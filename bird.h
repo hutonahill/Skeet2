@@ -17,6 +17,15 @@
 class Bird
 {
 protected:
+   // Nesting the strategy classes for security
+   class AdvanceStrategy;
+   class AdvanceStandard;
+   class AdvanceFloater;
+   class AdvanceCrazy;
+   class AdvanceSinker;
+   friend AdvanceStrategy;
+
+   AdvanceStrategy* advanceStrategy;
    static Position dimensions; // size of the screen
    Position pt;                  // position of the flyer
    Velocity v;                // velocity of the flyer
@@ -47,7 +56,7 @@ public:
 
    // special functions
    virtual void draw() = 0;
-   virtual void advance() = 0;
+   void advance();
 };
 
 /*********************************************
@@ -59,7 +68,6 @@ class Standard : public Bird
 public:
     Standard(double radius = 25.0, double speed = 5.0, int points = 10);
     void draw();
-    void advance();
 };
 
 /*********************************************
@@ -71,7 +79,6 @@ class Floater : public Bird
 public:
     Floater(double radius = 30.0, double speed = 5.0, int points = 15);
     void draw();
-    void advance();
 };
 
 /*********************************************
@@ -83,7 +90,6 @@ class Crazy : public Bird
 public:
     Crazy(double radius = 30.0, double speed = 4.5, int points = 30);
     void draw();
-    void advance();
 };
 
 /*********************************************
@@ -95,5 +101,31 @@ class Sinker : public Bird
 public:
     Sinker(double radius = 30.0, double speed = 4.5, int points = 20);
     void draw();
-    void advance();
+};
+
+class Bird::AdvanceStrategy
+{
+public:
+   virtual void execute(Bird& bird) = 0;
+};
+
+class Bird::AdvanceCrazy : public Bird::AdvanceStrategy
+{
+   void execute(Bird& bird);
+ 
+};
+
+class Bird::AdvanceStandard : public Bird::AdvanceStrategy
+{
+   void execute(Bird& bird);
+};
+
+class Bird::AdvanceFloater : public Bird::AdvanceStrategy
+{
+   void execute(Bird& bird);
+};
+
+class Bird::AdvanceSinker : public Bird::AdvanceStrategy
+{
+   void execute(Bird& bird);
 };

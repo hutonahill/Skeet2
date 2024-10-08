@@ -20,7 +20,7 @@ using namespace std;
 void Time::reset()
 {
     // first level is 30 seconds in length, the first 5 are the status time
-    levelLength = {0, 30, 30, 45, 45};
+    levelLength = {0, 10, 10, 10, 10};
     levelNumber = 1;
     framesLeft = FRAMES_PER_SECOND * levelLength[levelNumber];
 }
