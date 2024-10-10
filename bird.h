@@ -17,6 +17,15 @@
 class Bird
 {
 protected:
+   class AdvanceTemplate;
+   class AdvanceStandard;
+   class AdvanceFloater;
+   class AdvanceSinker;
+   class AdvanceCrazy;
+   friend AdvanceTemplate;
+
+   AdvanceTemplate *advanceTemplate;
+
    static Position dimensions; // size of the screen
    Position pt;                  // position of the flyer
    Velocity v;                // velocity of the flyer
@@ -96,4 +105,42 @@ public:
     Sinker(double radius = 30.0, double speed = 4.5, int points = 20);
     void draw();
     void advance();
+};
+
+
+class Bird::AdvanceTemplate
+{
+public:
+   void move(Bird &context);
+protected:
+   void drag(Bird &context);
+   virtual void definingMovement(Bird& context) = 0;
+   void inertia(Bird &context);
+   void killOnLeave(Bird &context);
+};
+
+class Bird::AdvanceStandard : public Bird::AdvanceTemplate
+{
+protected:
+   void drag(Bird& context);
+   void definingMovement(Bird& context);
+};
+
+class Bird::AdvanceFloater : public Bird::AdvanceTemplate
+{
+protected:
+   void drag(Bird& context);
+   void definingMovement(Bird& context);
+};
+
+class Bird::AdvanceSinker : public Bird::AdvanceTemplate
+{
+protected:
+   void definingMovement(Bird& context);
+};
+
+class Bird::AdvanceCrazy : public Bird::AdvanceTemplate
+{
+protected:
+   void definingMovement(Bird& context);
 };
