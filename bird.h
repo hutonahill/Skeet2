@@ -28,8 +28,9 @@ class Bird
    friend class SmallDrag;
    friend class LargeDrag;
    friend class Inertia;
-   friend class KillonLeave;
+   friend class KillOnLeave;
    friend class CrazyTurning;
+   friend class AntiGravity;
    
 protected:
    static Position dimensions; // size of the screen
@@ -119,16 +120,18 @@ public:
 
 /*********************************************
  * APPLYGRAVITY
- * Applies gravity to target bird
  *********************************************/
 class ApplyGravity : public BirdDecorator
 {
    void apply(Bird* self) override
    {
-      self->v -= 9.8; //Modified "position.h" to have a -= operator within the Velocity class
+      self->v.addDy(-0.07);
    }
 };
 
+/******************************************************************
+ * SMALLDRAG
+ ****************************************************************/
 class SmallDrag : public BirdDecorator
 {
    void apply(Bird* self) override
@@ -137,22 +140,31 @@ class SmallDrag : public BirdDecorator
    }
 };
 
+/******************************************************************
+ * LARGEDRAG
+ ****************************************************************/
 class LargeDrag : public BirdDecorator
 {
    void apply(Bird* self) override
    {
-      self->pt *=  0.990; //Modified "position.h" to have a *= operator within the Position class
+      self->v *=  0.990; 
    }
 };
 
+/******************************************************************
+ * INERTIA
+ ****************************************************************/
 class Inertia : public BirdDecorator
 {
    void apply(Bird* self) override
    {
-     self->pt += self->v;
+      self->pt.add(self->v);
   }
 };
 
+/******************************************************************
+ * KILLONLEAVE
+ ****************************************************************/
 class KillOnLeave : public BirdDecorator
 {
     void apply(Bird* self) override
@@ -164,6 +176,20 @@ class KillOnLeave : public BirdDecorator
    }
 };
 
+/******************************************************************
+ * ANTIGRAVITY
+ ****************************************************************/
+class AntiGravity : public BirdDecorator
+{
+  void apply(Bird* self) override
+   {
+      self->v.addDy(0.05);
+   }
+};
+
+/******************************************************************
+ * CRAZYTURNING
+ ****************************************************************/
 class CrazyTurning : public BirdDecorator
 {
    /******************************************************************
