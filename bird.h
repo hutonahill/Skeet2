@@ -157,7 +157,10 @@ class KillOnLeave : public BirdDecorator
 {
     void apply(Bird* self) override
    {
-      self->kill();
+       if (self->isOutOfBounds()){
+          self->kill();
+          self->points *= -1; // points go negative when it is missed!
+       }
    }
 };
 
