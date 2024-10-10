@@ -35,6 +35,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1634AF6B2CB85CA300748DCF /* birdDecorator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = birdDecorator.h; sourceTree = "<group>"; };
 		C108031F2AAF7E11005CEA4E /* points.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = points.h; sourceTree = "<group>"; };
 		C10803202AAF7E11005CEA4E /* points.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = points.cpp; sourceTree = "<group>"; };
 		C15451E427403CD70095997B /* effect.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = effect.h; sourceTree = "<group>"; };
@@ -79,6 +80,7 @@
 			children = (
 				C10803202AAF7E11005CEA4E /* points.cpp */,
 				C108031F2AAF7E11005CEA4E /* points.h */,
+				1634AF6B2CB85CA300748DCF /* birdDecorator.h */,
 				C16B8F532744AFD8009CC1DC /* score.h */,
 				C16B8F502744ABDE009CC1DC /* score.cpp */,
 				C15451E527403ED30095997B /* effect.cpp */,

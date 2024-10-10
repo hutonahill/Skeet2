@@ -9,6 +9,13 @@
 
 #pragma once
 #include "position.h"
+#include "birdDecorator.h"
+#include <list>
+#include <cassert>
+
+using namespace std;
+
+class BirdDecorator;
 
 /**********************
  * BIRD
@@ -16,6 +23,14 @@
  **********************/
 class Bird
 {
+   friend class BirdDecorator;
+   friend class ApplyGravity;
+   friend class SmallDrag;
+   friend class LargeDrag;
+   friend class Inertia;
+   friend class KillonLeave;
+   friend class CrazyTurning;
+   
 protected:
    static Position dimensions; // size of the screen
    Position pt;                  // position of the flyer
@@ -23,6 +38,7 @@ protected:
    double radius;             // the size (radius) of the flyer
    bool dead;                 // is this flyer dead?
    int points;                // how many points is this worth?
+   list<BirdDecorator*> decorators; //What quirks does each bird have?
    
 public:
    Bird() : dead(false), points(0), radius(1.0) { }
@@ -47,7 +63,8 @@ public:
 
    // special functions
    virtual void draw() = 0;
-   virtual void advance() = 0;
+   void advance();
+   
 };
 
 /*********************************************
@@ -59,7 +76,7 @@ class Standard : public Bird
 public:
     Standard(double radius = 25.0, double speed = 5.0, int points = 10);
     void draw();
-    void advance();
+//    void advance();
 };
 
 /*********************************************
@@ -71,7 +88,7 @@ class Floater : public Bird
 public:
     Floater(double radius = 30.0, double speed = 5.0, int points = 15);
     void draw();
-    void advance();
+//    void advance();
 };
 
 /*********************************************
@@ -83,7 +100,7 @@ class Crazy : public Bird
 public:
     Crazy(double radius = 30.0, double speed = 4.5, int points = 30);
     void draw();
-    void advance();
+//    void advance();
 };
 
 /*********************************************
@@ -95,5 +112,82 @@ class Sinker : public Bird
 public:
     Sinker(double radius = 30.0, double speed = 4.5, int points = 20);
     void draw();
-    void advance();
+//    void advance();
+};
+
+
+
+/*********************************************
+ * APPLYGRAVITY
+ * Applies gravity to target bird
+ *********************************************/
+class ApplyGravity : public BirdDecorator
+{
+   void apply(Bird* self) override
+   {
+      self->v -= 9.8; //Modified "position.h" to have a -= operator within the Velocity class
+   }
+};
+
+class SmallDrag : public BirdDecorator
+{
+   void apply(Bird* self) override
+   {
+      self->v *= 0.995;
+   }
+};
+
+class LargeDrag : public BirdDecorator
+{
+   void apply(Bird* self) override
+   {
+      self->pt *=  0.990; //Modified "position.h" to have a *= operator within the Position class
+   }
+};
+
+class Inertia : public BirdDecorator
+{
+   void apply(Bird* self) override
+   {
+     self->pt += self->v;
+  }
+};
+
+class KillOnLeave : public BirdDecorator
+{
+    void apply(Bird* self) override
+   {
+      self->kill();
+   }
+};
+
+class CrazyTurning : public BirdDecorator
+{
+   /******************************************************************
+    * RANDOM
+    * These functions generate a random number.
+    ****************************************************************/
+   int randomInt(int min, int max)
+   {
+      assert(min < max);
+      int num = (rand() % (max - min)) + min;
+      assert(min <= num && num <= max);
+      return num;
+   }
+   double randomFloat(double min, double max)
+   {
+      assert(min <= max);
+      double num = min + ((double)rand() / (double)RAND_MAX * (max - min));
+      assert(min <= num && num <= max);
+      return num;
+   }
+   
+  void apply(Bird* self) override
+   {
+      if (randomInt(0, 15) == 0)
+      {
+         self->v.addDy(randomFloat(-1.5, 1.5));
+         self->v.addDx(randomFloat(-1.5, 1.5));
+      }
+   }
 };
