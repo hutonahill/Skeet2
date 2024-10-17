@@ -28,7 +28,7 @@ class Bird
    friend class SmallDrag;
    friend class LargeDrag;
    friend class Inertia;
-   friend class KillonLeave;
+   friend class KillOnLeave;
    friend class CrazyTurning;
    
 protected:
