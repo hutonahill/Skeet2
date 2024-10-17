@@ -107,6 +107,11 @@ Floater::Floater(double radius, double speed, int points) : Bird()
 
    // set the size
    this->radius = radius;
+   
+   decorators.push_back(new KillOnLeave);
+   decorators.push_back(new Inertia);
+   decorators.push_back(new LargeDrag);
+   decorators.push_back(new AntiGravity);
 }
 
 /******************************************************************
@@ -127,6 +132,10 @@ Sinker::Sinker(double radius, double speed, int points) : Bird()
 
    // set the size
    this->radius = radius;
+   
+   decorators.push_back(new Inertia);
+   decorators.push_back(new KillOnLeave);
+   decorators.push_back(new ApplyGravity);
 }
 
 /******************************************************************
@@ -147,6 +156,10 @@ Crazy::Crazy(double radius, double speed, int points) : Bird()
 
    // set the size
    this->radius = radius;
+   
+   decorators.push_back(new Inertia);
+   decorators.push_back(new KillOnLeave);
+   decorators.push_back(new CrazyTurning);
 }
 
  /***************************************************************/
@@ -164,11 +177,7 @@ Crazy::Crazy(double radius, double speed, int points) : Bird()
     {
        decorator->apply(this);
     }
-   
 }
-
-
-
 
 
 /*********************************************

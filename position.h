@@ -39,14 +39,6 @@ public:
       return x != rhs.x || y != rhs.y;
    }
    
-   //Added a *= operator 
-   Position & operator *= (double mult)
-   {
-      x *= mult;
-      y *= mult;
-      return *this;
-   }
-   
 
    // setters
    void setX(double x)       { this->x = x;           }
@@ -128,17 +120,6 @@ public:
       v *= mult;
       return v;
    }
-   
-   // Added a -= operator
-   Velocity & operator -= (double sub)
-   {
-      dx -= sub;
-      dy -= sub;
-      return *this;
-   }
-   
-   
-   
    
    void set(double angle, double speed)
    {
