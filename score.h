@@ -9,6 +9,12 @@
 
 #pragma once
 #include <string>
+#include <list>
+
+struct Message {
+   //type
+   //value
+};
 
 /**********************
  * STATUS
@@ -52,4 +58,79 @@ public:
 private:
     int numKilled;
     int numMissed;
+};
+
+
+/**********************
+ * MEDIATOR
+ * A container for a set of colleagues, notify method, and utility methods
+ **********************/
+class Meditator : public Status
+{
+public:
+   
+   virtual void notify(Message);
+   //enrolls the Concrete colleagues that will be communicating
+   void enroll(Meditator);
+   //unenrolls the Concrete colleagues that will be communicating
+   void unenroll(Meditator);
+   
+protected:
+   std::list<Meditator*> colleagues;   //list of Colleagues enrolled in mediator
+   
+};
+
+/**********************
+ * ABSTRACT COLLEAGUE
+ * A reference to several mediators, notify method, and utlity methods
+ **********************/
+
+class AbstractColleague : public Meditator
+{
+public:
+   virtual void notify(Message) = 0;
+      //enrolls the Concrete colleagues that will be communicating
+   void enroll(Meditator);
+      //unenrolls the Concrete colleagues that will be communicating
+   void unenroll(Meditator);
+protected:
+   
+};
+
+/**********************
+ * HITRATIO COLLEAGUE
+ **********************/
+class HRColleague : public Status
+{
+public:
+   virtual void notify(Message);
+   
+};
+/**********************
+ * SCORE COLLEAGUE
+ **********************/
+class ScoreColleague : public Status
+{
+public:
+   virtual void notify(Message);
+};
+/**********************
+ * BULLET COLLEAGUE
+ **********************/
+class BulletColleague : public Status
+{
+public:
+   virtual void notify(Message);
+   void wentOutOfBounds();
+};
+
+/**********************
+ * BIRD COLLEAGUE
+ **********************/
+class BirdColleague : public Status
+{
+public:
+   void notify(Message);
+   void wentOutOfBounds();
+   void wasShot();
 };

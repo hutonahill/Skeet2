@@ -51,3 +51,15 @@ void HitRatio::adjust(int value)
     else if (value < 0)
         numMissed++;
 }
+
+/************************
+ * NOTIFY
+ * Calls all the colleagues
+ ************************/
+//void Mediator: notify(message)
+//{
+//   for (Mediator* colleague: colleagues)
+//   {
+//      colleague.notify(message);
+//   }
+//}
