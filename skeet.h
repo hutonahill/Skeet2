@@ -18,7 +18,7 @@
 #include "time.h"
 #include "score.h"
 #include "points.h"
-
+#include "visitor.h"
 #include <list>
 
 /*************************************************************************
@@ -27,6 +27,7 @@
  *************************************************************************/
 class Skeet
 {
+   friend Visitor;
 public:
     Skeet(Position & dimensions) : dimensions(dimensions),
         gun(Position(800.0, 0.0)), time(), score(), hitRatio(), bullseye(false) {}
@@ -43,6 +44,7 @@ public:
 
     // is the game currently playing right now?
     bool isPlaying() const { return time.isPlaying();  }
+
 private:
     // generate new birds
     void spawn();                  
@@ -62,4 +64,6 @@ private:
     HitRatio hitRatio;             // the hit ratio for the birds
     Position dimensions;           // size of the screen
     bool bullseye;
+
 };
+

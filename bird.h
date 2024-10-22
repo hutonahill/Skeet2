@@ -9,6 +9,7 @@
 
 #pragma once
 #include "position.h"
+#include "flyingObject.h"
 
 /**********************
  * BIRD

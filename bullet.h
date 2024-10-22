@@ -10,6 +10,7 @@
 #pragma once
 #include "position.h"
 #include "effect.h"
+#include "flyingObject.h"
 #include <list>
 #include <cassert>
 
