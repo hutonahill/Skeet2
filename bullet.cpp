@@ -187,8 +187,7 @@ void Bullet::drawDot(const Position& point, double radius,
  * PELLET OUTPUT
  * Draw a pellet - just a 3-pixel dot
  *********************************************/
-void Pellet::output()
-{
+void Pellet::output(){
    if (!isDead())
       drawDot(pt, 3.0, 1.0, 1.0, 0.0);
 }
@@ -197,10 +196,8 @@ void Pellet::output()
  * BOMB OUTPUT
  * Draw a bomb - many dots to make it have a soft edge
  *********************************************/
-void Bomb::output()
-{
-   if (!isDead())
-   {
+void Bomb::output(){
+   if (!isDead()){
        // Bomb actually has a gradient to cut out the harsh edges
        drawDot(pt, radius + 2.0, 0.50, 0.50, 0.00);
        drawDot(pt, radius + 1.0, 0.75, 0.75, 0.00);
@@ -213,8 +210,7 @@ void Bomb::output()
  * SHRAPNEL OUTPUT
  * Draw a fragment - a bright yellow dot
  *********************************************/
-void Shrapnel::output()
-{
+void Shrapnel::output(){
     if (!isDead())
        drawDot(pt, radius, 1.0, 1.0, 0.0);
 }
@@ -223,10 +219,8 @@ void Shrapnel::output()
  * MISSILE OUTPUT
  * Draw a missile - a line and a dot for the fins
  *********************************************/
-void Missile::output()
-{
-    if (!isDead())
-    {
+void Missile::output(){
+    if (!isDead()){
         // missile is a line with a dot at the end so it looks like fins.
         Position ptNext(pt);
         ptNext.add(v);
@@ -245,17 +239,24 @@ void Missile::output()
  * RANDOM
  * This function generates a random number.
  ****************************************************************/
-int Bullet::random(int min, int max)
-{
+int Bullet::random(int min, int max){
    assert(min < max);
    int num = (rand() % (max - min)) + min;
    assert(min <= num && num <= max);
    return num;
 }
-double Bullet::random(double min, double max)
-{
+double Bullet::random(double min, double max){
    assert(min <= max);
    double num = min + ((double)rand() / (double)RAND_MAX * (max - min));
    assert(min <= num && num <= max);
    return num;
+}
+
+
+void Missile::kill() {
+	
+}
+
+Missile::Missile(double angle, Skeet* skeet, double speed) :Bullet(angle, speed, 1.0, 3) {
+	pSkeet = skeet;
 }

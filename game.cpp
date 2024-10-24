@@ -45,7 +45,7 @@ void callBack(const UserInput* pUI, void* p)
 
 /*********************************
  * Main is pretty sparse.  Just initialize
- * my Skkeep type and call the display engine.
+ * my Skeep type and call the display engine.
  * That is all!
  *********************************/
 #ifdef _WIN32_X

@@ -6,6 +6,7 @@
 #include <string>
 #include <sstream>
 #include "skeet.h"
+#include "UiPackage.h"
 using namespace std;
 
 
@@ -31,6 +32,16 @@ using namespace std;
 #define GLUT_TEXT GLUT_BITMAP_HELVETICA_12
 #endif // _WIN32
 
+
+Skeet::Skeet(const Position & dimensions) : gun(Position(800.0, 0.0)),
+                                         time(), score(), hitRatio(),
+                               dimensions(dimensions), bullseye(false) {
+   time = Time();
+   SubscribeUi(new ResetGameMessage(this));
+   SubscribeUi(new FirePelletMessage(this));
+   SubscribeUi(new DisplayBullseyeMessage(this));
+}
+
 /************************
  * SKEET ANIMATE
  * move the gameplay by one unit of time
@@ -38,6 +49,14 @@ using namespace std;
 void Skeet::animate()
 {
    time++;
+
+   if(time.isLevelComplite() && time.level() == 2) {
+      SubscribeUi(fire_missile_message);
+   }
+
+   if(time.isLevelComplite() && time.level() == 3) {
+      SubscribeUi(fire_bomb_message);
+   }
    
    // if status, then do not move the game
    if (time.isStatus())
@@ -351,45 +370,65 @@ void Skeet::drawStatus() const
    }
 }
 
+
 /************************
  * SKEET INTERACT
  * handle all user input
  ************************/
-void Skeet::interact(const UserInput & ui)
-{
+void Skeet::interact(const UserInput & ui){
+   UiPackage* package = new UiPackage(ui.isSpace(), ui.isM(), ui.isB(), ui.isUp(),
+      ui.isDown(), ui.isRight(), ui.isLeft(), ui.isShift());
+
+   for (UiMessage* message : UiSignal) {
+      message->send(package);
+   }
+}
+
+void Skeet::ResetGame(const bool isSpace) {
    // reset the game
-   if (time.isGameOver() && ui.isSpace())
-   { 
+   if (time.isGameOver() && isSpace){ 
       time.reset();
       score.reset();
       hitRatio.reset();
-      return;
+
+      UnsubscribeUi(fire_bomb_message);
+      UnsubscribeUi(fire_missile_message);
    }
-
-   // gather input from the interface
-   gun.interact(ui.isUp() + ui.isRight(), ui.isDown() + ui.isLeft());
-   Bullet *p = nullptr;
-
-   // a pellet can be shot at any time
-   if (ui.isSpace())
-      p = new Pellet(gun.getAngle());
-   // missiles can be shot at level 2 and higher
-   else if (ui.isM() && time.level() > 1)
-      p = new Missile(gun.getAngle());
-   // bombs can be shot at level 3 and higher
-   else if (ui.isB() && time.level() > 2)
-      p = new Bomb(gun.getAngle());
-   
-   bullseye = ui.isShift();
-
-   // add something if something has been added
-   if (nullptr != p)
-      bullets.push_back(p);
-   
-   // send movement information to all the bullets. Only the missile cares.
-   for (auto bullet : bullets)
-      bullet->input(ui.isUp() + ui.isRight(), ui.isDown() + ui.isLeft(), ui.isB()); 
 }
+
+void Skeet::DisplayBullseye(bool isShift) {
+   bullseye = isShift;
+}
+
+void Skeet::FirePellet(bool isSpace) {
+   if(isSpace) {
+      bullets.push_back(new Pellet(gun.getAngle()));
+   }
+}
+
+void Skeet::FireMissile(bool isM) {
+   if(isM) {
+      
+      Missile* newMissile = new Missile(gun.getAngle(), this);
+
+      GetMovementMessage* sender = new GetMovementMessage(newMissile);
+      newMissile->RegisterSender(sender);
+
+      SubscribeUi(sender);
+      bullets.push_back(newMissile);
+   }
+}
+
+void Skeet::FireBomb(bool isB) {
+   if(isB) {
+      bullets.push_back(new Bomb(gun.getAngle()));
+   }
+}
+
+
+
+
+
 
 /******************************************************************
  * RANDOM
@@ -398,8 +437,7 @@ void Skeet::interact(const UserInput & ui)
  *    INPUT:   min, max : The number of values (min <= num <= max)
  *    OUTPUT   <return> : Return the integer
  ****************************************************************/
-int random(int min, int max)
-{
+int random(int min, int max){
    assert(min < max);
    int num = (rand() % (max - min)) + min;
    assert(min <= num && num <= max);

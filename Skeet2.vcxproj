@@ -30,6 +30,7 @@
     <ClCompile Include="skeet.cpp" />
     <ClCompile Include="time.cpp" />
     <ClCompile Include="uiInteract.cpp" />
+    <ClCompile Include="UiMessage.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="bullet.h" />
@@ -42,6 +43,8 @@
     <ClInclude Include="skeet.h" />
     <ClInclude Include="time.h" />
     <ClInclude Include="uiInteract.h" />
+    <ClInclude Include="UiMessage.h" />
+    <ClInclude Include="UiPackage.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

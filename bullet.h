@@ -13,6 +13,10 @@
 #include <list>
 #include <cassert>
 
+#include "UiMessage.h"
+
+class UiMessage;
+
 /*********************************************
  * BULLET
  * Something to shoot something else
@@ -31,7 +35,7 @@ public:
    Bullet(double angle = 0.0, double speed = 30.0, double radius = 5.0, int value = 1);
    
    // setters
-   void kill()                   { dead = true; }
+   virtual void kill()                   { dead = true; }
    void setValue(int newValue)   { value = newValue; }
    
    // getters
@@ -44,7 +48,6 @@ public:
    // special functions
    virtual void death(std::list<Bullet *> & bullets) {}
    virtual void output() = 0;
-   virtual void input(bool isUp, bool isDown, bool isB) {}
    virtual void move(std::list<Effect*> &effects);
 
 protected:
@@ -125,7 +128,7 @@ public:
 class Missile : public Bullet
 {
 public:
-   Missile(double angle, double speed = 10.0) : Bullet(angle, speed, 1.0, 3) {}
+   Missile(double angle, Skeet* skeet, double speed = 10.0);
    
    void output();
    void input(bool isUp, bool isDown, bool isB)
@@ -136,4 +139,12 @@ public:
          v.turn(-0.04);
    }
    void move(std::list<Effect*> & effects);
+
+   void RegisterSender(GetMovementMessage* sender) {Sender = sender;}
+
+   void kill() override;
+
+   Skeet* pSkeet;
+private:
+   GetMovementMessage* Sender;
 };

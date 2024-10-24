@@ -9,6 +9,8 @@
 
 #include "time.h"
 #include <sstream>
+
+#include "skeet.h"
 using namespace std;
 
 #define SECONDS_STATUS 5.0
@@ -107,14 +109,21 @@ void Time::operator++(int postfix)
     {
         // move the level or...
         levelNumber++;
-        if (levelNumber < (int)levelLength.size())
+        if (isLevelComplite()) {
             framesLeft = FRAMES_PER_SECOND * levelLength[levelNumber];
+        }
+        
         
         // game over!
         else
             levelNumber = 0;
     }
 }
+
+bool Time::isLevelComplite() {
+    return levelNumber < (int)levelLength.size();
+}
+
 
 /************************
  * TIME GET TEXT

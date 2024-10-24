@@ -14,6 +14,8 @@
 
 #define FRAMES_PER_SECOND 30
 
+class Skeet;
+
 /************************
  * TIME
  * Time in level, etc.
@@ -52,6 +54,8 @@ public:
 
     // reset
     void reset();
+
+    bool isLevelComplite();
 
 private:
     // number of frames left in this level

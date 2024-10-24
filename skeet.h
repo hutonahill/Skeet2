@@ -20,17 +20,27 @@
 #include "points.h"
 
 #include <list>
+#include <unordered_set>
+
+#include "UiMessage.h"
+
+using namespace std;
+
+class UiMessage;
+class FireMissileMessage;
+class FireBombMessage;
+class Bullet;
 
 /*************************************************************************
  * Skeet2
  * The game class
  *************************************************************************/
-class Skeet
-{
+class Skeet{
 public:
-    Skeet(Position & dimensions) : dimensions(dimensions),
-        gun(Position(800.0, 0.0)), time(), score(), hitRatio(), bullseye(false) {}
+    Skeet(const Position & dimensions);
 
+	
+	
     // handle all user input
     void interact(const UserInput& ui);
 
@@ -43,6 +53,16 @@ public:
 
     // is the game currently playing right now?
     bool isPlaying() const { return time.isPlaying();  }
+
+	void ResetGame(bool isSpace);
+	void DisplayBullseye(bool isShift);
+	void FireMissile(bool isM);
+	void FirePellet(bool isSpace);
+	void FireBomb(bool isB);
+	
+	void SubscribeUi(UiMessage* listener){UiSignal.insert(listener);}
+	void UnsubscribeUi(UiMessage* listener){UiSignal.erase(listener);}
+	
 private:
     // generate new birds
     void spawn();                  
@@ -52,6 +72,11 @@ private:
                    double redBack, double greenBack, double blueBack) const;
     void drawBullseye(double angle) const;
 
+	std::unordered_set<UiMessage*> UiSignal;
+
+	UiMessage* fire_missile_message = new FireMissileMessage(this);
+	UiMessage* fire_bomb_message = new FireBombMessage(this);
+	
     Gun gun;                       // the gun
     std::list<Bird*> birds;        // all the shootable birds
     std::list<Bullet*> bullets;    // the bullets
