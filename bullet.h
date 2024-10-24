@@ -18,7 +18,7 @@
  * BULLET
  * Something to shoot something else
  *********************************************/
-class Bullet
+class Bullet : public FlyingObject
 {
 protected:
    static Position dimensions;   // size of the screen
@@ -47,6 +47,7 @@ public:
    virtual void output() = 0;
    virtual void input(bool isUp, bool isDown, bool isB) {}
    virtual void move(std::list<Effect*> &effects);
+   inline void accept(Visitor& v) { v.visit(*this); };
 
 protected:
    bool isOutOfBounds() const

@@ -14,7 +14,7 @@
 /**********************
  * Effect: stuff that is not interactive
  **********************/
-class Effect
+class Effect : public FlyingObject
 {
 protected:
     Position pt;      // location of the effect
@@ -31,6 +31,9 @@ public:
     
     // it is dead when age goes to 0.0
     bool isDead() const { return age <= 0.0; }
+
+    // Visitor method
+    inline virtual void accept(Visitor& v) { };
 };
 
 /**********************
@@ -51,6 +54,9 @@ public:
     
     // move it forward with regards to inertia. Let it age
     void fly();
+
+    // Visitor
+    inline void accept(Visitor& v) { v.visit(*this); };
 };
 
 /**********************

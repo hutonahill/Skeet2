@@ -8,6 +8,7 @@
  ************************************************************************/
 
 #include "bullet.h"
+#include "flyingObject.h"
 
 #ifdef __APPLE__
 #define GL_SILENCE_DEPRECATION

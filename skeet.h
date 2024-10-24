@@ -39,7 +39,7 @@ public:
     void animate();
 
     // output everything on the screen
-    void drawLevel()  const;    // output the game
+    void drawLevel();    // output the game
     void drawStatus() const;    // output the status information
 
     // is the game currently playing right now?
@@ -55,9 +55,12 @@ private:
     void drawBullseye(double angle) const;
 
     Gun gun;                       // the gun
-    std::list<Bird*> birds;        // all the shootable birds
-    std::list<Bullet*> bullets;    // the bullets
+    //std::list<Bird*> birds;        // all the shootable birds
+    //std::list<Bullet*> bullets;    // the bullets
     std::list<Effect*> effects;    // the fragments of a dead bird.
+
+    std::list<FlyingObject*> flyingObjects;
+
     std::list<Points>  points;     // point values;
     Time time;                     // how many frames have transpired since the beginning
     Score score;                   // the player's score

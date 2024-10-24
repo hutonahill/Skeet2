@@ -43,9 +43,7 @@ void Skeet::animate()
    if (time.isStatus())
    {
       // get rid of the bullets and the birds without changing the score
-      birds.clear();
-      bullets.clear();
-      effects.clear();
+      flyingObjects.clear();
       points.clear();
       return;
    }
@@ -53,60 +51,62 @@ void Skeet::animate()
    // spawn
    spawn();
    
+
+   VisitMove vm = VisitMove(&(this->effects));
    // move the birds and the bullets
-   for (auto element : birds)
-   {
-      element->advance();
-      hitRatio.adjust(element->isDead() ? -1 : 0);
-   }
-   for (auto bullet : bullets)
-      bullet->move(effects);
-   for (auto effect : effects)
-      effect->fly();
-   for (auto & pts : points)
-      pts.update();
-      
-   // hit detection
-   for (auto element : birds)
-      for (auto bullet : bullets)
-         if (!element->isDead() && !bullet->isDead() &&
-             element->getRadius() + bullet->getRadius() >
-             minimumDistance(element->getPosition(), element->getVelocity(),
-                             bullet->getPosition(),  bullet->getVelocity()))
-         {
-            for (int i = 0; i < 25; i++)
-               effects.push_back(new Fragment(bullet->getPosition(), bullet->getVelocity()));
-            element->kill();
-            bullet->kill();
-            hitRatio.adjust(1);
-            bullet->setValue(-(element->getPoints()));
-            element->setPoints(0);
-         }
-   
-   // remove the zombie birds
-   for (auto it = birds.begin(); it != birds.end();)
-      if ((*it)->isDead())
-      {
-         if ((*it)->getPoints())
-            points.push_back(Points((*it)->getPosition(), (*it)->getPoints()));
-         score.adjust((*it)->getPoints());
-         it = birds.erase(it);
-      }
-      else
-         ++it;
-       
-   // remove zombie bullets
-   for (auto it = bullets.begin(); it != bullets.end(); )
-      if ((*it)->isDead())
-      {
-         (*it)->death(bullets);
-         int value = -(*it)->getValue();
-         points.push_back(Points((*it)->getPosition(), value));
-         score.adjust(value);
-         it = bullets.erase(it);
-      }
-      else
-         ++it;
+   //for (auto element : flyingObjects)
+   //{
+   //   element->accept(vm);
+   //   hitRatio.adjust(element->isDead() ? -1 : 0);
+   //}
+   //for (auto bullet : bullets)
+   //   bullet->move(effects);
+   //for (auto effect : effects)
+   //   effect->fly();
+   //for (auto & pts : points)
+   //   pts.update();
+   //   
+   //// hit detection
+   //for (auto element : birds)
+   //   for (auto bullet : bullets)
+   //      if (!element->isDead() && !bullet->isDead() &&
+   //          element->getRadius() + bullet->getRadius() >
+   //          minimumDistance(element->getPosition(), element->getVelocity(),
+   //                          bullet->getPosition(),  bullet->getVelocity()))
+   //      {
+   //         for (int i = 0; i < 25; i++)
+   //            effects.push_back(new Fragment(bullet->getPosition(), bullet->getVelocity()));
+   //         element->kill();
+   //         bullet->kill();
+   //         hitRatio.adjust(1);
+   //         bullet->setValue(-(element->getPoints()));
+   //         element->setPoints(0);
+   //      }
+   //
+   //// remove the zombie birds
+   //for (auto it = birds.begin(); it != birds.end();)
+   //   if ((*it)->isDead())
+   //   {
+   //      if ((*it)->getPoints())
+   //         points.push_back(Points((*it)->getPosition(), (*it)->getPoints()));
+   //      score.adjust((*it)->getPoints());
+   //      it = birds.erase(it);
+   //   }
+   //   else
+   //      ++it;
+   //    
+   //// remove zombie bullets
+   //for (auto it = bullets.begin(); it != bullets.end(); )
+   //   if ((*it)->isDead())
+   //   {
+   //      (*it)->death(bullets);
+   //      int value = -(*it)->getValue();
+   //      points.push_back(Points((*it)->getPosition(), value));
+   //      score.adjust(value);
+   //      it = bullets.erase(it);
+   //   }
+   //   else
+   //      ++it;
    
    // remove zombie fragments
    for (auto it = effects.begin(); it != effects.end();)
@@ -290,7 +290,7 @@ void Skeet::drawBullseye(double angle) const
  * SKEET DRAW LEVEL
  * output everything that will be on the screen
  ************************/
-void Skeet::drawLevel() const
+void Skeet::drawLevel()
 {
    // output the background
    drawBackground(time.level() * .1, 0.0, 0.0);
@@ -302,15 +302,12 @@ void Skeet::drawLevel() const
    // output the gun
    gun.display();
          
+   VisitDraw vd = VisitDraw(&(this->effects));
    // output the birds, bullets, and fragments
    for (auto& pts : points)
       pts.show();
-   for (auto effect : effects)
-      effect->render();
-   for (auto bullet : bullets)
-      bullet->output();
-   for (auto element : birds)
-      element->draw();
+   for (auto element : flyingObjects)
+      element->accept(vd);
    
    // status
    drawText(Position(10,                         dimensions.getY() - 30), score.getText()  );
@@ -384,11 +381,12 @@ void Skeet::interact(const UserInput & ui)
 
    // add something if something has been added
    if (nullptr != p)
-      bullets.push_back(p);
+      flyingObjects.push_back(p);
    
+   VisitInput vi = VisitInput(ui);
    // send movement information to all the bullets. Only the missile cares.
-   for (auto bullet : bullets)
-      bullet->input(ui.isUp() + ui.isRight(), ui.isDown() + ui.isLeft(), ui.isB()); 
+   for (auto element : flyingObjects)
+      element->accept(vi); 
 }
 
 /******************************************************************
