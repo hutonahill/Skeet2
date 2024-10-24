@@ -78,3 +78,12 @@ public:
 private:
 	Missile* Target;
 };
+
+class MoveGunMessage : public UiMessage {
+public:
+	void send(UiPackage* package) override;
+	MoveGunMessage(Skeet* skeet);
+
+private:
+	Skeet* pSkeet;
+};

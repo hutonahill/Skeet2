@@ -59,6 +59,7 @@ public:
 	void FireMissile(bool isM);
 	void FirePellet(bool isSpace);
 	void FireBomb(bool isB);
+	void MoveGun(int clockwise, int antiClockwise);
 	
 	void SubscribeUi(UiMessage* listener){UiSignal.insert(listener);}
 	void UnsubscribeUi(UiMessage* listener){UiSignal.erase(listener);}

@@ -27,6 +27,11 @@ void GetMovementMessage::send(UiPackage* package) {
 	Target->input(package->Up, package->Down, package->B);
 }
 
+void MoveGunMessage::send(UiPackage* package) {
+	pSkeet->MoveGun( package->Up + package->Right, package->Down + package->Left);
+}
+
+
 
 FireMissileMessage::FireMissileMessage(Skeet* skeet) {
 	pSkeet = skeet;
@@ -44,9 +49,6 @@ GetMovementMessage::GetMovementMessage(Missile* target) {
 	Target = target;
 }
 
-
-
-
-
-
-
+MoveGunMessage::MoveGunMessage(Skeet* skeet) {
+	pSkeet = skeet;
+}

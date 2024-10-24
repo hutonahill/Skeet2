@@ -40,6 +40,7 @@ Skeet::Skeet(const Position & dimensions) : gun(Position(800.0, 0.0)),
    SubscribeUi(new ResetGameMessage(this));
    SubscribeUi(new FirePelletMessage(this));
    SubscribeUi(new DisplayBullseyeMessage(this));
+   SubscribeUi(new MoveGunMessage(this));
 }
 
 /************************
@@ -369,6 +370,11 @@ void Skeet::drawStatus() const
          sout.str());
    }
 }
+
+void Skeet::MoveGun(int clockwise, int antiClockwise) {
+   gun.interact(clockwise, antiClockwise);
+}
+
 
 
 /************************
