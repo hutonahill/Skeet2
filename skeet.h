@@ -21,6 +21,9 @@
 
 #include <list>
 
+#include"bulletMaker.h"
+
+
 /*************************************************************************
  * Skeet2
  * The game class
@@ -29,7 +32,13 @@ class Skeet
 {
 public:
     Skeet(Position & dimensions) : dimensions(dimensions),
-        gun(Position(800.0, 0.0)), time(), score(), hitRatio(), bullseye(false) {}
+        gun(Position(800.0, 0.0)), time(), score(), hitRatio(), bullseye(false)
+    {
+       // ADD MAKERS
+       bulletMakers.push_back(new PelletMaker());
+       bulletMakers.push_back(new MissleMaker());
+       bulletMakers.push_back(new BombMaker()  );
+    }
 
     // handle all user input
     void interact(const UserInput& ui);
@@ -62,4 +71,6 @@ private:
     HitRatio hitRatio;             // the hit ratio for the birds
     Position dimensions;           // size of the screen
     bool bullseye;
+    
+    std::list<BulletMaker*> bulletMakers;
 };

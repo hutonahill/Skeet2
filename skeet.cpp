@@ -369,7 +369,8 @@ void Skeet::interact(const UserInput & ui)
    // gather input from the interface
    gun.interact(ui.isUp() + ui.isRight(), ui.isDown() + ui.isLeft());
    Bullet *p = nullptr;
-
+   bool handeled = false;
+   /*
    // a pellet can be shot at any time
    if (ui.isSpace())
       p = new Pellet(gun.getAngle());
@@ -379,7 +380,16 @@ void Skeet::interact(const UserInput & ui)
    // bombs can be shot at level 3 and higher
    else if (ui.isB() && time.level() > 2)
       p = new Bomb(gun.getAngle());
+   */
    
+   for (BulletMaker* bulletMaker: bulletMakers)
+   {
+      if (!handeled)
+      {
+         handeled = bulletMaker->makeBullet(p, ui, time.level(), gun.getAngle());
+      }
+   }
+
    bullseye = ui.isShift();
 
    // add something if something has been added
@@ -486,3 +496,4 @@ void Skeet::spawn()
          break;
    }
 }
+
