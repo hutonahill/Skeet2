@@ -4,7 +4,7 @@
 #include "skeet.h"
 
 void FirePelletMessage::send(UiPackage* package) {
-	Skeet->FirePellet(package->Space);
+	pSkeet->FirePellet(package->Space);
 }
 
 void FireBombMessage::send(UiPackage* package) {
@@ -32,6 +32,9 @@ void MoveGunMessage::send(UiPackage* package) {
 }
 
 
+FirePelletMessage::FirePelletMessage(Skeet* skeet) {
+	pSkeet = skeet;
+}
 
 FireMissileMessage::FireMissileMessage(Skeet* skeet) {
 	pSkeet = skeet;

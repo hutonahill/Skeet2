@@ -7,8 +7,7 @@ class Skeet;
 class UiPackage;
 class Missile;
 
-class UiMessage
-{
+class UiMessage {
 public:
 	virtual ~UiMessage() = default;
 	virtual void send(UiPackage* package) = 0;
@@ -17,14 +16,13 @@ public:
 };
 
 
-class FirePelletMessage : public UiMessage
-{
+class FirePelletMessage : public UiMessage {
 public:
 	void send(UiPackage* package) override;
-	FirePelletMessage(Skeet* skeet) {Skeet = skeet;}
+	FirePelletMessage(Skeet* skeet);
 
 private:
-	Skeet* Skeet;
+	Skeet* pSkeet;
 };
 
 
