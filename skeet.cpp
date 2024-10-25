@@ -302,7 +302,7 @@ void Skeet::drawLevel()
    // output the gun
    gun.display();
          
-   VisitDraw vd = VisitDraw(&(this->effects));
+   VisitDraw vd = VisitDraw();
    // output the birds, bullets, and fragments
    for (auto& pts : points)
       pts.show();
