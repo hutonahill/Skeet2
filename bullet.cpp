@@ -54,7 +54,7 @@ Bullet::Bullet(double angle, double speed, double radius, int value) :
  * BOMB DEATH
  * Bombs have a tendency to explode!
  *********************************************/
-void Bomb::death(std::list<Bullet*>& bullets)
+void Bomb::death(std::list<FlyingObject*>& bullets)
 {
    for (int i = 0; i < 20; i++)
       bullets.push_back(new Shrapnel(*this));
