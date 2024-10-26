@@ -43,7 +43,7 @@ public:
    int getValue()          const { return value;  }
 
    // special functions
-   virtual void death(std::list<Bullet *> & bullets) {}
+   virtual void death(std::list<FlyingObject *> & bullets) {}
    virtual void output() = 0;
    virtual void input(bool isUp, bool isDown, bool isB) {}
    virtual void move(std::list<Effect*> &effects);
@@ -89,7 +89,7 @@ public:
    
    void output();
    void move(std::list<Effect*> & effects);
-   void death(std::list<Bullet *> & bullets);
+   void death(std::list<FlyingObject *> & bullets);
 };
 
 /*********************
