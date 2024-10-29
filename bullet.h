@@ -125,14 +125,12 @@ public:
  * MISSILE
  * Guided missiles
  **********************/
-class Missile : public Bullet
-{
+class Missile : public Bullet{
 public:
    Missile(double angle, Skeet* skeet, double speed = 10.0);
    
    void output();
-   void input(bool isUp, bool isDown, bool isB)
-   {
+   void input(bool isUp, bool isDown, bool isB){
       if (isUp)
          v.turn(0.04);
       if (isDown)

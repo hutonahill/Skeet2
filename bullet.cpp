@@ -9,6 +9,8 @@
 
 #include "bullet.h"
 
+#include "skeet.h"
+
 #ifdef __APPLE__
 #define GL_SILENCE_DEPRECATION
 #include <openGL/gl.h>    // Main OpenGL library
@@ -254,9 +256,11 @@ double Bullet::random(double min, double max){
 
 
 void Missile::kill() {
-	
+	pSkeet->UnsubscribeUi(Sender);
+
+	Bullet::kill();
 }
 
-Missile::Missile(double angle, Skeet* skeet, double speed) :Bullet(angle, speed, 1.0, 3) {
+Missile::Missile(double angle, Skeet* skeet, double speed) : Bullet(angle, speed, 1.0, 3) {
 	pSkeet = skeet;
 }
