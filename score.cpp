@@ -56,10 +56,68 @@ void HitRatio::adjust(int value)
  * NOTIFY
  * Calls all the colleagues
  ************************/
-//void Mediator: notify(message)
-//{
-//   for (Mediator* colleague: colleagues)
-//   {
-//      colleague.notify(message);
-//   }
-//}
+void Mediator :: notify(Message message)
+{
+   for (AbstractColleague* colleague: colleagues)
+   {
+      colleague->notify(message);
+   }
+}
+
+
+/************************
+ * ENROLL
+ ************************/
+void AbstractColleague:: enroll(Mediator* mediator) {
+   this->mediator = mediator;
+   mediator->enroll(this);
+}
+/************************
+ * UNENROLL
+ ************************/
+void AbstractColleague:: unenroll(Mediator* mediator) {
+   mediator->unenroll(this);
+   this->mediator = nullptr;
+}
+
+/************************
+* WENT OUT OF BOUNDS - BIRD
+ ************************/
+void BirdColleague::wentOutOfBounds()
+{
+   Message message;
+   message.type = Message::BIRD_DIED;
+   message.value = std::to_string(-pBird->getPoints());
+   mediator->notify(message);
+}
+
+/************************
+ * WAS SHOT - BIRD
+ ************************/
+void BirdColleague::wasShot()
+{
+   Message message;
+   message.type = Message::BIRD_DIED;
+   message.value = std::to_string(pBird->getPoints());
+   mediator->notify(message);
+}
+/************************
+ WENT OUT OF BOUNDS - BULLET
+ ************************/
+void BulletColleague::wentOutOfBounds()
+{
+   Message message;
+   message.type = Message::OUTOFBOUNDS;
+   message.value = std::to_string(-pBullet->getValue());
+   mediator->notify(message);
+}
+/************************
+ WAS FIRED - BULLET
+ ************************/
+void BulletColleague::wasFired()
+{
+   Message message;
+   message.type = Message::BULLET_FIRED;
+   message.value = std::to_string(pBullet->getValue());
+   mediator->notify(message);
+}

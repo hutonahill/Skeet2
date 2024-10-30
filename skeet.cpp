@@ -6,6 +6,7 @@
 #include <string>
 #include <sstream>
 #include "skeet.h"
+
 using namespace std;
 
 
@@ -57,7 +58,7 @@ void Skeet::animate()
    for (auto element : birds)
    {
       element->advance();
-      hitRatio.adjust(element->isDead() ? -1 : 0);
+//      hitRatio.adjust(element->isDead() ? -1 : 0);
    }
    for (auto bullet : bullets)
       bullet->move(effects);
@@ -78,18 +79,20 @@ void Skeet::animate()
                effects.push_back(new Fragment(bullet->getPosition(), bullet->getVelocity()));
             element->kill();
             bullet->kill();
-            hitRatio.adjust(1);
-            bullet->setValue(-(element->getPoints()));
-            element->setPoints(0);
+
+            //Notify the mediator about the collision
+            Message message;
+            message.value = std::to_string(element->getPoints());
+            mediator->notify( message);
+
          }
    
    // remove the zombie birds
    for (auto it = birds.begin(); it != birds.end();)
       if ((*it)->isDead())
       {
-         if ((*it)->getPoints())
-            points.push_back(Points((*it)->getPosition(), (*it)->getPoints()));
-         score.adjust((*it)->getPoints());
+         
+
          it = birds.erase(it);
       }
       else
@@ -100,9 +103,7 @@ void Skeet::animate()
       if ((*it)->isDead())
       {
          (*it)->death(bullets);
-         int value = -(*it)->getValue();
-         points.push_back(Points((*it)->getPosition(), value));
-         score.adjust(value);
+
          it = bullets.erase(it);
       }
       else

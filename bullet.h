@@ -13,12 +13,14 @@
 #include <list>
 #include <cassert>
 
+
 /*********************************************
  * BULLET
  * Something to shoot something else
  *********************************************/
 class Bullet
 {
+   friend class BulletColleague;
 protected:
    static Position dimensions;   // size of the screen
    Position pt;                  // position of the bullet

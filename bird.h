@@ -7,8 +7,11 @@
  *    Stuff that moves across the screen to be shot
  ************************************************************************/
 
+class AbstractColleague;
+
 #pragma once
 #include "position.h"
+#include "score.h"
 
 /**********************
  * BIRD
@@ -16,6 +19,7 @@
  **********************/
 class Bird
 {
+   friend class BirdColleague;
 protected:
    static Position dimensions; // size of the screen
    Position pt;                  // position of the flyer
@@ -48,6 +52,7 @@ public:
    // special functions
    virtual void draw() = 0;
    virtual void advance() = 0;
+   
 };
 
 /*********************************************
@@ -58,8 +63,12 @@ class Standard : public Bird
 {
 public:
     Standard(double radius = 25.0, double speed = 5.0, int points = 10);
-    void draw();
-    void advance();
+    void draw() ;
+    void advance() override;
+   Standard(AbstractColleague* colleague) : pColleague(colleague) {};
+private:
+   AbstractColleague* pColleague;
+   
 };
 
 /*********************************************
