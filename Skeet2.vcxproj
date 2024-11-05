@@ -19,10 +19,13 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ArrowListener.cpp" />
     <ClCompile Include="bird.cpp" />
     <ClCompile Include="bullet.cpp" />
     <ClCompile Include="DrawStrategy.cpp" />
     <ClCompile Include="effect.cpp" />
+    <ClCompile Include="ElementLogic.cpp" />
+    <ClCompile Include="ElementStorage.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="gun.cpp" />
     <ClCompile Include="Interface.cpp" />
@@ -36,10 +39,13 @@
     <ClCompile Include="uiInteract.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ArrowListener.h" />
     <ClInclude Include="bullet.h" />
     <ClInclude Include="bird.h" />
     <ClInclude Include="DrawStrategy.h" />
     <ClInclude Include="effect.h" />
+    <ClInclude Include="ElementLogic.h" />
+    <ClInclude Include="ElementStorage.h" />
     <ClInclude Include="gun.h" />
     <ClInclude Include="Interface.h" />
     <ClInclude Include="points.h" />
