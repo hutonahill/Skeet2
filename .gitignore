@@ -402,3 +402,8 @@ FodyWeavers.xsd
 
 # the one missing visual studio code file.
 *.vcxproj
+
+# the xcode project file
+.xcodeproj/
+
+.idea/
