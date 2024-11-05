@@ -413,7 +413,5 @@ FodyWeavers.xsd
 packages/
 
 .filters
-
-.sln
-
-.config
+*.config
+*.sln
