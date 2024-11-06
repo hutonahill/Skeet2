@@ -407,3 +407,11 @@ FodyWeavers.xsd
 .xcodeproj/
 
 .idea/
+
+
+# we are not sure who did this, but someone needes it and it breaks everything
+packages/
+
+*.filters
+*.config
+*.sln
