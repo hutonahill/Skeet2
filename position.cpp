@@ -10,6 +10,7 @@
 #include "position.h"
 #include <cmath>
 #include <cassert>
+#include <limits>
 
 /******************************************
  * POINT : CONSTRUCTOR WITH X,Y
