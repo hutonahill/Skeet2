@@ -23,7 +23,8 @@ private:
 		IteratorElement(ElementStorage* it) : it(it) {};
 		IteratorElement(IteratorElement* that) : it(that->it) {};
 
-		IteratorElement operator++() {};
+		IteratorElement operator++();
+		ElementStorage* operator*();
 
 	private:
 		ElementStorage* it;
@@ -31,11 +32,13 @@ private:
 
 	class IteratorBird
 	{
+	public:
 		IteratorBird() : it(nullptr) {};
 		IteratorBird(ElementStorage* it) : it(it) {};
 		IteratorBird(IteratorBird* that) : it(that->it) {};
 
-		IteratorBird operator++() {};
+		IteratorBird operator++();
+		ElementStorage* operator*();
 
 	private:
 		ElementStorage* it;
@@ -43,11 +46,13 @@ private:
 
 	class IteratorBullet
 	{
+	public:
 		IteratorBullet() : it(nullptr) {};
 		IteratorBullet(ElementStorage* it) : it(it) {};
 		IteratorBullet(IteratorBullet* that) : it(that->it) {};
 
-		IteratorBullet operator++() {};
+		IteratorBullet operator++();
+		ElementStorage* operator*();
 
 	private:
 		ElementStorage* it;
@@ -56,16 +61,18 @@ private:
 
 public:
 	
-	Storage() {};
+	Storage();
 	int getPoints() { return points; }
-	int getNumKilled() {};
-	int getNumMissed() {};
-	IteratorElement begin() {};
-	IteratorElement end() {};
-	IteratorBird beginBird() {};
-	IteratorBird endBird() {};
-	IteratorBullet beginBullet() {};
-	IteratorBullet endBullet() {};
-	void add(ElementStorage element) {};
-	void reset() {};
+	int getNumKilled() { return numKilled; }
+	int getNumMissed() { return numMissed; }
+	StorageGun getGun() { return gun; }
+	IteratorElement begin();
+	IteratorElement end();
+	IteratorBird beginBird();
+	IteratorBird endBird();
+	IteratorBullet beginBullet();
+	IteratorBullet endBullet();
+	void add(ElementStorage* element);
+	void remove(ElementStorage* it);
+	void reset();
 };
