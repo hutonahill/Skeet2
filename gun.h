@@ -26,3 +26,8 @@ private:
    double angle;
    Position pt;
 };
+
+class StorageGun
+{
+
+};
