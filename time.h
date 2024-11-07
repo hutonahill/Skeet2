@@ -78,4 +78,7 @@ private:
     
 };
 
+class StorageTime
+{
 
+};
