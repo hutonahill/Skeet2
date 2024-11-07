@@ -2,6 +2,7 @@
 #include "ElementStorage.h"
 #include "Interface.h"
 #include "position.h"
+#include <cassert>
 
 /***************************************************************/
 /***************************************************************/
@@ -173,4 +174,7 @@ void NotTimed::execute(ElementStorage* el)
 
 void Timed::execute(ElementStorage* el)
 {
+   timeToDie--;
+   if (!timeToDie)
+      el->isDead = true;
 }
