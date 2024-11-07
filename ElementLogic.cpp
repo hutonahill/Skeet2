@@ -38,13 +38,6 @@ void StandardBirdMove::execute(ElementStorage* el)
 
    // inertia
    el->pt.add(el->v);
-
-   // out of bounds checker
-   if (el->isOutOfBounds())
-   {
-      el->isDead = true;
-      el->points *= -1; // points go negative when it is missed!
-   }
 }
 
 void FloaterBirdMove::execute(ElementStorage* el)
@@ -57,13 +50,6 @@ void FloaterBirdMove::execute(ElementStorage* el)
 
    // anti-gravity
    el->v.addDy(0.05);
-
-   // out of bounds checker
-   if (el->isOutOfBounds())
-   {
-      el->isDead = true;
-      el->points *= -1; // points go negative when it is missed!
-   }
 }
 
 void SinkerBirdMove::execute(ElementStorage* el)
@@ -73,13 +59,6 @@ void SinkerBirdMove::execute(ElementStorage* el)
 
    // inertia
    el->pt.add(el->v);
-
-   // out of bounds checker
-   if (el->isOutOfBounds())
-   {
-      el->isDead = true;
-      el->points *= -1; // points go negative when it is missed!
-   }
 }
 
 void CrazyBirdMove::execute(ElementStorage* el)
@@ -93,22 +72,12 @@ void CrazyBirdMove::execute(ElementStorage* el)
 
    // inertia
    pt.add(v);
-
-   // out of bounds checker
-   if (isOutOfBounds())
-   {
-      el->isDead = true;
-      points *= -1; // points go negative when it is missed!
-   }
 }
 
 void PelletMove::execute(ElementStorage* el)
 {
    // inertia
    el->pt.add(el->v);
-   // out of bounds checker
-   if (el->isOutOfBounds())
-      el->isDead = true;
 }
 
 void MissleMove::execute(ElementStorage* el)
@@ -126,8 +95,6 @@ void MissleMove::execute(ElementStorage* el)
 
 void NoneMove::execute(ElementStorage* el)
 {
-   // inertia
-   el->pt.add(el->v);
 }
 
 void EffectDeath::execute(ElementStorage* el)
