@@ -6,79 +6,79 @@ class SkeetLogic;
 
 class ElementLogic {
 public:
-	virtual void execute(ElementStorage& el) = 0;
+	virtual void execute(ElementStorage* el) = 0;
 };
 
 class SpecialMove : public ElementLogic {
 public:
-	virtual void execute(ElementStorage& el) = 0;
+	virtual void execute(ElementStorage* el) = 0;
 };
 
 class StandardBirdMove : public SpecialMove
 {
 public:
-	virtual void execute(ElementStorage& el);
+	virtual void execute(ElementStorage* el);
 };
 
 class FloaterBirdMove : public SpecialMove
 {
 public:
-	virtual void execute(ElementStorage& el);
+	virtual void execute(ElementStorage* el);
 };
 
 class SinkerBirdMove : public SpecialMove
 {
 public:
-	virtual void execute(ElementStorage& el);
+	virtual void execute(ElementStorage* el);
 };
 
 class CrazyBirdMove : public SpecialMove
 {
 public:
-	virtual void execute(ElementStorage& el);
+	virtual void execute(ElementStorage* el);
 };
 
 class PelletMove : public SpecialMove
 {
 public:
-	virtual void execute(ElementStorage& el);
+	virtual void execute(ElementStorage* el);
 };
 
 class MissleMove : public SpecialMove
 {
 public:
-	virtual void execute(ElementStorage& el);
+	virtual void execute(ElementStorage* el);
 };
 
 class NoneMove : public SpecialMove
 {
 public:
-	virtual void execute(ElementStorage& el);
+	virtual void execute(ElementStorage* el);
 };
 
 class OnDeath : public ElementLogic
 {
 public:
-	virtual void execute(ElementStorage& el) = 0;
+	virtual void execute(ElementStorage* el) = 0;
 };
 
 class EffectDeath : public OnDeath
 {
 public:
-	virtual void execute(ElementStorage& el);
+	virtual void execute(ElementStorage* el);
 };
 
 class DisapearDeath : public OnDeath
 {
 public:
-	virtual void execute(ElementStorage& el);
+	virtual void execute(ElementStorage* el);
 };
 
 class ShrapnelDeath : public OnDeath
 {
 public:
 	ShrapnelDeath(SkeetLogic* sl) : SkeetLogic(sl) {};
-	virtual void execute(ElementStorage& el);
+	virtual void execute(ElementStorage* el);
 private:
 	SkeetLogic* SkeetLogic;
 };
@@ -87,9 +87,9 @@ class Input : public ElementLogic
 {
 public:
 	Input() : up(0), down(0), left(0), right(0) {};
-	virtual void execute(ElementStorage& el) = 0;
-	virtual void subscribe(ArrowListener& al) = 0;
-	virtual void unsubscribe(ArrowListener& al) = 0;
+	virtual void execute(ElementStorage* el) = 0;
+	virtual void subscribe(ArrowListener* al) = 0;
+	virtual void unsubscribe(ArrowListener* al) = 0;
 	int up;
 	int down;
 	int left;
@@ -99,9 +99,9 @@ public:
 class Arrows : public Input
 {
 public:
-	virtual void execute(ElementStorage& el);
-	virtual void subscribe(ArrowListener& al);
-	virtual void unsubscribe(ArrowListener& al);
+	virtual void execute(ElementStorage* el);
+	virtual void subscribe(ArrowListener* al);
+	virtual void unsubscribe(ArrowListener* al);
 private:
 	ArrowListener* al;
 };
@@ -109,25 +109,26 @@ private:
 class None : public Input
 {
 public:
-	virtual void execute(ElementStorage& el);
-	virtual void subscribe(ArrowListener& al);
-	virtual void unsubscribe(ArrowListener& al);
+	virtual void execute(ElementStorage* el);
+	virtual void subscribe(ArrowListener* al);
+	virtual void unsubscribe(ArrowListener* al);
 };
 
 class Timing : public ElementLogic
 {
 public:
-	virtual void execute(ElementStorage& el) = 0;
+	virtual void execute(ElementStorage* el) = 0;
 };
 
 class NotTimed : public Timing
 {
 public:
-	virtual void execute(ElementStorage& el);
+	virtual void execute(ElementStorage* el);
 };
 
 class Timed : public Timing
 {
 public:
-	virtual void execute(ElementStorage& el);
+	virtual void execute(ElementStorage* el);
+	int timeToDie;
 };
