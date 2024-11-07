@@ -2,6 +2,7 @@
 
 class ElementStorage;
 class ArrowListener;
+class SkeetLogic;
 
 class ElementLogic {
 public:
@@ -76,7 +77,10 @@ public:
 class ShrapnelDeath : public OnDeath
 {
 public:
+	ShrapnelDeath(SkeetLogic* sl) : SkeetLogic(sl) {};
 	virtual void execute(ElementStorage& el);
+private:
+	SkeetLogic* SkeetLogic;
 };
 
 class Input : public ElementLogic
@@ -98,6 +102,8 @@ public:
 	virtual void execute(ElementStorage& el);
 	virtual void subscribe(ArrowListener& al);
 	virtual void unsubscribe(ArrowListener& al);
+private:
+	ArrowListener* al;
 };
 
 class None : public Input
@@ -111,7 +117,7 @@ public:
 class Timing : public ElementLogic
 {
 public:
-	virtual void execute(ElementStorage& el);
+	virtual void execute(ElementStorage& el) = 0;
 };
 
 class NotTimed : public Timing
