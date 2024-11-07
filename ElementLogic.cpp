@@ -64,10 +64,6 @@ void None::unsubscribe(ArrowListener& al)
 {
 }
 
-void Timing::execute(ElementStorage& el)
-{
-}
-
 void NotTimed::execute(ElementStorage& el)
 {
 }
