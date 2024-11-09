@@ -2,9 +2,10 @@
 #include <iterator>
 #include <list>
 
+class ElementStorage;
 using namespace std;
 
-class ElementStorage;
+
 class Storage;
 class Interface;
 
@@ -23,17 +24,16 @@ public:
 	void makeMissile();
 	void makeBomb();
 
-	list<ElementStorage> ElementsToSpawn;
+	list<ElementStorage*> ElementsToSpawn;
 	
 private:
-	void move();
 	void specialMoves();
 	void spawn();
 	void detectCollision();
+	void detectOutOfBounds();
 	void clearZombies();
 	void updateStatus();
-
-	list<ElementStorage>::iterator* PrivateElementIterator;
+	void birdSpawn();
 	
 	Storage* SkeetStorage;
 
