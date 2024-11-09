@@ -36,14 +36,13 @@ public:
    void specialMove();
       // getters
    Position getPosition()  const        { return objectPT; }
+   Velocity getVelocity() const        {return objectV;}
    bool isDead() const                  {return dead;}
    void kill()                          { dead = true; }
 
 protected:
    Position objectPT;   //what is our position?
    Velocity objectV;    //what is our velocity?
-   Bird bird;
-   Bullet bullet;
    Score score;
    SpecialMove*  sm;
    OnDeath* od;
