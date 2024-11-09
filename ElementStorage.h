@@ -42,8 +42,6 @@ public:
 protected:
    Position objectPT;   //what is our position?
    Velocity objectV;    //what is our velocity?
-   Bird bird;
-   Bullet bullet;
    Score score;
    SpecialMove*  sm;
    OnDeath* od;
