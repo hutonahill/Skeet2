@@ -13,40 +13,43 @@
 #include "bullet.h"
 #include "bird.h"
 #include "score.h"
+#include "ElementLogic.h"
 
 
 class SpecialMove;
 class Timing;
-
+class Bird;
+class Bullet;
+class OnDeath;
+class Input;
 
 /**********************
  * ENTITY STORAGE
  * The storage of all entities/elements within the system
  **********************/
 class ElementStorage {
+   friend ElementLogic;
 public:
    bool isBird;
    bool isBullet;
-   ElementStorage() : isBird(true), {} ;
+   ElementStorage() : isBird(true) {};
    void specialMove();
-   void execute();
-   SpecialMove getSpecial() const{ return sm;}
-   
       // getters
-   Position getPosition()  const { return objectPT;     }
-  
-   
-   
-   
+   Position getPosition()  const        { return objectPT; }
+   bool isDead() const                  {return dead;}
+   void kill()                          { dead = true; }
+
 protected:
-   Position objectPT;
-   Bird* bird;
-   Bullet* bullet;
+   Position objectPT;   //what is our position?
+   Velocity objectV;    //what is our velocity?
+   Bird bird;
+   Bullet bullet;
+   Score score;
    SpecialMove*  sm;
-   Score* score;
    OnDeath* od;
-   Input*      arrow;
+   Input*   arrow;
    Timing*  time;
+   bool dead;
    
 };
 

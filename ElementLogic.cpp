@@ -1,4 +1,4 @@
-﻿#include "ElementLogic.h"
+#include "ElementLogic.h"
 #include "ElementStorage.h"
 #include "Interface.h"
 #include "position.h"
@@ -37,7 +37,7 @@ void StandardBirdMove::execute(ElementStorage* el)
    el->v *= 0.995;
 
    // inertia
-   el->pt.add(el->v);
+   el->objectPT.add(el->v);
 
    // out of bounds checker
    if (el->isOutOfBounds())
@@ -69,10 +69,10 @@ void FloaterBirdMove::execute(ElementStorage* el)
 void SinkerBirdMove::execute(ElementStorage* el)
 {
    // gravity
-   el->v.addDy(-0.07);
+   el->objectV.addDy(-0.07);
 
    // inertia
-   el->pt.add(el->v);
+   el->objectPT.add(el->objectV);
 
    // out of bounds checker
    if (el->isOutOfBounds())
