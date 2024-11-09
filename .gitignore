@@ -415,3 +415,4 @@ packages/
 *.filters
 *.config
 *.sln
+*.DS_Store
