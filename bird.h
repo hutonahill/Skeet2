@@ -15,7 +15,7 @@
  * BIRD
  * Everything that can be shot
  **********************/
-class Bird : public ElementStorage
+class Bird 
 {
 protected:
    static Position dimensions; // size of the screen
