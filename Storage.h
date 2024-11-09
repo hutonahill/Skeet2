@@ -6,6 +6,19 @@
 #include <list>
 
 class Storage {
+public:
+
+	Storage() : numBirds(0),points(0),numKilled(0),numMissed(0) {};
+	int getPoints() { return points; }
+	int getNumKilled() { return numKilled; }
+	int getNumMissed() { return numMissed; }
+	int getNumBirds() { return numBirds; }
+	StorageGun getGun() { return gun; }
+	StorageTime getTime() { return time;  }
+	void add(ElementStorage* element);
+	void remove(ElementStorage* it);
+	void reset();
+
 private:
 
 	int numBirds;
@@ -34,7 +47,7 @@ private:
 	{
 	public:
 		IteratorBird() : it(nullptr) {};
-		IteratorBird(ElementStorage* it) : it(it) {};
+		IteratorBird(ElementStorage* it);
 		IteratorBird(IteratorBird* that) : it(that->it) {};
 
 		IteratorBird operator++();
@@ -48,7 +61,7 @@ private:
 	{
 	public:
 		IteratorBullet() : it(nullptr) {};
-		IteratorBullet(ElementStorage* it) : it(it) {};
+		IteratorBullet(ElementStorage* it);
 		IteratorBullet(IteratorBullet* that) : it(that->it) {};
 
 		IteratorBullet operator++();
@@ -58,22 +71,12 @@ private:
 		ElementStorage* it;
 	};
 
-
 public:
-	
-	Storage();
-	int getPoints() { return points; }
-	int getNumKilled() { return numKilled; }
-	int getNumMissed() { return numMissed; }
-	StorageGun getGun() { return gun; }
-	StorageTime getTime() { return time;  }
+
 	IteratorElement begin();
 	IteratorElement end();
 	IteratorBird beginBird();
 	IteratorBird endBird();
 	IteratorBullet beginBullet();
 	IteratorBullet endBullet();
-	void add(ElementStorage* element);
-	void remove(ElementStorage* it);
-	void reset();
 };
