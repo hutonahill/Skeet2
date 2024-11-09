@@ -36,6 +36,7 @@ public:
    void specialMove();
       // getters
    Position getPosition()  const        { return objectPT; }
+   Velocity getVelocity() const        {return objectV;}
    bool isDead() const                  {return dead;}
    void kill()                          { dead = true; }
 
