@@ -74,109 +74,116 @@ double getSize(int level) {
 	return maxSize - (5*(level-1));
 }
 
-void StandardFactory(double size, int level) {
+void SkeetLogic::StandardFactory(double size, int level) {
 	ElementStorage* newStandard;
 	switch (level) {
 		case 1:
 			newStandard = new Standard(size, 7);
+			break;
 		case 2:
 			newStandard = new Standard(size, 7, 12);
+			break;
 		case 3:
 			newStandard = new Standard(size, 5.0, 15);
+			break;
 		case 4:
 			newStandard = new Standard(size, 4.0, 18);
+			break;
 		default:
-			return
+			newStandard = nullptr;
+			break;
+	}
+
+	if (newStandard != nullptr) {
+		ElementsToSpawn.push_back(newStandard);
 	}
 }
 
-ElementStorage* SinkerFacotry(double size, int level) {
-	
+void SkeetLogic::SinkerFactory(double size, int level) {
+	ElementStorage* newSinker;
 	switch (level) {
-		case 1:
-			return new Standard(size, 7);
 		case 2:
-			return new Standard(size, 7, 12);
+			newSinker = new Sinker(size);
+			break;
 		case 3:
-			return new Standard(size, 5.0, 15);
+			newSinker = new Sinker(size, 4.0, 22);
+			break;
 		case 4:
-			return new Standard(size, 4.0, 18);
+			newSinker = new Sinker(size, 3.5, 25);
+			break;
+		default:
+			newSinker = nullptr;
+			break;
+	}
+
+	if (newSinker != nullptr) {
+		ElementsToSpawn.push_back(newSinker);
+	}
+}
+
+void SkeetLogic::FloaterFactory(double size, int level) {
+	ElementStorage* newFloater;
+	switch (level) {
+		case 3:
+			newFloater = new Floater(size);
+			break;
+		case 4:
+			newFloater = new Floater(size, 4.0, 25);
+			break;
+		default:
+			newFloater = nullptr;
+			break;
+	}
+
+	if (newFloater != nullptr) {
+		ElementsToSpawn.push_back(newFloater);
+	}
+}
+
+void SkeetLogic::CrazyFactory(double size, int level) {
+	ElementStorage* newCrazy;
+	switch (level) {
+		case 4:
+			newCrazy = new Crazy(size);
+			break;
+		default:
+			newCrazy = nullptr;
+			break;
+	}
+
+	if (newCrazy != nullptr) {
+		ElementsToSpawn.push_back(newCrazy);
 	}
 }
 
 void SkeetLogic::birdSpawn() {
-	double size;
-   switch (SkeetStorage->getTime().level)
-   {
-      // in level 1 spawn big birds occasionally
-      case 1:
-         size = 30.0;
-         // spawns when there is nothing on the screen
-         if (SkeetStorage->getNumBirds() == 0 && random(0, 15) == 1)
-            ElementsToSpawn.push_back(new Standard(size, 7.0));
-         
-         // spawn every 4 seconds
-         if (ShouldSpawnBird())
-            ElementsToSpawn.push_back(new Standard(size, 7.0));
-         break;
-         
-      // two kinds of birds in level 2
-      case 2:
-         size = 25.0;
-         // spawns when there is nothing on the screen
-         if (SkeetStorage->getNumBirds() == 0 && random(0, 15) == 1)
-            ElementsToSpawn.push_back(new Standard(size, 7.0, 12));
 
-         // spawn every 4 seconds
-         if (ShouldSpawnBird())
-            ElementsToSpawn.push_back(new Standard(size, 5.0, 12));
-         // spawn every 4 seconds
-         if (ShouldSpawnBird())
-            ElementsToSpawn.push_back(new Sinker(size));
-         break;
-      
-      // three kinds of birds in level 3
-      case 3:
-         size = 20.0;
-         // spawns when there is nothing on the screen
-         if (SkeetStorage->getNumBirds() == 0 && random(0, 15) == 1)
-            ElementsToSpawn.push_back(new Standard(size, 5.0, 15));
+	int level = SkeetStorage->getTime().getLevel();
+	int size = getSize(level);
+	// spawns when there is nothing on the screen
+	if (SkeetStorage->getNumBirds() == 0 && random(0, 15) == 1) {
+		StandardFactory(size, level);
+	}
 
-         // spawn every 4 seconds
-         if (ShouldSpawnBird())
-            ElementsToSpawn.push_back(new Standard(size, 5.0, 15));
-         // spawn every 4 seconds
-         if (ShouldSpawnBird())
-            ElementsToSpawn.push_back(new Sinker(size, 4.0, 22));
-         // spawn every 4 seconds
-         if (ShouldSpawnBird())
-            ElementsToSpawn.push_back(new Floater(size));
-         break;
+	// spawn every 4 seconds
+	if (ShouldSpawnBird()) {
+		StandardFactory(size, level);
+	}
+	// spawn every 4 seconds
+	if (ShouldSpawnBird()) {
+		SinkerFactory(size, level);
+	}
+	// spawn every 4 seconds
+	if (ShouldSpawnBird()) {
+		FloaterFactory(size, level);
+	}
+	// spawn every 4 seconds
+	if (ShouldSpawnBird()) {
+		CrazyFactory(size, level);
+	}
          
-      // three kinds of birds in level 4
-      case 4:
-         size = 15.0;
-         // spawns when there is nothing on the screen
-         if (SkeetStorage->getNumBirds() == 0 && random(0, 15) == 1)
-            ElementsToSpawn.push_back(new Standard(size, 4.0, 18));
-
-         // spawn every 4 seconds
-         if (ShouldSpawnBird())
-            ElementsToSpawn.push_back(new Standard(size, 4.0, 18));
-         // spawn every 4 seconds
-         if (ShouldSpawnBird())
-            ElementsToSpawn.push_back(new Sinker(size, 3.5, 25));
-         // spawn every 4 seconds
-         if (ShouldSpawnBird())
-            ElementsToSpawn.push_back(new Floater(size, 4.0, 25));
-         // spawn every 4 seconds
-         if (ShouldSpawnBird())
-            ElementsToSpawn.push_back(new Crazy(size));
-         break;
          
-      default:
-         break;
-   }
+	
 }
 
 void SkeetLogic::spawn() {

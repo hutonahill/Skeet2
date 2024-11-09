@@ -34,6 +34,11 @@ private:
 	void clearZombies();
 	void updateStatus();
 	void birdSpawn();
+
+	void StandardFactory(double size, int level);
+	void SinkerFactory(double size, int level);
+	void FloaterFactory(double size, int level);
+	void CrazyFactory(double size, int level);
 	
 	Storage* SkeetStorage;
 
