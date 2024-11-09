@@ -34,11 +34,15 @@ public:
    bool isBullet;
    ElementStorage() : isBird(true) {};
    void specialMove();
-      // getters
-   Position getPosition()  const        { return objectPT; }
-   Velocity getVelocity() const        {return objectV;}
-   bool isDead() const                  {return dead;}
-   void kill()                          { dead = true; }
+   // getters
+   Position getPosition() const         {return objectPT;}
+   Velocity getVelocity() const         {return objectV;}
+   Input* getInput()      const         {return arrow;}
+   Score getPoints()      const         {return score;}
+   Timing* getTime()      const         {return time;}
+   bool isDead()          const         {return dead;}
+   void kill()                          { dead = true;}
+   
 
 protected:
    Position objectPT;   //what is our position?
