@@ -34,22 +34,22 @@ double randomFloat(double min, double max)
 void StandardBirdMove::execute(ElementStorage* el)
 {
    // small amount of drag
-   el->v *= 0.995;
+   el->getVelocity() *= 0.995;
 
    // inertia
-   el->objectPT.add(el->v);
+   el->getPosition().add(el->getVelocity());
 }
 
 void FloaterBirdMove::execute(ElementStorage* el)
 {
    // large amount of drag
-   el->v *= 0.990;
+   el->getVelocity() *= 0.990;
 
    // inertia
-   el->pt.add(el->v);
+   el->getPosition().add(el->getVelocity());
 
    // anti-gravity
-   el->v.addDy(0.05);
+   el->getVelocity().addDy(0.05);
 }
 
 void SinkerBirdMove::execute(ElementStorage* el)
