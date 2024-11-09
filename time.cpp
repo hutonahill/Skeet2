@@ -12,7 +12,7 @@
 using namespace std;
 
 #define SECONDS_STATUS 5.0
-
+// :)
 /************************
  * TIME reset
  * Set up the levels and stuff
