@@ -67,6 +67,7 @@ public:
 	int getNumMissed() { return numMissed; }
 	StorageGun getGun() { return gun; }
 	Time getTime() { return time;  }
+	int getNumBirds() { return numBirds; }
 	IteratorElement begin();
 	IteratorElement end();
 	IteratorBird beginBird();
