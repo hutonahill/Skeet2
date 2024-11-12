@@ -1,11 +1,11 @@
 ﻿#include "Storage.h"
 
-Storage::IteratorElement Storage::begin()
+Storage::IteratorElement Storage::beginElement()
 {
    return IteratorElement(*(Element.begin()));
 }
 
-Storage::IteratorElement Storage::end()
+Storage::IteratorElement Storage::endElement()
 {
    return IteratorElement(*(Element.end()));
 }
