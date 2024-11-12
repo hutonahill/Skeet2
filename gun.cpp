@@ -123,3 +123,18 @@ void Gun::interact(int clockwise, int counterclockwise)
          angle = 0.0;
    }
 }
+
+void StorageGun::addAngle(int num)
+{
+   angle += num;
+
+   if (angle > M_PI_2)
+   {
+      angle = M_PI_2;
+   }
+
+   if (angle < 0)
+   {
+      angle = 0;
+   }
+}
