@@ -1,6 +1,7 @@
 #include "ElementLogic.h"
 #include "ElementStorage.h"
 #include "Interface.h"
+#include "ArrowListener.h"
 #include "position.h"
 #include <cassert>
 
@@ -113,7 +114,7 @@ void Arrows::execute(ElementStorage* el)
 
 void Arrows::subscribe(ArrowListener* al)
 {
-   al = al->subscribe(this);
+   al->subscribe(this);
 }
 
 void Arrows::unsubscribe(ArrowListener* al)
