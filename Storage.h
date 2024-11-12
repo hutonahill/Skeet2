@@ -70,13 +70,16 @@ public:
 	Time getTime() { return time;  }
 	int getNumBirds() { return numBirds; }
 	Position getDimensions() { return dimensions; }
-	IteratorElement begin();
-	IteratorElement end();
+	IteratorElement beginElement();
+	IteratorElement endElement();
 	IteratorBird beginBird();
 	IteratorBird endBird();
 	IteratorBullet beginBullet();
 	IteratorBullet endBullet();
-	void add(ElementStorage* element);
+	void addPoints(int points) { this->points += points; }
+	void addMissed(int missed) { numMissed += missed; }
+	void addKilled(int killed) { numKilled += killed; }
+	void addElement(ElementStorage* element);
 	void remove(ElementStorage* it);
 	void reset();
 };

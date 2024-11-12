@@ -30,8 +30,13 @@ Storage::IteratorBullet Storage::endBullet()
    return IteratorBullet(*(Element.end()));
 }
 
-void Storage::add(ElementStorage* element)
+void Storage::addElement(ElementStorage* element)
 {
+   if (element->isBird)
+   {
+      numBirds++;
+   }
+
    Element.push_back(element);
 }
 
