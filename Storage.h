@@ -12,7 +12,7 @@ private:
 	int points;
 	int numKilled;
 	int numMissed;
-	StorageTime time;
+	Time time;
 	StorageGun gun;
 	std::list<ElementStorage*> Element;
 
@@ -66,7 +66,7 @@ public:
 	int getNumKilled() { return numKilled; }
 	int getNumMissed() { return numMissed; }
 	StorageGun getGun() { return gun; }
-	StorageTime getTime() { return time;  }
+	Time getTime() { return time;  }
 	IteratorElement begin();
 	IteratorElement end();
 	IteratorBird beginBird();
