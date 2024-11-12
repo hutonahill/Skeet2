@@ -47,7 +47,7 @@ bool isOutOfBounds(ElementStorage element, Position dimensions){
 void SkeetLogic::detectOutOfBounds() {
 
 	for (ElementStorage element : SkeetStorage->begin()) {
-		if(isOutOfBounds(element, SkeetStorage->getDimensions)) {
+		if(isOutOfBounds(element, SkeetStorage->getDimensions())) {
 			element.kill();
 		}
 	}
@@ -82,20 +82,27 @@ double getSize(int level) {
 	return maxSize - (5*(level-1));
 }
 
+ElementStorage* Standard(double radius, double speed, int points) {
+	SpecialMove* move = new StandardBirdMove();
+	OnDeath* death = new DisapearDeath();
+	Timing* time = new NotTimed();
+
+	return new ;
+}
 void SkeetLogic::StandardFactory(double size, int level) {
 	ElementStorage* newStandard;
 	switch (level) {
 		case 1:
-			newStandard = new Standard(size, 7);
+			newStandard = Standard(size, 7, 10);
 			break;
 		case 2:
-			newStandard = new Standard(size, 7, 12);
+			newStandard = Standard(size, 7, 12);
 			break;
 		case 3:
-			newStandard = new Standard(size, 5.0, 15);
+			newStandard = Standard(size, 5.0, 15);
 			break;
 		case 4:
-			newStandard = new Standard(size, 4.0, 18);
+			newStandard = Standard(size, 4.0, 18);
 			break;
 		default:
 			newStandard = nullptr;
@@ -107,17 +114,25 @@ void SkeetLogic::StandardFactory(double size, int level) {
 	}
 }
 
+
+ElementStorage* Sinker(double radius, double speed, int points) {
+	SpecialMove* move = new SinkerBirdMove();
+	OnDeath* death = new DisapearDeath();
+	Timing* time = new NotTimed();
+
+	return new ;
+}
 void SkeetLogic::SinkerFactory(double size, int level) {
 	ElementStorage* newSinker;
 	switch (level) {
 		case 2:
-			newSinker = new Sinker(size);
+			newSinker = Sinker(size, 4.5, 20);
 			break;
 		case 3:
-			newSinker = new Sinker(size, 4.0, 22);
+			newSinker = Sinker(size, 4.0, 22);
 			break;
 		case 4:
-			newSinker = new Sinker(size, 3.5, 25);
+			newSinker = Sinker(size, 3.5, 25);
 			break;
 		default:
 			newSinker = nullptr;
@@ -129,14 +144,22 @@ void SkeetLogic::SinkerFactory(double size, int level) {
 	}
 }
 
+
+ElementStorage* Floater(double radius, double speed, int points) {
+	SpecialMove* move = new FloaterBirdMove();
+	OnDeath* death = new DisapearDeath();
+	Timing* time = new NotTimed();
+
+	return new ;
+}
 void SkeetLogic::FloaterFactory(double size, int level) {
 	ElementStorage* newFloater;
 	switch (level) {
 		case 3:
-			newFloater = new Floater(size);
+			newFloater = Floater(size, 5, 15);
 			break;
 		case 4:
-			newFloater = new Floater(size, 4.0, 25);
+			newFloater = Floater(size, 4.0, 25);
 			break;
 		default:
 			newFloater = nullptr;
@@ -148,11 +171,19 @@ void SkeetLogic::FloaterFactory(double size, int level) {
 	}
 }
 
+
+ElementStorage* Crazy(double size, double speed, int points) {
+	SpecialMove* move = new CrazyBirdMove();
+	OnDeath* death = new DisapearDeath();
+	Timing* time = new NotTimed();
+
+	return new ;
+}
 void SkeetLogic::CrazyFactory(double size, int level) {
 	ElementStorage* newCrazy;
 	switch (level) {
 		case 4:
-			newCrazy = new Crazy(size);
+			newCrazy = Crazy(size, 4.5, 30);
 			break;
 		default:
 			newCrazy = nullptr;
@@ -163,6 +194,8 @@ void SkeetLogic::CrazyFactory(double size, int level) {
 		ElementsToSpawn.push_back(newCrazy);
 	}
 }
+
+
 
 void SkeetLogic::birdSpawn() {
 
