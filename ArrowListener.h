@@ -11,8 +11,8 @@ class ArrowListener
 {
 public:
 
-   ArrowListener* subscribe(Input& in);  
-   void unsubscribe(Input& in);
+   void subscribe(Input* in);  
+   void unsubscribe(Input* in);
 
 private:
    set<Input*> subscribers;
