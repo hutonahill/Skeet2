@@ -15,6 +15,7 @@
 #include "score.h"
 #include "ElementLogic.h"
 #include "Effect.h"
+#include "DrawStrategy.h"
 
 
 class SpecialMove;
@@ -44,13 +45,13 @@ public:
    
    // getters
    SpecialMove* getSpecialMove()
-                          const         {return sm;      }
-   Position getPosition() const         {return objectPT;}
-   Velocity getVelocity() const         {return objectV; }
-   Input* getInput()      const         {return arrow;   }
-   Score getPoints()      const         {return score;   }
-   Timing* getTime()      const         {return time;    }
-   
+                           const         {return sm;      }
+   Position getPosition()  const         {return objectPT;}
+   Velocity getVelocity()  const         {return objectV; }
+   Input* getInput()       const         {return arrow;   }
+   Score getPoints()       const         {return score;   }
+   Timing* getTime()       const         {return time;    }
+   DrawStrategy* getDraw() const         {return draw;    }
    
    //Other valid functions
 
@@ -75,6 +76,7 @@ protected:
    OnDeath* od;         //what do we do once we die? AKA how dramatic are we?
    Input*   arrow;      //what keys are pressed?
    Timing*  time;       //how much time do we have?
+   DrawStrategy* draw;  //how we display the object
    
    bool dead;           //Are we dead?
    
