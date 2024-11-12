@@ -34,7 +34,7 @@ private:
 	{
 	public:
 		IteratorBird() : it(nullptr) {};
-		IteratorBird(ElementStorage* it) : it(it) {};
+		IteratorBird(ElementStorage* it);
 		IteratorBird(IteratorBird* that) : it(that->it) {};
 
 		IteratorBird operator++();

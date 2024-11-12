@@ -9,12 +9,13 @@
 
 #pragma once
 #include "position.h"
+#include "ElementStorage.h"
 
 /**********************
  * BIRD
  * Everything that can be shot
  **********************/
-class Bird
+class Bird 
 {
 protected:
    static Position dimensions; // size of the screen

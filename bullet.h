@@ -12,12 +12,13 @@
 #include "effect.h"
 #include <list>
 #include <cassert>
+#include "ElementStorage.h"
 
 /*********************************************
  * BULLET
  * Something to shoot something else
  *********************************************/
-class Bullet
+class Bullet 
 {
 protected:
    static Position dimensions;   // size of the screen
