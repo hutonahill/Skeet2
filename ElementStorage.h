@@ -37,8 +37,10 @@ public:
    bool isBullet;
    bool isDead;
    double radius;
+   double age; //1.0 = new, 0.0 = dead
    //Constructor
-   ElementStorage(bool isDead, bool isBird, bool isBullet) : isDead(isDead), isBird(isBird), isBullet(isBullet){};
+   ElementStorage(bool isDead, bool isBird, bool isBullet, SpecialMove* sm, OnDeath* od, Input* arrow, Timing* time, double radius = 0) : isDead(isDead), isBird(isBird), isBullet(isBullet), sm(sm), od(od), arrow(arrow), time(time), radius(radius) {};
+   
    
    // getters
    SpecialMove* getSpecialMove()
@@ -48,17 +50,19 @@ public:
    Input* getInput()      const         {return arrow;   }
    Score getPoints()      const         {return score;   }
    Timing* getTime()      const         {return time;    }
-   double getSize()     const           { return radius; }
+   
+   
    //Other valid functions
-   bool getDead()          const        {return dead;    }
+
    void kill()                          {dead = true;    }
+   bool getDead()          const        {return dead;    }
+   double getRadius()     const         {return radius; }
+   double getAge()        const         {return age;}
    
    
    
 
 protected:
-   
-   ElementStorage(SpecialMove* sm, OnDeath* od, Input* arrow, Timing* time) : sm(sm), od(od), arrow(arrow), time(time) {};
    
    Position objectPT;   //what is our position?
    Velocity objectV;    //what is our velocity?
@@ -76,13 +80,14 @@ protected:
    
 };
 
+//age? Size? radius?
 /**********************
  * BIRD
  **********************/
 class Bird : public ElementStorage
 {
 public:
-   Bird() : ElementStorage(false, true, false) {};
+   Bird(SpecialMove* sm, OnDeath* od, Input* arrow, Timing* time, double radius) : ElementStorage(false, true, false, sm, od, arrow, time, radius) {};
    
 };
 
@@ -92,7 +97,7 @@ public:
 class Bullet : public ElementStorage
 {
 public:
-   Bullet() : ElementStorage(false, false, true) {};
+   Bullet(SpecialMove* sm, OnDeath* od, Input* arrow, Timing* time, double radius) : ElementStorage(false, false, true, sm, od, arrow, time, radius) {};
    
 };
 
@@ -102,6 +107,6 @@ public:
 class Effect : public ElementStorage
 {
 public:
-   Effect() : ElementStorage(false, false, false) {};
+   Effect(SpecialMove* sm, OnDeath* od, Input* arrow, Timing* time, double radius) : ElementStorage(false, false, false, sm, od, arrow, time, radius) {};
    
 };
