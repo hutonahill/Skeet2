@@ -70,8 +70,8 @@ public:
 	Time getTime() { return time;  }
 	int getNumBirds() { return numBirds; }
 	Position getDimensions() { return dimensions; }
-	IteratorElement begin();
-	IteratorElement end();
+	IteratorElement beginElement();
+	IteratorElement endElement();
 	IteratorBird beginBird();
 	IteratorBird endBird();
 	IteratorBullet beginBullet();

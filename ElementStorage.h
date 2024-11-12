@@ -11,7 +11,6 @@
 #include <string>
 #include "position.h"
 #include "bullet.h"
-#include "bird.h"
 #include "score.h"
 #include "ElementLogic.h"
 
