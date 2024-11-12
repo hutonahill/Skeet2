@@ -158,7 +158,7 @@ void SkeetLogic::CrazyFactory(double size, int level) {
 
 void SkeetLogic::birdSpawn() {
 
-	int level = SkeetStorage->getTime().getLevel();
+	int level = SkeetStorage->getTime();
 	int size = getSize(level);
 	// spawns when there is nothing on the screen
 	if (SkeetStorage->getNumBirds() == 0 && random(0, 15) == 1) {
