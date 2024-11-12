@@ -33,64 +33,61 @@ double randomFloat(double min, double max)
 
 void StandardBirdMove::execute(ElementStorage* el)
 {
-   // small amount of drag
-   el->v *= 0.995;
-
-   // inertia
-   el->objectPT.add(el->v);
+      // small amount of drag
+   el->getVelocity() *= 0.995;
+   
+      // inertia
+   el->getPosition().add(el->getVelocity());
 }
 
 void FloaterBirdMove::execute(ElementStorage* el)
 {
-   // large amount of drag
-   el->v *= 0.990;
-
-   // inertia
-   el->pt.add(el->v);
-
-   // anti-gravity
-   el->v.addDy(0.05);
+      // large amount of drag
+   el->getVelocity() *= 0.990;
+   
+      // inertia
+   el->getPosition().add(el->getVelocity());
+   
+      // anti-gravity
+   el->getVelocity().addDy(0.05);
 }
 
 void SinkerBirdMove::execute(ElementStorage* el)
 {
-   // gravity
-   el->objectV.addDy(-0.07);
-
-   // inertia
-   el->objectPT.add(el->objectV);
+      // gravity
+   el->getVelocity().addDy(-0.07);
+   
+      // inertia
+   el->getPosition().add(el->getVelocity());
 }
 
 void CrazyBirdMove::execute(ElementStorage* el)
 {
-   // erratic turns eery half a second or so
+      // erratic turns eery half a second or so
    if (randomInt(0, 15) == 0)
    {
-      el->v.addDy(randomFloat(-1.5, 1.5));
-      el->v.addDx(randomFloat(-1.5, 1.5));
+      el->getVelocity().addDy(randomFloat(-1.5, 1.5));
+      el->getVelocity().addDx(randomFloat(-1.5, 1.5));
    }
-
-   // inertia
-   pt.add(v);
+   
+      // inertia
+   el->getPosition().add(el->getVelocity());
 }
 
 void PelletMove::execute(ElementStorage* el)
 {
-   // inertia
-   el->pt.add(el->v);
+      // inertia
+   el->getPosition().add(el->getVelocity());
 }
 
 void MissleMove::execute(ElementStorage* el)
 {
-   if (el->input->up) 
-      el->v.turn(0.04);
-   if (el->input->down)
-      el->v.turn(-0.04);
-   // inertia
-   el->pt.add(el->v);
-   // out of bounds checker
-   if (el->isOutOfBounds())
-      el->isDead = true;
+   if (el->getInput()->up)
+      el->getVelocity().turn(0.04);
+   if (el->getInput()->down)
+      el->getVelocity().turn(-0.04);
+      // inertia
+   el->getPosition().add(el->getVelocity());
 }
 
 void NoneMove::execute(ElementStorage* el)
@@ -143,5 +140,5 @@ void Timed::execute(ElementStorage* el)
 {
    timeToDie--;
    if (!timeToDie)
-      el->isDead = true;
+      el->kill();
 }
