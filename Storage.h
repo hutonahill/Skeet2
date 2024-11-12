@@ -14,7 +14,7 @@ public:
 	int getNumMissed() { return numMissed; }
 	int getNumBirds() { return numBirds; }
 	StorageGun getGun() { return gun; }
-	StorageTime getTime() { return time;  }
+	Time getTime() { return time;  }
 	void add(ElementStorage* element);
 	void remove(ElementStorage* it);
 	void reset();
@@ -25,7 +25,7 @@ private:
 	int points;
 	int numKilled;
 	int numMissed;
-	StorageTime time;
+	Time time;
 	StorageGun gun;
 	std::list<ElementStorage*> Element;
 
