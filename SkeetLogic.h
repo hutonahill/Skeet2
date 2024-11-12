@@ -31,7 +31,7 @@ private:
 	void spawn();
 	void detectCollision();
 	void detectOutOfBounds();
-	void clearZombies();
+	void clearZombies() const;
 	void updateStatus();
 	void birdSpawn();
 

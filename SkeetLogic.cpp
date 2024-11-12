@@ -32,24 +32,32 @@ void SkeetLogic::Advance() {
 void SkeetLogic::specialMoves() {
 
 	for (ElementStorage element : SkeetStorage->begin()) {
-		// exicuted exicute method which hasent been updated
+		element.specialMove();
 	}
 
 	
+}
+
+bool isOutOfBounds(ElementStorage element, Position dimensions){
+	Position elementPosition = element.getPosition();
+	return (elementPosition.getX() < -element.getSize() || elementPosition.getX() >= dimensions.getX() + element.getSize() ||
+			elementPosition.getY() < -element.getSize() || elementPosition.getY() >= dimensions.getY() + element.getSize());
 }
 
 void SkeetLogic::detectOutOfBounds() {
 
 	for (ElementStorage element : SkeetStorage->begin()) {
-		// exicuted exicute method which hasent been updated
+		if(isOutOfBounds(element, SkeetStorage->getDimensions)) {
+			element.kill();
+		}
 	}
-
-	
 }
 
-void SkeetLogic::clearZombies() {
+
+
+void SkeetLogic::clearZombies() const {
 	for (ElementStorage* element : SkeetStorage->begin()) {
-		if (/*element.isDead*/) {
+		if (element->isDead()) {
 			SkeetStorage->remove(element);
 		}
 	}
