@@ -1,11 +1,11 @@
 ﻿#include "Storage.h"
 
-Storage::IteratorElement Storage::begin()
+Storage::IteratorElement Storage::beginElement()
 {
    return IteratorElement(*(Element.begin()));
 }
 
-Storage::IteratorElement Storage::end()
+Storage::IteratorElement Storage::endElement()
 {
    return IteratorElement(*(Element.end()));
 }
@@ -53,7 +53,7 @@ Storage::IteratorElement Storage::IteratorElement::operator++()
 
 ElementStorage* Storage::IteratorElement::operator*()
 {
-   return nullptr;
+   return it;
 }
 
 Storage::IteratorBird::IteratorBird(ElementStorage* it)
@@ -80,7 +80,7 @@ Storage::IteratorBird Storage::IteratorBird::operator++()
 
 ElementStorage* Storage::IteratorBird::operator*()
 {
-   return nullptr;
+   return it;
 }
 
 Storage::IteratorBullet::IteratorBullet(ElementStorage* it)
@@ -105,5 +105,5 @@ Storage::IteratorBullet Storage::IteratorBullet::operator++()
 
 ElementStorage* Storage::IteratorBullet::operator*()
 {
-   return nullptr;
+   return it;
 }
