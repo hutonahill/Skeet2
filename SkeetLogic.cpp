@@ -32,7 +32,7 @@ void SkeetLogic::Advance() {
 void SkeetLogic::specialMoves() {
 
 	for (Storage::IteratorElement it = SkeetStorage->beginElement(); it != SkeetStorage->endElement(); ++it ) {
-		(*it)->specialMove();
+		(*it)->getSpecialMove();
 	}
 
 	
@@ -48,7 +48,7 @@ void SkeetLogic::detectOutOfBounds() {
 
 	for (Storage::IteratorElement it = SkeetStorage->beginElement(); it != SkeetStorage->endElement(); ++it) {
 		if(isOutOfBounds(*(*it), SkeetStorage->getDimensions())) {
-			(*it).kill();
+			(*it)->kill();
 		}
 	}
 }
@@ -56,8 +56,9 @@ void SkeetLogic::detectOutOfBounds() {
 
 
 void SkeetLogic::clearZombies() const {
-	for (ElementStorage* element : SkeetStorage->begin()) {
-		if (element->isDead()) {
+	for (Storage::IteratorElement it = SkeetStorage->beginElement(); it != SkeetStorage->endElement(); ++it) {
+		bool dead = (*it)->getDead();
+		if ( (*it)->isDead() ) {
 			SkeetStorage->remove(element);
 		}
 	}
