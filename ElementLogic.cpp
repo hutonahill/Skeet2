@@ -5,6 +5,8 @@
 #include "position.h"
 #include <cassert>
 
+#include "SkeetLogic.h"
+
 /***************************************************************/
 /***************************************************************/
 /*                             MISC.                           */
@@ -38,7 +40,7 @@ void StandardBirdMove::execute(ElementStorage* el)
    el->getVelocity() *= 0.995;
    
       // inertia
-   el->getPosition().add(el->getVelocity());
+   el->getPosition()->add(el->getVelocity());
 }
 
 void FloaterBirdMove::execute(ElementStorage* el)
@@ -47,19 +49,19 @@ void FloaterBirdMove::execute(ElementStorage* el)
    el->getVelocity() *= 0.990;
    
       // inertia
-   el->getPosition().add(el->getVelocity());
+   el->getPosition()->add(el->getVelocity());
    
       // anti-gravity
-   el->getVelocity().addDy(0.05);
+   el->getVelocity()->addDy(0.05);
 }
 
 void SinkerBirdMove::execute(ElementStorage* el)
 {
       // gravity
-   el->getVelocity().addDy(-0.07);
+   el->getVelocity()->addDy(-0.07);
    
       // inertia
-   el->getPosition().add(el->getVelocity());
+   el->getPosition()->add(el->getVelocity());
 }
 
 void CrazyBirdMove::execute(ElementStorage* el)
@@ -67,19 +69,19 @@ void CrazyBirdMove::execute(ElementStorage* el)
       // erratic turns eery half a second or so
    if (randomInt(0, 15) == 0)
    {
-      el->getVelocity().addDy(RandomFloat(-1.5, 1.5));
-      el->getVelocity().addDx(RandomFloat(-1.5, 1.5));
+      el->getVelocity()->addDy(RandomFloat(-1.5, 1.5));
+      el->getVelocity()->addDx(RandomFloat(-1.5, 1.5));
    }
    
       // inertia
-   el->getPosition().add(el->getVelocity());
+   el->getPosition()->add(el->getVelocity());
 }
 
 void PelletMove::execute(ElementStorage* el)
 {
       // inertia
    
-   el->getPosition().add(el->getVelocity());
+   el->getPosition()->add(el->getVelocity());
 }
 
 void MissleMove::execute(ElementStorage* el)
@@ -102,11 +104,16 @@ void EffectDeath::execute(ElementStorage* el)
 
 void DisapearDeath::execute(ElementStorage* el)
 {
+   el->isDead = true;
 }
 
 void ShrapnelDeath::execute(ElementStorage* el)
 {
-
+   // for bombs, should spawn some shrapnel
+   int numFragments = 25;
+   for (int i = 0; i < numFragments; i++) {
+      ElementsToSpawn->push_back(SkeetLogic::Fragment(el->getPosition(), el->getVelocity()));
+   }
 }
 
 void Arrows::execute(ElementStorage* el)

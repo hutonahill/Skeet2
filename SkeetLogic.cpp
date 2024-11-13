@@ -341,7 +341,7 @@ void SkeetLogic::spawn() const {
 	}
 }
 
-ElementStorage* Fragment(Position* position, Velocity* velocity) {
+ElementStorage* SkeetLogic::Fragment(const Position* position, const Velocity* velocity) {
 	SpecialMove* move = new PelletMove();
 	OnDeath* death = new DisapearDeath();
 	Timing* time = new Timed();

@@ -23,6 +23,8 @@ public:
 	void makeMissile();
 	void makeBomb();
 
+	static ElementStorage* Fragment(const Position* position, const Velocity* velocity);
+
 	list<ElementStorage*> ElementsToSpawn;
 	class Iterator {
 

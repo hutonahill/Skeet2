@@ -106,10 +106,10 @@ public:
 class ShrapnelDeath : public OnDeath
 {
 public:
-	ShrapnelDeath(std::list<ElementStorage*>* sl) : SkeetLogic(sl) {};
+	ShrapnelDeath(std::list<ElementStorage*>* sl) : ElementsToSpawn(sl) {};
 	void execute(ElementStorage* el) override;
 private:
-	std::list<ElementStorage*>* SkeetLogic;
+	std::list<ElementStorage*>* ElementsToSpawn;
 };
 
 // Handles whether an element needs input or not
