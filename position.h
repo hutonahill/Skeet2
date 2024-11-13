@@ -44,7 +44,7 @@ public:
    void setY(double y)       { this->y = y;           }
    void addX(double dx)      { setX(getX() + dx);     }
    void addY(double dy)      { setY(getY() + dy);     }
-   void add(const Velocity & v);
+   void add(const Velocity* v);
    Position & operator += (const Velocity & v);
    Position & operator = (const Position & rhs)
    {
@@ -97,7 +97,7 @@ public:
       addDy(v.getDy());
       return *this;
    }
-   void add(const Velocity & v)
+   void add(const Velocity* v)
    {
       *this += v;
    }

@@ -8,6 +8,6 @@ public:
 	ArrowListener* getArrowListener();
 
 private:
-   ArrowListener al;
+   ArrowListener* al;
 };
 

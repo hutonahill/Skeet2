@@ -1,6 +1,5 @@
 ﻿#pragma once
 #include "time.h"
-#include "gun.h"
 #include "ElementStorage.h"
 
 #include <list>
@@ -52,7 +51,7 @@ public:
 	{
 	public:
 		IteratorBullet() : it(nullptr) {};
-		IteratorBullet(ElementStorage* it) : it(it) {};
+		IteratorBullet(ElementStorage* it);
 		IteratorBullet(IteratorBullet* that) : it(that->it) {};
 
 		IteratorBullet operator++();

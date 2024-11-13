@@ -1,7 +1,6 @@
 ﻿#include "DrawStrategy.h"
 #include "openGLIntegration.h"
 #include "ElementStorage.h"
-#include "gun.h"
 #include <sstream>
 #include "time.h"
 #include <string>

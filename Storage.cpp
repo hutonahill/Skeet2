@@ -92,7 +92,7 @@ ElementStorage* Storage::IteratorBird::operator*()
    return it;
 }
 
-Storage::IteratorBullet::IteratorBullet(ElementStorage* it)
+Storage::IteratorBullet::IteratorBullet(ElementStorage* it) : it(it)
 {
    while (!(it->isBullet) && it != nullptr)
    {
