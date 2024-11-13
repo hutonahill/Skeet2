@@ -1,5 +1,5 @@
-﻿/**********************************************************************
-* Skeet2
+/**********************************************************************
+ * Skeet2
  * No actual birds were killed in the making of this game.
  **********************************************************************/
 
@@ -37,7 +37,7 @@ using namespace std;
  ************************/
 void Skeet::animate()
 {
-	interface->advance();
+   interface->advance();
 }
 
 /************************
@@ -46,7 +46,7 @@ void Skeet::animate()
  ************************/
 void Skeet::drawLevel() const
 {
-	interface->drawLevel();
+   interface->drawLevel();
 }
 
 /************************
@@ -55,7 +55,7 @@ void Skeet::drawLevel() const
  ************************/
 void Skeet::drawStatus() const
 {
-	interface->drawStatus();
+   interface->drawStatus();
 }
 
 /************************
@@ -64,6 +64,6 @@ void Skeet::drawStatus() const
  ************************/
 void Skeet::interact(const UserInput & ui)
 {
-	interface->interact(ui);
+   interface->interact(ui);
 }
 
