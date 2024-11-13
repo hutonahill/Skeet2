@@ -25,7 +25,10 @@ public:
 	void makePellet();
 	void makeMissile();
 	void makeBomb();
-	StorageGun* getGun() { SkeetStorage->getGun(); };
+	StorageGun* getGun() { return SkeetStorage->getGun(); };
+	float getHitRatio() { return SkeetStorage->getHitRatio(); }
+	Position* getDimensions() { return SkeetStorage->getDimensions(); }
+	int getPoints() { return SkeetStorage->getPoints(); }
 
 	static ElementStorage* Fragment(const Position* position, const Velocity* velocity);
 
@@ -39,6 +42,9 @@ public:
 		Storage::IteratorElement it;
 	public:
 		Iterator(Storage* SkeetStorage);
+		Iterator operator++();
+		ElementStorage* operator*();
+		bool operator !=(const Iterator& rhs) { return it != rhs.it; }
 	};
 		Iterator begin() {
 			return Iterator(SkeetStorage);
