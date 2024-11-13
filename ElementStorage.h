@@ -54,7 +54,7 @@ public:
    // getters
    SpecialMove* getSpecialMove()
                                     {return sm;           }
-   Position* getPosition()           {return objectPT;     }
+   Position* getPosition() const           {return objectPT;     }
    Velocity* getVelocity()           {return objectV;      }
    Input* getInput()                {return arrow;        }
    Timing* getTime()                {return time;         }
@@ -68,9 +68,9 @@ public:
    int getValue()         const         {return value;         }
    //Setters
    void kill()                          {isDead = true;        }
-   void setAge(double age) const {age = this->age;      }
-   void setPoints(int points) const {points = this->points;}
-   void setValue(int value) const {value = this->value;  }
+   void setAge(double age)  {age = this->age;      }
+   void setPoints(int points)  {points = this->points;}
+   void setValue(int value)  {value = this->value;  }
    
    
    
