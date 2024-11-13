@@ -5,8 +5,6 @@
 
 class ElementStorage;
 class Effect;
-class StorageGun;
-class Storage;
 
 
 class DrawStrategy
@@ -109,18 +107,3 @@ public:
 
 };
 
-// Draw other
-
-class gunDraw : public DrawStrategy
-{
-public:
-	virtual void draw(StorageGun* elm);
-
-};
-
-class StatusDraw : public DrawStrategy
-{
-public:
-	virtual void draw(Storage* elm);
-
-};
