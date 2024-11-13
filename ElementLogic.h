@@ -18,7 +18,7 @@ public:
 // Abstract
 class SpecialMove : public ElementLogic {
 public:
-	void execute(ElementStorage* el) override = 0;
+	void execute(ElementStorage* el)  = 0;
 };
 
 // Special move for standard bird
@@ -26,7 +26,7 @@ public:
 class StandardBirdMove : public SpecialMove
 {
 public:
-	void execute(ElementStorage* el) override;
+	void execute(ElementStorage* el) ;
 };
 
 // Special move for floater bird
@@ -34,7 +34,7 @@ public:
 class FloaterBirdMove : public SpecialMove
 {
 public:
-	void execute(ElementStorage* el) override;
+	void execute(ElementStorage* el) ;
 };
 
 // Special move for sinker bird
@@ -42,7 +42,7 @@ public:
 class SinkerBirdMove : public SpecialMove
 {
 public:
-	void execute(ElementStorage* el) override;
+	void execute(ElementStorage* el) ;
 };
 
 // Special move for crazy bird
@@ -50,7 +50,7 @@ public:
 class CrazyBirdMove : public SpecialMove
 {
 public:
-	void execute(ElementStorage* el) override;
+	void execute(ElementStorage* el) ;
 };
 
 // Special move for pellet and bomb
@@ -58,7 +58,7 @@ public:
 class PelletMove : public SpecialMove
 {
 public:
-	void execute(ElementStorage* el) override;
+	void execute(ElementStorage* el) ;
 };
 
 // Special move for the missle
@@ -66,7 +66,7 @@ public:
 class MissleMove : public SpecialMove
 {
 public:
-	void execute(ElementStorage* el) override;
+	void execute(ElementStorage* el) ;
 };
 
 // Special move for things that don't move
@@ -74,7 +74,7 @@ public:
 class NoneMove : public SpecialMove
 {
 public:
-	void execute(ElementStorage* el) override;
+	void execute(ElementStorage* el) ;
 };
 
 // What do we do when an element dies
@@ -82,7 +82,7 @@ public:
 class OnDeath : public ElementLogic
 {
 public:
-	void execute(ElementStorage* el) override = 0;
+	void execute(ElementStorage* el)  = 0;
 };
 
 // When an effect dies
@@ -90,7 +90,7 @@ public:
 class EffectDeath : public OnDeath
 {
 public:
-	void execute(ElementStorage* el) override;
+	void execute(ElementStorage* el) ;
 };
 
 // Fragments, offscreen birds, shrappnel, missle, bullets
@@ -98,7 +98,7 @@ public:
 class DisapearDeath : public OnDeath
 {
 public:
-	void execute(ElementStorage* el) override;
+	void execute(ElementStorage* el) ;
 };
 
 // Bombs
@@ -107,7 +107,7 @@ class ShrapnelDeath : public OnDeath
 {
 public:
 	ShrapnelDeath(std::list<ElementStorage*>* sl) : SkeetLogic(sl) {};
-	void execute(ElementStorage* el) override;
+	void execute(ElementStorage* el) ;
 private:
 	std::list<ElementStorage*>* SkeetLogic;
 };
@@ -131,9 +131,9 @@ public:
 class Arrows : public Input
 {
 public:
-	void execute(ElementStorage* el) override;
-	void subscribe(ArrowListener* al) override;
-	void unsubscribe(ArrowListener* al) override;
+	void execute(ElementStorage* el) ;
+	void subscribe(ArrowListener* al) ;
+	void unsubscribe(ArrowListener* al) ;
 private:
 	ArrowListener* al;
 };
@@ -143,9 +143,9 @@ private:
 class NoInput : public Input
 {
 public:
-	void execute(ElementStorage* el) override;
-	void subscribe(ArrowListener* al) override;
-	void unsubscribe(ArrowListener* al) override;
+	void execute(ElementStorage* el) ;
+	void subscribe(ArrowListener* al) ;
+	void unsubscribe(ArrowListener* al) ;
 };
 
 // What we do for internal clocks on elements
@@ -153,7 +153,7 @@ public:
 class Timing : public ElementLogic
 {
 public:
-	void execute(ElementStorage* el) override = 0;
+	void execute(ElementStorage* el)  = 0;
 	virtual void setInitialTimer(int time) = 0;
 };
 
@@ -162,8 +162,8 @@ public:
 class NotTimed : public Timing
 {
 public:
-	void execute(ElementStorage* el) override;
-	void setInitialTimer(int time) override {}
+	void execute(ElementStorage* el) ;
+	void setInitialTimer(int time)  {}
 };
 
 // Has an internal timer
@@ -171,9 +171,9 @@ public:
 class Timed : public Timing
 {
 public:
-	void execute(ElementStorage* el) override;
+	void execute(ElementStorage* el) ;
 
 	// This is set to a different time depending on the type of timed item
-	void setInitialTimer(int time) override { timeToDie = time; }
+	void setInitialTimer(int time)  { timeToDie = time; }
 	int timeToDie;
 };

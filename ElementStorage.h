@@ -53,12 +53,12 @@ public:
    
    // getters
    SpecialMove* getSpecialMove()
-                           const         {return sm;           }
-   Position* getPosition()  const         {return objectPT;     }
-   Velocity* getVelocity()  const         {return objectV;      }
-   Input* getInput()       const         {return arrow;        }
-   Timing* getTime()       const         {return time;         }
-   DrawStrategy* getDraw() const         {return draw;         }
+                                    {return sm;           }
+   Position* getPosition()           {return objectPT;     }
+   Velocity* getVelocity()           {return objectV;      }
+   Input* getInput()                {return arrow;        }
+   Timing* getTime()                {return time;         }
+   DrawStrategy* getDraw()          {return draw;         }
    
    //Other valid functions
    bool getDead()         const         {return isDead;        }
