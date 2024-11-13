@@ -68,7 +68,7 @@ public:
    // constructors
    Velocity()            : dx(0.0), dy(0.0)  {}
    Velocity(double dx, double dy);
-   Velocity(const Velocity & v) : dx(v.dx), dy(v.dy) {}
+   Velocity(const Velocity* v) : dx(v->dx), dy(v->dy) {}
 
    // getters
    double getDx()       const { return dx;              }
@@ -141,5 +141,5 @@ std::istream & operator >> (std::istream & in,        Position & pt);
 inline double max(double x, double y) { return (x > y) ? x : y; }
 inline double min(double x, double y) { return (x > y) ? y : x; }
 
-double minimumDistance(const Position & pt1, const Velocity & v1,
-                       const Position & pt2, const Velocity & v2);
+double minimumDistance(const Position* pt1, const Velocity* v1,
+                       const Position* pt2, const Velocity* v2);

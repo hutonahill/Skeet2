@@ -23,7 +23,7 @@ int randomInt(int min, int max)
    assert(min <= num && num <= max);
    return num;
 }
-double randomFloat(double min, double max)
+double RandomFloat(double min, double max)
 {
    assert(min <= max);
    double num = min + ((double)rand() / (double)RAND_MAX * (max - min));
@@ -67,8 +67,8 @@ void CrazyBirdMove::execute(ElementStorage* el)
       // erratic turns eery half a second or so
    if (randomInt(0, 15) == 0)
    {
-      el->getVelocity().addDy(randomFloat(-1.5, 1.5));
-      el->getVelocity().addDx(randomFloat(-1.5, 1.5));
+      el->getVelocity().addDy(RandomFloat(-1.5, 1.5));
+      el->getVelocity().addDx(RandomFloat(-1.5, 1.5));
    }
    
       // inertia
@@ -85,11 +85,11 @@ void PelletMove::execute(ElementStorage* el)
 void MissleMove::execute(ElementStorage* el)
 {
    if (el->getInput()->up)
-      el->getVelocity().turn(0.04);
+      el->getVelocity()->turn(0.04);
    if (el->getInput()->down)
-      el->getVelocity().turn(-0.04);
+      el->getVelocity()->turn(-0.04);
       // inertia
-   el->getPosition().add(el->getVelocity());
+   el->getPosition()->add(el->getVelocity());
 }
 
 void NoneMove::execute(ElementStorage* el)

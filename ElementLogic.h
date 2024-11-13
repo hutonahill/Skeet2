@@ -1,4 +1,7 @@
 ﻿#pragma once
+#include <list>
+
+#include "ElementStorage.h"
 
 class ElementStorage;
 class ArrowListener;
@@ -103,10 +106,10 @@ public:
 class ShrapnelDeath : public OnDeath
 {
 public:
-	ShrapnelDeath(SkeetLogic* sl) : SkeetLogic(sl) {};
+	ShrapnelDeath(std::list<ElementStorage*>* sl) : SkeetLogic(sl) {};
 	void execute(ElementStorage* el) override;
 private:
-	SkeetLogic* SkeetLogic;
+	std::list<ElementStorage*>* SkeetLogic;
 };
 
 // Handles whether an element needs input or not
@@ -137,7 +140,7 @@ private:
 
 // Everything else
 // Concrete
-class None : public Input
+class NoInput : public Input
 {
 public:
 	void execute(ElementStorage* el) override;

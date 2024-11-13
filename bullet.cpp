@@ -245,7 +245,7 @@ void Missile::output()
  * RANDOM
  * This function generates a random number.
  ****************************************************************/
-int Bullet::random(int min, int max)
+int Bullet::RandomInt(int min, int max)
 {
    assert(min < max);
    int num = (rand() % (max - min)) + min;

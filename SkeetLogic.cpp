@@ -31,6 +31,15 @@ void SkeetLogic::Advance() {
 	
 }
 
+double RandomFloat(const double min, const double max)
+{
+	assert(min < max);
+	double num = min +(static_cast<double>(rand()) / static_cast<double>(RAND_MAX) * (max - min));
+	assert(min <= num && num <= max);
+
+	return num;
+}
+
 void SkeetLogic::makePellet()
 {
 	float speed = 15;
@@ -41,8 +50,8 @@ void SkeetLogic::makePellet()
 	DrawStrategy* dr = new PelletDraw();
 	Bullet* b = new Bullet(move,death,in,t,dr,1);
 	b->setPoints(1);
-	b->getVelocity().setDx(randomFloat(speed - .5, speed + .5));
-	b->getVelocity().setDy(randomFloat(speed - .5, speed + .5));
+	b->getVelocity()->setDx(RandomFloat(speed - .5, speed + .5));
+	b->getVelocity()->setDy(RandomFloat(speed - .5, speed + .5));
 	ElementsToSpawn.push_back(b);
 }
 
@@ -58,8 +67,8 @@ void SkeetLogic::makeMissile()
 
 	Bullet* b = new Bullet(move, death, in, t,dr, 1);
 	b->setPoints(3);
-	b->getVelocity().setDx(randomFloat(speed - .5, speed + .5));
-	b->getVelocity().setDy(randomFloat(speed - .5, speed + .5));
+	b->getVelocity()->setDx(RandomFloat(speed - .5, speed + .5));
+	b->getVelocity()->setDy(RandomFloat(speed - .5, speed + .5));
 	ElementsToSpawn.push_back(b);
 }
 
@@ -74,8 +83,8 @@ void SkeetLogic::makeBomb()
 
 	Bullet* b = new Bullet(move, death, in, t, dr, 1);
 	b->setPoints(1);
-	b->getVelocity().setDx(randomFloat(speed - .5, speed + .5));
-	b->getVelocity().setDy(randomFloat(speed - .5, speed + .5));
+	b->getVelocity()->setDx(RandomFloat(speed - .5, speed + .5));
+	b->getVelocity()->setDy(RandomFloat(speed - .5, speed + .5));
 	ElementsToSpawn.push_back(b);
 }
 
@@ -89,9 +98,9 @@ void SkeetLogic::specialMoves() {
 }
 
 bool isOutOfBounds(const ElementStorage* element, const Position* dimensions){
-	Position elementPosition = element->getPosition();
-	return (elementPosition.getX() < -element->getRadius() || elementPosition.getX() >= dimensions->getX() + element->getRadius() ||
-			elementPosition.getY() < -element->getRadius() || elementPosition.getY() >= dimensions->getY() + element->getRadius());
+	Position* elementPosition = element->getPosition();
+	return (elementPosition->getX() < -element->getRadius() || elementPosition->getX() >= dimensions->getX() + element->getRadius() ||
+			elementPosition->getY() < -element->getRadius() || elementPosition->getY() >= dimensions->getY() + element->getRadius());
 }
 
 void SkeetLogic::detectOutOfBounds(){
@@ -132,7 +141,7 @@ void SkeetLogic::updateStatus() {
 	PointChangeThisFrame = 0;
 }
 
-int random(int min, int max)
+int RandomInt(int min, int max)
 {
 	assert(min < max);
 	int num = (rand() % (max - min)) + min;
@@ -141,17 +150,10 @@ int random(int min, int max)
 	return num;
 }
 
-float randomFloat(float min, float max)
-{
-	assert(min < max);
-	float num = min +((double)rand() / (double)RAND_MAX * (max - min));
-	assert(min <= num && num <= max);
 
-	return num;
-}
 
 bool ShouldSpawnBird(const double seconds = 4){
-	return random(0, static_cast<int>(seconds * 30)) == 1;
+	return RandomInt(0, static_cast<int>(seconds * 30)) == 1;
 }
 
 double getSize(int level) {
@@ -168,8 +170,8 @@ ElementStorage* Standard(const double radius, const double speed, const int poin
 	DrawStrategy* dr = new StandardBirdDraw();
 	Bird* b = new Bird(move, death, input, time, dr, radius);
 	b->setValue(points);
-	b->getVelocity().setDx(randomFloat(speed - .5, speed + .5));
-	b->getVelocity().setDy(randomFloat(speed - .5, speed + .5));
+	b->getVelocity()->setDx(RandomFloat(speed - .5, speed + .5));
+	b->getVelocity()->setDy(RandomFloat(speed - .5, speed + .5));
 
 
 	return b;
@@ -208,8 +210,8 @@ ElementStorage* Sinker(double radius, double speed, int points) {
 	DrawStrategy* dr = new SinkerBirdDraw();
 	Bird* b = new Bird(move, death, input, time,dr, radius);
 	b->setValue(points);
-	b->getVelocity().setDx(randomFloat(speed - .5, speed + .5));
-	b->getVelocity().setDy(randomFloat(speed - .5, speed + .5));
+	b->getVelocity()->setDx(RandomFloat(speed - .5, speed + .5));
+	b->getVelocity()->setDy(RandomFloat(speed - .5, speed + .5));
 
 
 	return b;
@@ -245,8 +247,8 @@ ElementStorage* Floater(double radius, double speed, int points) {
 	DrawStrategy* dr = new FloaterBirdDraw();
 	Bird* b = new Bird(move, death, input, time,dr, radius);
 	b->setValue(points);
-	b->getVelocity().setDx(randomFloat(speed - .5, speed + .5));
-	b->getVelocity().setDy(randomFloat(speed - .5, speed + .5));
+	b->getVelocity()->setDx(RandomFloat(speed - .5, speed + .5));
+	b->getVelocity()->setDy(RandomFloat(speed - .5, speed + .5));
 
 
 	return b;
@@ -279,8 +281,8 @@ ElementStorage* Crazy(double size, double speed, int points) {
 	DrawStrategy* dr = new CrazyBirdDraw();
 	Bird* b = new Bird(move, death, input, time,dr, size);
 	b->setValue(points);
-	b->getVelocity().setDx(randomFloat(speed - .5, speed + .5));
-	b->getVelocity().setDy(randomFloat(speed - .5, speed + .5));
+	b->getVelocity()->setDx(RandomFloat(speed - .5, speed + .5));
+	b->getVelocity()->setDy(RandomFloat(speed - .5, speed + .5));
 
 
 	return b;
@@ -305,10 +307,10 @@ void SkeetLogic::CrazyFactory(double size, int level) {
 
 void SkeetLogic::birdSpawn() {
 
-	int level = SkeetStorage->getTime().level();
+	int level = SkeetStorage->getTime()->level();
 	double size = getSize(level);
 	// spawns when there is nothing on the screen
-	if (SkeetStorage->getNumBirds() == 0 && random(0, 15) == 1) {
+	if (SkeetStorage->getNumBirds() == 0 && RandomInt(0, 15) == 1) {
 		StandardFactory(size, level);
 	}
 
@@ -343,7 +345,28 @@ ElementStorage* Fragment(Position* position, Velocity* velocity) {
 	SpecialMove* move = new PelletMove();
 	OnDeath* death = new DisapearDeath();
 	Timing* time = new Timed();
-	time->setInitialTimer()
+	int timeToLive = static_cast<int>(30.0 * RandomFloat(0.4, 1.0));
+	time->setInitialTimer(timeToLive);
+	DrawStrategy* draw = new FragmentDraw();
+
+
+	//TODO: find teh right radius
+	ElementStorage* newBullet = new Bullet(move, death, new NoInput(), time, draw, 0);
+
+	newBullet->getVelocity()->setDx(velocity->getDx() * 0.5 + RandomInt(-6.0, 6.0));
+	newBullet->getVelocity()->setDy(velocity->getDy() * 0.5 + RandomInt(-6.0, 6.0));
+
+	newBullet->getPosition()->setX(position->getX());
+	newBullet->getPosition()->setY(position->getY());
+
+	/*
+	// the velocity is a random kick plus the velocity of the thing that died
+   this->v.setDx(v.getDx() * 0.5 + random(-6.0, 6.0));
+   this->v.setDy(v.getDy() * 0.5 + random(-6.0, 6.0));
+   
+	// age
+	age = random(0.4, 1.0);
+	 */
 }
 
 void SkeetLogic::detectCollision() {

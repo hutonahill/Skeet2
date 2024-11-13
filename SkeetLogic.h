@@ -2,6 +2,8 @@
 #include <iterator>
 #include <list>
 
+#include "Storage.h"
+
 class ElementStorage;
 using namespace std;
 
