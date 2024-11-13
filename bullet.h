@@ -56,7 +56,7 @@
 //   }
 //   void drawLine(const Position& begin, const Position& end,
 //                 double red = 1.0, double green = 1.0, double blue = 1.0) const;
-//
+
 //   void drawDot(const Position& point, double radius = 2.0,
 //                double red = 1.0, double green = 1.0, double blue = 1.0) const;
 //   int    random(int    min, int    max);
