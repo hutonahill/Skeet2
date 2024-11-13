@@ -31,8 +31,8 @@ void SkeetLogic::Advance() {
 
 void SkeetLogic::specialMoves() {
 
-	for (ElementStorage element : SkeetStorage->begin()) {
-		element.specialMove();
+	for (Storage::IteratorElement it = SkeetStorage->beginElement(); it != SkeetStorage->endElement(); ++it ) {
+		(*it)->specialMove();
 	}
 
 	
@@ -40,15 +40,15 @@ void SkeetLogic::specialMoves() {
 
 bool isOutOfBounds(ElementStorage element, Position dimensions){
 	Position elementPosition = element.getPosition();
-	return (elementPosition.getX() < -element.getSize() || elementPosition.getX() >= dimensions.getX() + element.getSize() ||
-			elementPosition.getY() < -element.getSize() || elementPosition.getY() >= dimensions.getY() + element.getSize());
+	return (elementPosition.getX() < -element.getRadius() || elementPosition.getX() >= dimensions.getX() + element.getRadius() ||
+			elementPosition.getY() < -element.getRadius() || elementPosition.getY() >= dimensions.getY() + element.getRadius());
 }
 
 void SkeetLogic::detectOutOfBounds() {
 
-	for (ElementStorage element : SkeetStorage->begin()) {
-		if(isOutOfBounds(element, SkeetStorage->getDimensions())) {
-			element.kill();
+	for (Storage::IteratorElement it = SkeetStorage->beginElement(); it != SkeetStorage->endElement(); ++it) {
+		if(isOutOfBounds(*(*it), SkeetStorage->getDimensions())) {
+			(*it).kill();
 		}
 	}
 }
