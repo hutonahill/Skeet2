@@ -41,15 +41,21 @@ public:
    int points;
    int value;
    //Constructor
-   ElementStorage(bool isDead, bool isBird, bool isBullet, SpecialMove* sm, OnDeath* od, Input* arrow, Timing* time, DrawStrategy* draw, double radius = 0) : isDead(isDead), isBird(isBird), isBullet(isBullet), sm(sm), od(od), arrow(arrow), time(time), draw(draw), radius(radius) {};
+   ElementStorage(const bool isDead, const bool isBird, const bool isBullet, SpecialMove* sm, OnDeath* od, Input* arrow,
+   	Timing* time, DrawStrategy* draw, double radius = 0) :
+	   isBird(isBird), isBullet(isBullet), isDead(isDead), radius(radius), sm(sm), od(od), arrow(arrow), time(time),
+	   draw(draw)
+	{
+	   
+    }
    
 
    
    // getters
    SpecialMove* getSpecialMove()
                            const         {return sm;           }
-   Position getPosition()  const         {return objectPT;     }
-   Velocity getVelocity()  const         {return objectV;      }
+   Position* getPosition()  const         {return objectPT;     }
+   Velocity* getVelocity()  const         {return objectV;      }
    Input* getInput()       const         {return arrow;        }
    Timing* getTime()       const         {return time;         }
    DrawStrategy* getDraw() const         {return draw;         }
@@ -62,20 +68,20 @@ public:
    int getValue()         const         {return value;         }
    //Setters
    void kill()                          {isDead = true;        }
-   void setAge(double age)              {age = this->age;      }
-   void setPoints(int points)           {points = this->points;}
-   void setValue(int value)             {value = this->value;  }
+   void setAge(double age) const {age = this->age;      }
+   void setPoints(int points) const {points = this->points;}
+   void setValue(int value) const {value = this->value;  }
    
    
    
 
 protected:
    
-   Position objectPT;   //what is our position?
-   Position ptEnd;      //what is the end of an effect's position?
-   Velocity objectV;    //what is our velocity?
-   Score score;         //what is our value? How much will our score be affected?
-   HitRatio hr;         //what is our hit ratio?
+   Position* objectPT;   //what is our position?
+   Position* ptEnd;      //what is the end of an effect's position?
+   Velocity* objectV;    //what is our velocity?
+   Score* score;         //what is our value? How much will our score be affected?
+   HitRatio* hr;         //what is our hit ratio?
    Effect* effect;      //what visual effects exist?
    
    
@@ -96,7 +102,10 @@ protected:
 class Bird : public ElementStorage
 {
 public:
-   Bird(SpecialMove* sm, OnDeath* od, Input* arrow, Timing* time, DrawStrategy* draw, double radius) : ElementStorage(false, true, false, sm, od, arrow, time, draw, radius) {};
+   Bird(SpecialMove* sm, OnDeath* od, Input* arrow, Timing* time, DrawStrategy* draw, double radius) :
+	ElementStorage(false, true, false, sm, od, arrow, time, draw, radius) {
+	   
+   }
    
 };
 
@@ -106,7 +115,8 @@ public:
 class Bullet : public ElementStorage
 {
 public:
-   Bullet(SpecialMove* sm, OnDeath* od, Input* arrow, Timing* time,DrawStrategy* draw, double radius) : ElementStorage(false, false, true, sm, od, arrow, time, draw, radius) {};
+   Bullet(SpecialMove* sm, OnDeath* od, Input* arrow, Timing* time,DrawStrategy* draw, double radius) :
+	ElementStorage(false, false, true, sm, od, arrow, time, draw, radius) {}
    
 };
 
@@ -116,8 +126,9 @@ public:
 class Effect : public ElementStorage
 {
 public:
-   Effect(SpecialMove* sm, OnDeath* od, Input* arrow, Timing* time, DrawStrategy* draw, double radius, Position& ptEnd) : ElementStorage(false, false, false, sm, od, arrow, time, draw, radius) {};
-   Position& getEnd() {return ptEnd;}
-   void setEnd(Position& ptEnd) {ptEnd= this->ptEnd;}
+   Effect(SpecialMove* sm, OnDeath* od, Input* arrow, Timing* time, DrawStrategy* draw, double radius, Position& ptEnd) :
+	ElementStorage(false, false, false, sm, od, arrow, time, draw, radius) {}
+   Position* getEnd() {return ptEnd;}
+   void setEnd(Position* ptEnd) {ptEnd= this->ptEnd;}
    
 };

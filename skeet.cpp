@@ -67,21 +67,23 @@ void Skeet::animate()
       pts.update();
       
    // hit detection
-   for (auto element : birds)
-      for (auto bullet : bullets)
-         if (!element->isDead() && !bullet->isDead() &&
-             element->getRadius() + bullet->getRadius() >
-             minimumDistance(element->getPosition(), element->getVelocity(),
+   for (auto bird : birds) {
+      for (auto bullet : bullets) {
+         if (!bird->isDead() && !bullet->isDead() &&
+             bird->getRadius() + bullet->getRadius() >
+             minimumDistance(bird->getPosition(), bird->getVelocity(),
                              bullet->getPosition(),  bullet->getVelocity()))
          {
             for (int i = 0; i < 25; i++)
                effects.push_back(new Fragment(bullet->getPosition(), bullet->getVelocity()));
-            element->kill();
+            bird->kill();
             bullet->kill();
             hitRatio.adjust(1);
-            bullet->setValue(-(element->getPoints()));
-            element->setPoints(0);
+            bullet->setValue(-(bird->getPoints()));
+            bird->setPoints(0);
          }
+      }
+   }
    
    // remove the zombie birds
    for (auto it = birds.begin(); it != birds.end();)

@@ -28,12 +28,16 @@ public:
 	
 private:
 	void specialMoves();
-	void spawn();
+	void spawn() const;
 	void detectCollision();
 	void detectOutOfBounds();
 	void clearZombies() const;
 	void updateStatus();
 	void birdSpawn();
+
+	int BirdsShotThisFrame;
+	int BirdsMissedThisFrame;
+	int PointChangeThisFrame;
 
 	void StandardFactory(double size, int level);
 	void SinkerFactory(double size, int level);
