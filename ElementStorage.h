@@ -13,6 +13,7 @@
 #include "bullet.h"
 #include "score.h"
 #include "ElementLogic.h"
+#include "Effect.h"
 
 
 class SpecialMove;
@@ -21,6 +22,7 @@ class Bird;
 class Bullet;
 class OnDeath;
 class Input;
+class Effect;
 
 /**********************
  * ENTITY STORAGE
@@ -29,31 +31,74 @@ class Input;
 class ElementStorage {
    friend ElementLogic;
 public:
+   //Defining Quirks
    bool isBird;
    bool isBullet;
-   ElementStorage() : isBird(true) {};
-   void specialMove();
+   bool isDead;
+   double radius;
+   //Constructor
+   ElementStorage(bool isDead, bool isBird, bool isBullet, SpecialMove* sm, OnDeath* od, Input* arrow, Timing* time, double radius = 0) : isDead(isDead), isBird(isBird), isBullet(isBullet), sm(sm), od(od), arrow(arrow), time(time), radius(radius) {};
+   
    // getters
+   SpecialMove* getSpecialMove()
+                          const         {return sm;      }
    Position getPosition() const         {return objectPT;}
-   Velocity getVelocity() const         {return objectV;}
-   Input* getInput()      const         {return arrow;}
-   Score getPoints()      const         {return score;}
-   Timing* getTime()      const         {return time;}
-   bool isDead()          const         {return dead;}
-   void kill()                          { dead = true;}
+   Velocity getVelocity() const         {return objectV; }
+   Input* getInput()      const         {return arrow;   }
+   Score getPoints()      const         {return score;   }
+   Timing* getTime()      const         {return time;    }
+   double getSize()     const           { return radius; }
+   //Other valid functions
+   bool getDead()          const        {return isDead;    }
+   void kill()                          {isDead = true;    }
+   
+   
    
 
 protected:
+   
+   
+   
    Position objectPT;   //what is our position?
    Velocity objectV;    //what is our velocity?
-   Score score;
-   SpecialMove*  sm;
-   OnDeath* od;
-   Input*   arrow;
-   Timing*  time;
-   bool dead;
+   Score score;         //what is our value? How much will our score be affected?
+   HitRatio hr;         //what is our hit ratio?
+   Effect* effect;      //what visual effects exist?
+   
+   
+   SpecialMove*  sm;    //what special move do we execute?
+   OnDeath* od;         //what do we do once we die? AKA how dramatic are we?
+   Input*   arrow;      //what keys are pressed?
+   Timing*  time;       //how much time do we have?
    
 };
 
+/**********************
+ * BIRD
+ **********************/
+class Bird : public ElementStorage
+{
+public:
+   Bird(SpecialMove* sm, OnDeath* od, Input* arrow, Timing* time, double radius) : ElementStorage(false, true, false, sm, od, arrow, time, radius) {};
+   
+};
 
+/**********************
+ * BULLET
+ **********************/
+class Bullet : public ElementStorage
+{
+public:
+   Bullet(SpecialMove* sm, OnDeath* od, Input* arrow, Timing* time, double radius) : ElementStorage(false, false, true, sm, od, arrow, time, radius) {};
+   
+};
 
+/**********************
+ * EFFECTS
+ **********************/
+class Effect : public ElementStorage
+{
+public:
+   Effect(SpecialMove* sm, OnDeath* od, Input* arrow, Timing* time, double radius) : ElementStorage(false, false, false, sm, od, arrow, time, radius) {};
+   
+};

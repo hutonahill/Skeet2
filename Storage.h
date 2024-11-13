@@ -76,7 +76,10 @@ public:
 	IteratorBird endBird();
 	IteratorBullet beginBullet();
 	IteratorBullet endBullet();
-	void add(ElementStorage* element);
+	void addPoints(int points) { this->points += points; }
+	void addMissed(int missed) { numMissed += missed; }
+	void addKilled(int killed) { numKilled += killed; }
+	void addElement(ElementStorage* element);
 	void remove(ElementStorage* it);
 	void reset();
 };

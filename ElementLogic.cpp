@@ -63,7 +63,7 @@ void SinkerBirdMove::execute(ElementStorage* el)
 
 void CrazyBirdMove::execute(ElementStorage* el)
 {
-   // erratic turns eery half a second or so
+      // erratic turns eery half a second or so
    if (randomInt(0, 15) == 0)
    {
       el->getVelocity().addDy(randomFloat(-1.5, 1.5));
@@ -76,7 +76,8 @@ void CrazyBirdMove::execute(ElementStorage* el)
 
 void PelletMove::execute(ElementStorage* el)
 {
-   // inertia
+      // inertia
+
    el->getPosition().add(el->getVelocity());
 }
 
