@@ -42,6 +42,10 @@ void Storage::addElement(ElementStorage* element)
 
 void Storage::remove(ElementStorage* it)
 {
+   if (it->isBird)
+   {
+      numBirds--;
+   }
    Element.remove(it);
 }
 
@@ -58,7 +62,7 @@ Storage::IteratorElement Storage::IteratorElement::operator++()
 
 ElementStorage* Storage::IteratorElement::operator*()
 {
-   return *it;
+   return it;
 }
 
 Storage::IteratorBird::IteratorBird(ElementStorage* it)
@@ -85,7 +89,7 @@ Storage::IteratorBird Storage::IteratorBird::operator++()
 
 ElementStorage* Storage::IteratorBird::operator*()
 {
-   return *it;
+   return it;
 }
 
 Storage::IteratorBullet::IteratorBullet(ElementStorage* it)
@@ -110,5 +114,5 @@ Storage::IteratorBullet Storage::IteratorBullet::operator++()
 
 ElementStorage* Storage::IteratorBullet::operator*()
 {
-   return *it;
+   return it;
 }

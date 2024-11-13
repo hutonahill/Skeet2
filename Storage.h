@@ -44,7 +44,6 @@ public:
 		IteratorBird operator++();
 		ElementStorage* operator*();
 		bool operator !=(const IteratorBird& rhs) { return it != rhs.it; }
-
 	private:
 		ElementStorage* it;
 	};
