@@ -1,6 +1,7 @@
 ﻿#include "Interface.h"
 #include "openGLIntegration.h"
 #include "DrawStrategy.h"
+#include "SkeetLogic.h"
 #include <sstream>
 
 void Interface::drawLevel() const
@@ -11,8 +12,8 @@ void Interface::drawLevel() const
    // output the gun
    drawGun();
 
-   for (SkeetLogic::Iterator it = SkeetLogic->beginElement(); it != SkeetLogic->endElement(); ++it) {
-      (*it)->draw();
+   for (SkeetLogic::Iterator it = sl->begin(); it != nullptr; ++it) {
+      (*it)->getDraw()->draw(*it);
    }
 
    // status
