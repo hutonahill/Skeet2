@@ -1,9 +1,9 @@
 #include "ElementLogic.h"
 #include "ElementStorage.h"
 #include "Interface.h"
+#include "ArrowListener.h"
 #include "position.h"
 #include <cassert>
-#include "ArrowListener.h"
 
 /***************************************************************/
 /***************************************************************/
@@ -34,31 +34,31 @@ double randomFloat(double min, double max)
 
 void StandardBirdMove::execute(ElementStorage* el)
 {
-   // small amount of drag
+      // small amount of drag
    el->getVelocity() *= 0.995;
-
-   // inertia
+   
+      // inertia
    el->getPosition().add(el->getVelocity());
 }
 
 void FloaterBirdMove::execute(ElementStorage* el)
 {
-   // large amount of drag
+      // large amount of drag
    el->getVelocity() *= 0.990;
-
-   // inertia
+   
+      // inertia
    el->getPosition().add(el->getVelocity());
-
-   // anti-gravity
+   
+      // anti-gravity
    el->getVelocity().addDy(0.05);
 }
 
 void SinkerBirdMove::execute(ElementStorage* el)
 {
-   // gravity
+      // gravity
    el->getVelocity().addDy(-0.07);
-
-   // inertia
+   
+      // inertia
    el->getPosition().add(el->getVelocity());
 }
 
@@ -70,15 +70,15 @@ void CrazyBirdMove::execute(ElementStorage* el)
       el->getVelocity().addDy(randomFloat(-1.5, 1.5));
       el->getVelocity().addDx(randomFloat(-1.5, 1.5));
    }
-
-   // inertia
+   
+      // inertia
    el->getPosition().add(el->getVelocity());
 }
 
 void PelletMove::execute(ElementStorage* el)
 {
       // inertia
-
+   
    el->getPosition().add(el->getVelocity());
 }
 
@@ -88,7 +88,7 @@ void MissleMove::execute(ElementStorage* el)
       el->getVelocity().turn(0.04);
    if (el->getInput()->down)
       el->getVelocity().turn(-0.04);
-   // inertia
+      // inertia
    el->getPosition().add(el->getVelocity());
 }
 
