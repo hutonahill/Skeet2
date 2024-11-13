@@ -1,4 +1,7 @@
 ﻿#pragma once
+#include <list>
+
+#include "ElementStorage.h"
 
 class ElementStorage;
 class ArrowListener;
@@ -15,7 +18,7 @@ public:
 // Abstract
 class SpecialMove : public ElementLogic {
 public:
-	virtual void execute(ElementStorage* el) = 0;
+	void execute(ElementStorage* el)  = 0;
 };
 
 // Special move for standard bird
@@ -23,7 +26,7 @@ public:
 class StandardBirdMove : public SpecialMove
 {
 public:
-	virtual void execute(ElementStorage* el);
+	void execute(ElementStorage* el) ;
 };
 
 // Special move for floater bird
@@ -31,7 +34,7 @@ public:
 class FloaterBirdMove : public SpecialMove
 {
 public:
-	virtual void execute(ElementStorage* el);
+	void execute(ElementStorage* el) ;
 };
 
 // Special move for sinker bird
@@ -39,7 +42,7 @@ public:
 class SinkerBirdMove : public SpecialMove
 {
 public:
-	virtual void execute(ElementStorage* el);
+	void execute(ElementStorage* el) ;
 };
 
 // Special move for crazy bird
@@ -47,7 +50,7 @@ public:
 class CrazyBirdMove : public SpecialMove
 {
 public:
-	virtual void execute(ElementStorage* el);
+	void execute(ElementStorage* el) ;
 };
 
 // Special move for pellet and bomb
@@ -55,7 +58,7 @@ public:
 class PelletMove : public SpecialMove
 {
 public:
-	virtual void execute(ElementStorage* el);
+	void execute(ElementStorage* el) ;
 };
 
 // Special move for the missle
@@ -63,7 +66,7 @@ public:
 class MissleMove : public SpecialMove
 {
 public:
-	virtual void execute(ElementStorage* el);
+	void execute(ElementStorage* el) ;
 };
 
 // Special move for things that don't move
@@ -71,7 +74,7 @@ public:
 class NoneMove : public SpecialMove
 {
 public:
-	virtual void execute(ElementStorage* el);
+	void execute(ElementStorage* el) override;
 };
 
 // What do we do when an element dies
@@ -79,7 +82,7 @@ public:
 class OnDeath : public ElementLogic
 {
 public:
-	virtual void execute(ElementStorage* el) = 0;
+	void execute(ElementStorage* el)  = 0;
 };
 
 // When an effect dies
@@ -87,7 +90,7 @@ public:
 class EffectDeath : public OnDeath
 {
 public:
-	virtual void execute(ElementStorage* el);
+	void execute(ElementStorage* el) ;
 };
 
 // Fragments, offscreen birds, shrappnel, missle, bullets
@@ -95,7 +98,7 @@ public:
 class DisapearDeath : public OnDeath
 {
 public:
-	virtual void execute(ElementStorage* el);
+	void execute(ElementStorage* el) ;
 };
 
 // Bombs
@@ -103,10 +106,10 @@ public:
 class ShrapnelDeath : public OnDeath
 {
 public:
-	ShrapnelDeath(SkeetLogic* sl) : SkeetLogic(sl) {};
-	virtual void execute(ElementStorage* el);
+	ShrapnelDeath(std::list<ElementStorage*>* sl) : ElementsToSpawn(sl) {};
+	void execute(ElementStorage* el);
 private:
-	SkeetLogic* SkeetLogic;
+	std::list<ElementStorage*>* ElementsToSpawn;
 };
 
 // Handles whether an element needs input or not
@@ -114,8 +117,7 @@ private:
 class Input : public ElementLogic
 {
 public:
-	Input() : up(0), down(0), left(0), right(0) {};
-	virtual void execute(ElementStorage* el) = 0;
+	Input() : up(0), down(0), left(0), right(0) {}
 	virtual void subscribe(ArrowListener* al) = 0;
 	virtual void unsubscribe(ArrowListener* al) = 0;
 	int up;
@@ -129,21 +131,21 @@ public:
 class Arrows : public Input
 {
 public:
-	virtual void execute(ElementStorage* el);
-	virtual void subscribe(ArrowListener* al);
-	virtual void unsubscribe(ArrowListener* al);
+	void execute(ElementStorage* el) override;
+	void subscribe(ArrowListener* al) override;
+	void unsubscribe(ArrowListener* al) override;
 private:
 	ArrowListener* al;
 };
 
 // Everything else
 // Concrete
-class None : public Input
+class NoInput : public Input
 {
 public:
-	virtual void execute(ElementStorage* el);
-	virtual void subscribe(ArrowListener* al);
-	virtual void unsubscribe(ArrowListener* al);
+	void execute(ElementStorage* el) override;
+	void subscribe(ArrowListener* al) override;
+	void unsubscribe(ArrowListener* al) override;
 };
 
 // What we do for internal clocks on elements
@@ -151,7 +153,7 @@ public:
 class Timing : public ElementLogic
 {
 public:
-	virtual void execute(ElementStorage* el) = 0;
+	void execute(ElementStorage* el) override = 0;
 	virtual void setInitialTimer(int time) = 0;
 };
 
@@ -160,8 +162,8 @@ public:
 class NotTimed : public Timing
 {
 public:
-	virtual void execute(ElementStorage* el);
-	virtual void setInitialTimer(int time) {}
+	void execute(ElementStorage* el) override;
+	void setInitialTimer(int time) override {}
 };
 
 // Has an internal timer
@@ -169,9 +171,9 @@ public:
 class Timed : public Timing
 {
 public:
-	virtual void execute(ElementStorage* el);
+	void execute(ElementStorage* el) override;
 
 	// This is set to a different time depending on the type of timed item
-	virtual void setInitialTimer(int time) { timeToDie = time; }
+	void setInitialTimer(int time) override { timeToDie = time; }
 	int timeToDie;
 };

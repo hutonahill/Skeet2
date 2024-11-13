@@ -12,10 +12,10 @@ private:
 	int points;
 	int numKilled;
 	int numMissed;
-	Position dimensions;
-	Time time;
-	StorageGun gun;
-	std::list<ElementStorage*> Element;
+	Position* dimensions;
+	Time* time;
+	StorageGun* gun;
+	std::list<ElementStorage*>* Element;
 
 public:
 
@@ -63,14 +63,16 @@ public:
 		ElementStorage* it;
 	};
 	
-	Storage() : numBirds(0), points(0), numKilled(0), numMissed(0), gun(Position(800.0, 0.0)), dimensions(Position(800.0, 800.0)) {}
-	int getPoints() { return points; }
-	int getNumKilled() { return numKilled; }
-	int getNumMissed() { return numMissed; }
-	StorageGun getGun() { return gun; }
-	Time getTime() { return time;  }
-	int getNumBirds() { return numBirds; }
-	Position getDimensions() { return dimensions; }
+	Storage() : numBirds(0), points(0), numKilled(0), numMissed(0),
+		dimensions(new Position(800.0, 800.0)),
+		gun(new StorageGun(Position(800.0, 0.0))) {}
+	int getPoints() const { return points; }
+	int getNumKilled() const { return numKilled; }
+	int getNumMissed() const { return numMissed; }
+	StorageGun* getGun() { return gun; }
+	Time* getTime() const { return time;  }
+	int getNumBirds() const { return numBirds; }
+	Position* getDimensions() const { return dimensions; }
 	IteratorElement beginElement();
 	IteratorElement endElement();
 	IteratorBird beginBird();

@@ -3,17 +3,16 @@
 #include <list>
 #include "time.h"
 
+#include "Storage.h"
+
 class ElementStorage;
 using namespace std;
-
 
 class Storage;
 class Interface;
 
 class SkeetLogic {
 public:
-
-	class iterator;
 	
 	SkeetLogic();
 
@@ -27,19 +26,35 @@ public:
 	void makeMissile();
 	void makeBomb();
 
+	static ElementStorage* Fragment(const Position* position, const Velocity* velocity);
+
 	Time getTime();
 
 
 	list<ElementStorage*> ElementsToSpawn;
+	class Iterator {
+
+	private:
+		Storage::IteratorElement it;
+	public:
+		Iterator(Storage* SkeetStorage);
+	};
+		Iterator begin() {
+			return Iterator(SkeetStorage);
+		};
 	
 private:
 	void specialMoves();
-	void spawn();
+	void spawn() const;
 	void detectCollision();
 	void detectOutOfBounds();
 	void clearZombies() const;
 	void updateStatus();
 	void birdSpawn();
+
+	int BirdsShotThisFrame;
+	int BirdsMissedThisFrame;
+	int PointChangeThisFrame;
 
 	void StandardFactory(double size, int level);
 	void SinkerFactory(double size, int level);
@@ -53,7 +68,4 @@ private:
 	
 };
 
-class SkeetLogic :: iterator {
-private:
-	
-};
+

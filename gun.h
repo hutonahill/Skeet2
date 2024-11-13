@@ -17,25 +17,25 @@
 class Gun
 {
 public:
-   Gun(const Position & pt) : angle(0.78 /* 45 degrees */), pt(pt) {}  // 45 degrees initially
+   Gun(Position* pt) : angle(0.78 /* 45 degrees */), pt(pt) {}  // 45 degrees initially
    void display() const;
    void interact(int clockwise, int counterclockwise);
    double getAngle() const { return angle; }
    
 private:
    double angle;
-   Position pt;
+   Position* pt;
 };
 
 class StorageGun
 {
 public:
-   StorageGun(const Position& pt) : angle(0.78 /* 45 degrees */), pt(pt) {}  // 45 degrees initially
+   StorageGun(Position* pt) : angle(0.78 /* 45 degrees */), pt(pt) {}  // 45 degrees initially
    void addAngle(int num);
    double getAngle() const { return angle; }
-   Position getPosition() const { return pt; }
+   Position* getPosition() const { return pt; }
 
 private:
    double angle;
-   Position pt;
+   Position* pt;
 };
