@@ -25,6 +25,7 @@ public:
 	void makePellet();
 	void makeMissile();
 	void makeBomb();
+	StorageGun* getGun() { SkeetStorage->getGun(); };
 
 	static ElementStorage* Fragment(const Position* position, const Velocity* velocity);
 

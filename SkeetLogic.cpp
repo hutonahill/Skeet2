@@ -374,6 +374,7 @@ ElementStorage* SkeetLogic::Fragment(const Position* position, const Velocity* v
 	return newBullet;
 }
 
+
 void SkeetLogic::detectCollision() {
 
 	for (Storage::IteratorBird it = SkeetStorage->beginBird(); it != SkeetStorage->endBird(); ++it) {
