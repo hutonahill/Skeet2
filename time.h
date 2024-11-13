@@ -77,8 +77,3 @@ private:
     }
     
 };
-
-class StorageTime
-{
-
-};
