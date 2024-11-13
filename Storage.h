@@ -69,7 +69,7 @@ public:
 	int getPoints() const { return points; }
 	int getNumKilled() const { return numKilled; }
 	int getNumMissed() const { return numMissed; }
-	float getHitRatio() { return (FLOAT)numKilled / (FLOAT)(numMissed + numKilled); }
+	float getHitRatio() { return static_cast<float> (numKilled) / static_cast<float>(numMissed + numKilled); }
 	Position* getDimensions() { return dimensions; }
 	StorageGun* getGun() { return gun; }
 	Time* getTime() const { return time;  }
