@@ -7,8 +7,8 @@
 #include <math.h>
 #include <GL/freeglut_std.h>
 
-SkeetLogic::SkeetLogic(Interface* skeetInterface) {
-	SkeetInterface = skeetInterface;
+SkeetLogic::SkeetLogic() {
+	SkeetInterface = nullptr;
 	SkeetStorage = new Storage();
 }
 
@@ -86,6 +86,10 @@ void SkeetLogic::makeBomb()
 	b->getVelocity()->setDx(RandomFloat(speed - .5, speed + .5));
 	b->getVelocity()->setDy(RandomFloat(speed - .5, speed + .5));
 	ElementsToSpawn.push_back(b);
+Time SkeetLogic::getTime()
+{
+	return SkeetStorage->getTime();
+
 }
 
 void SkeetLogic::specialMoves() {
@@ -97,7 +101,7 @@ void SkeetLogic::specialMoves() {
 	
 }
 
-bool isOutOfBounds(const ElementStorage* element, const Position* dimensions){
+bool isOutOfBounds(ElementStorage* element, const Position* dimensions){
 	Position* elementPosition = element->getPosition();
 	return (elementPosition->getX() < -element->getRadius() || elementPosition->getX() >= dimensions->getX() + element->getRadius() ||
 			elementPosition->getY() < -element->getRadius() || elementPosition->getY() >= dimensions->getY() + element->getRadius());
@@ -125,7 +129,7 @@ void SkeetLogic::detectOutOfBounds(){
 void SkeetLogic::clearZombies() const {
 	for (Storage::IteratorElement it = SkeetStorage->beginElement(); it != SkeetStorage->endElement(); ++it) {
 		bool dead = (*it)->getDead();
-		if ( (*it)->isDead() ) {
+		if ( (*it)->getDead()) {
 			SkeetStorage->remove(*it);
 		}
 	}
@@ -380,8 +384,8 @@ void SkeetLogic::detectCollision() {
 			
 			if (!bird->getDead() && !bullet->getDead() &&
 			 bird->getRadius() + bullet->getRadius() >
-			 minimumDistance(bird->getPosition(), bird->getVelocity(),
-							 bullet->getPosition(),  bullet->getVelocity()))
+			 minimumDistance(*(bird->getPosition()), *(bird->getVelocity()),
+							 *(bullet->getPosition()),  *(bullet->getVelocity())))
 			{
 				// this implies fragments are created on the death of every bird...
 				for (int i = 0; i < 25; i++) {

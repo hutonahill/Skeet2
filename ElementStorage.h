@@ -53,12 +53,12 @@ public:
    
    // getters
    SpecialMove* getSpecialMove()
-                           const         {return sm;           }
-   Position* getPosition()  const         {return objectPT;     }
-   Velocity* getVelocity()  const         {return objectV;      }
-   Input* getInput()       const         {return arrow;        }
-   Timing* getTime()       const         {return time;         }
-   DrawStrategy* getDraw() const         {return draw;         }
+                                    {return sm;           }
+   Position* getPosition() const           {return objectPT;     }
+   Velocity* getVelocity()           {return objectV;      }
+   Input* getInput()                {return arrow;        }
+   Timing* getTime()                {return time;         }
+   DrawStrategy* getDraw()          {return draw;         }
    
    //Other valid functions
    bool getDead()         const         {return isDead;        }
@@ -68,9 +68,9 @@ public:
    int getValue()         const         {return value;         }
    //Setters
    void kill()                          {isDead = true;        }
-   void setAge(double age) const {age = this->age;      }
-   void setPoints(int points) const {points = this->points;}
-   void setValue(int value) const {value = this->value;  }
+   void setAge(double age)  {age = this->age;      }
+   void setPoints(int points)  {points = this->points;}
+   void setValue(int value)  {value = this->value;  }
    
    
    

@@ -18,7 +18,7 @@ public:
 // Abstract
 class SpecialMove : public ElementLogic {
 public:
-	void execute(ElementStorage* el) override = 0;
+	void execute(ElementStorage* el)  = 0;
 };
 
 // Special move for standard bird
@@ -26,7 +26,7 @@ public:
 class StandardBirdMove : public SpecialMove
 {
 public:
-	void execute(ElementStorage* el) override;
+	void execute(ElementStorage* el) ;
 };
 
 // Special move for floater bird
@@ -34,7 +34,7 @@ public:
 class FloaterBirdMove : public SpecialMove
 {
 public:
-	void execute(ElementStorage* el) override;
+	void execute(ElementStorage* el) ;
 };
 
 // Special move for sinker bird
@@ -42,7 +42,7 @@ public:
 class SinkerBirdMove : public SpecialMove
 {
 public:
-	void execute(ElementStorage* el) override;
+	void execute(ElementStorage* el) ;
 };
 
 // Special move for crazy bird
@@ -50,7 +50,7 @@ public:
 class CrazyBirdMove : public SpecialMove
 {
 public:
-	void execute(ElementStorage* el) override;
+	void execute(ElementStorage* el) ;
 };
 
 // Special move for pellet and bomb
@@ -58,7 +58,7 @@ public:
 class PelletMove : public SpecialMove
 {
 public:
-	void execute(ElementStorage* el) override;
+	void execute(ElementStorage* el) ;
 };
 
 // Special move for the missle
@@ -66,7 +66,7 @@ public:
 class MissleMove : public SpecialMove
 {
 public:
-	void execute(ElementStorage* el) override;
+	void execute(ElementStorage* el) ;
 };
 
 // Special move for things that don't move
@@ -82,7 +82,7 @@ public:
 class OnDeath : public ElementLogic
 {
 public:
-	void execute(ElementStorage* el) override = 0;
+	void execute(ElementStorage* el)  = 0;
 };
 
 // When an effect dies
@@ -90,7 +90,7 @@ public:
 class EffectDeath : public OnDeath
 {
 public:
-	void execute(ElementStorage* el) override;
+	void execute(ElementStorage* el) ;
 };
 
 // Fragments, offscreen birds, shrappnel, missle, bullets
@@ -98,7 +98,7 @@ public:
 class DisapearDeath : public OnDeath
 {
 public:
-	void execute(ElementStorage* el) override;
+	void execute(ElementStorage* el) ;
 };
 
 // Bombs
@@ -107,7 +107,7 @@ class ShrapnelDeath : public OnDeath
 {
 public:
 	ShrapnelDeath(std::list<ElementStorage*>* sl) : ElementsToSpawn(sl) {};
-	void execute(ElementStorage* el) override;
+	void execute(ElementStorage* el);
 private:
 	std::list<ElementStorage*>* ElementsToSpawn;
 };

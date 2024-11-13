@@ -37,7 +37,7 @@ double RandomFloat(double min, double max)
 void StandardBirdMove::execute(ElementStorage* el)
 {
       // small amount of drag
-   el->getVelocity() *= 0.995;
+   (*(el->getVelocity())) *= 0.995;
    
       // inertia
    el->getPosition()->add(el->getVelocity());
@@ -46,7 +46,7 @@ void StandardBirdMove::execute(ElementStorage* el)
 void FloaterBirdMove::execute(ElementStorage* el)
 {
       // large amount of drag
-   el->getVelocity() *= 0.990;
+   (*(el->getVelocity())) *= 0.990;
    
       // inertia
    el->getPosition()->add(el->getVelocity());

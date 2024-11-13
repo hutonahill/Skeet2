@@ -1,6 +1,7 @@
 ﻿#pragma once
 #include <iterator>
 #include <list>
+#include "time.h"
 
 #include "Storage.h"
 
@@ -13,7 +14,9 @@ class Interface;
 class SkeetLogic {
 public:
 	
-	SkeetLogic(Interface* skeetInterface);
+	SkeetLogic();
+
+	void setInterface(Interface* skeetInterface) { SkeetInterface = skeetInterface; }
 	
 	list<ElementStorage>::iterator* ElementIterator;
 
@@ -24,6 +27,9 @@ public:
 	void makeBomb();
 
 	static ElementStorage* Fragment(const Position* position, const Velocity* velocity);
+
+	Time getTime();
+
 
 	list<ElementStorage*> ElementsToSpawn;
 	class Iterator {
