@@ -100,6 +100,7 @@ void NoneMove::execute(ElementStorage* el)
 
 void EffectDeath::execute(ElementStorage* el)
 {
+   // This would add bird fragments if it were implimented
 }
 
 void DisapearDeath::execute(ElementStorage* el)

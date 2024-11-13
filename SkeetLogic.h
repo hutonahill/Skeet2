@@ -25,10 +25,11 @@ public:
 	void makePellet();
 	void makeMissile();
 	void makeBomb();
+	StorageGun* getGun() { SkeetStorage->getGun(); };
 
 	static ElementStorage* Fragment(const Position* position, const Velocity* velocity);
 
-	Time getTime();
+	Time* getTime() const;
 
 
 	list<ElementStorage*> ElementsToSpawn;
@@ -44,7 +45,7 @@ public:
 		};
 	
 private:
-	void specialMoves();
+	void specialMoves() const;
 	void spawn() const;
 	void detectCollision();
 	void detectOutOfBounds();

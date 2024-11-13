@@ -72,8 +72,7 @@ void SkeetLogic::makeMissile()
 	ElementsToSpawn.push_back(b);
 }
 
-void SkeetLogic::makeBomb()
-{
+void SkeetLogic::makeBomb() {
 	float speed = 15;
 	SpecialMove* move = new PelletMove();
 	OnDeath* death = new ShrapnelDeath(&ElementsToSpawn);
@@ -86,13 +85,13 @@ void SkeetLogic::makeBomb()
 	b->getVelocity()->setDx(RandomFloat(speed - .5, speed + .5));
 	b->getVelocity()->setDy(RandomFloat(speed - .5, speed + .5));
 	ElementsToSpawn.push_back(b);
-Time SkeetLogic::getTime()
-{
+}
+Time* SkeetLogic::getTime() const {
 	return SkeetStorage->getTime();
 
 }
 
-void SkeetLogic::specialMoves() {
+void SkeetLogic::specialMoves() const {
 
 	for (Storage::IteratorElement it = SkeetStorage->beginElement(); it != SkeetStorage->endElement(); ++it ) {
 		(*it)->getSpecialMove()->execute(*it);
@@ -375,6 +374,7 @@ ElementStorage* SkeetLogic::Fragment(const Position* position, const Velocity* v
 	return newBullet;
 }
 
+
 void SkeetLogic::detectCollision() {
 
 	for (Storage::IteratorBird it = SkeetStorage->beginBird(); it != SkeetStorage->endBird(); ++it) {
@@ -384,8 +384,8 @@ void SkeetLogic::detectCollision() {
 			
 			if (!bird->getDead() && !bullet->getDead() &&
 			 bird->getRadius() + bullet->getRadius() >
-			 minimumDistance(*(bird->getPosition()), *(bird->getVelocity()),
-							 *(bullet->getPosition()),  *(bullet->getVelocity())))
+			 minimumDistance(bird->getPosition(), bird->getVelocity(),
+							 bullet->getPosition(),  bullet->getVelocity()))
 			{
 				// this implies fragments are created on the death of every bird...
 				for (int i = 0; i < 25; i++) {

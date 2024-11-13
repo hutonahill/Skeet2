@@ -65,7 +65,7 @@ public:
 	
 	Storage() : numBirds(0), points(0), numKilled(0), numMissed(0),
 		dimensions(new Position(800.0, 800.0)),
-		gun(new StorageGun(Position(800.0, 0.0))) {}
+		gun(new StorageGun(new Position(800.0, 0.0))) {}
 	int getPoints() const { return points; }
 	int getNumKilled() const { return numKilled; }
 	int getNumMissed() const { return numMissed; }

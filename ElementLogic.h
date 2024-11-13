@@ -90,7 +90,10 @@ public:
 class EffectDeath : public OnDeath
 {
 public:
+	EffectDeath(std::list<ElementStorage*>* sl) : ElementsToSpawn(sl) {};
 	void execute(ElementStorage* el) ;
+private:
+	std::list<ElementStorage*>* ElementsToSpawn;
 };
 
 // Fragments, offscreen birds, shrappnel, missle, bullets
