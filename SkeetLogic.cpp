@@ -72,8 +72,7 @@ void SkeetLogic::makeMissile()
 	ElementsToSpawn.push_back(b);
 }
 
-void SkeetLogic::makeBomb()
-{
+void SkeetLogic::makeBomb() {
 	float speed = 15;
 	SpecialMove* move = new PelletMove();
 	OnDeath* death = new ShrapnelDeath(&ElementsToSpawn);
@@ -86,8 +85,8 @@ void SkeetLogic::makeBomb()
 	b->getVelocity()->setDx(RandomFloat(speed - .5, speed + .5));
 	b->getVelocity()->setDy(RandomFloat(speed - .5, speed + .5));
 	ElementsToSpawn.push_back(b);
-Time SkeetLogic::getTime()
-{
+}
+Time* SkeetLogic::getTime() {
 	return SkeetStorage->getTime();
 
 }

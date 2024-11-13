@@ -28,7 +28,7 @@ public:
 
 	static ElementStorage* Fragment(const Position* position, const Velocity* velocity);
 
-	Time getTime();
+	Time* getTime();
 
 
 	list<ElementStorage*> ElementsToSpawn;
