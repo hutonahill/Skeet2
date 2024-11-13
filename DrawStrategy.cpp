@@ -4,7 +4,6 @@
 #include <sstream>
 #include "time.h"
 #include <string>
-#include "Storage.h"
 
 //Draw bullet
 void PelletDraw::draw(ElementStorage* elm)
@@ -167,38 +166,3 @@ void ScoreDraw::draw(ElementStorage* elm)
    glutBitmapCharacter(pFont, static_cast<char>(number % 10) + '0');
 }
 
-
-//Draw other
-void gunDraw::draw(StorageGun* elm)
-{
-   drawRectangle(elm->getPosition(), M_PI_2 - elm->getAngle(), 10.0, 100.0, 1.0, 1.0, 1.0);
-}
-
-void StatusDraw::draw(Storage* elm)
-{
-   // output the text information
-   if (elm->getTime()->isGameOver())
-   {
-      // draw the end of game message
-      drawText(Position(elm->getDimensions()->getX() / 2 - 30, elm->getDimensions()->getY() / 2 + 10),
-         "Game Over");
-
-      // draw end of game status
-      drawText(Position(elm->getDimensions()->getX() / 2 - 30, elm->getDimensions()->getY() / 2 - 10),
-         to_string(elm->getPoints()));
-   }
-   else
-   {
-      ostringstream sOut;
-      // output the status elm->getTime()r
-      drawTimer(1.0 - elm->getTime()->percentLeft(),
-         (elm->getTime()->level() - 0.0) * .1, 0.0, 0.0,
-         (elm->getTime()->level() - 1.0) * .1, 0.0, 0.0, elm->getDimensions());
-
-      // draw the message giving a countdown
-      sOut << "Level " << elm->getTime()->level()
-         << " begins in " << elm->getTime()->secondsLeft() << " seconds";
-      drawText(Position(elm->getDimensions()->getX() / 2 - 110, elm->getDimensions()->getY() / 2 - 10),
-         sOut.str());
-   }
-}
