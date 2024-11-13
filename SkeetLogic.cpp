@@ -408,3 +408,14 @@ SkeetLogic::Iterator::Iterator(Storage* SkeetStorage)
 {
 	it = SkeetStorage->beginElement();
 }
+
+SkeetLogic::Iterator SkeetLogic::Iterator::operator++()
+{
+	++it;
+	return *this;
+}
+
+ElementStorage* SkeetLogic::Iterator::operator*()
+{
+	return *it;
+}

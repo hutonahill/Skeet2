@@ -42,6 +42,9 @@ public:
 		Storage::IteratorElement it;
 	public:
 		Iterator(Storage* SkeetStorage);
+		Iterator operator++();
+		ElementStorage* operator*();
+		bool operator !=(const Iterator& rhs) { return it != rhs.it; }
 	};
 		Iterator begin() {
 			return Iterator(SkeetStorage);
