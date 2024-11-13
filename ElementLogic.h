@@ -137,7 +137,7 @@ private:
 
 // Everything else
 // Concrete
-class NoInput : public Input
+class None : public Input
 {
 public:
 	void execute(ElementStorage* el) override;

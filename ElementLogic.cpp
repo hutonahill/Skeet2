@@ -106,6 +106,7 @@ void DisapearDeath::execute(ElementStorage* el)
 
 void ShrapnelDeath::execute(ElementStorage* el)
 {
+
 }
 
 void Arrows::execute(ElementStorage* el)
