@@ -138,7 +138,7 @@ private:
 
 // Everything else
 // Concrete
-class None : public Input
+class NoInput : public Input
 {
 public:
 	virtual void execute(ElementStorage* el);
