@@ -350,11 +350,11 @@ ElementStorage* Fragment(Position* position, Velocity* velocity) {
 	DrawStrategy* draw = new FragmentDraw();
 
 
-	//TODO: find teh right radius
-	ElementStorage* newBullet = new Bullet(move, death, new NoInput(), time, draw, 0);
+	
+	ElementStorage* newBullet = new Bullet(move, death, new NoInput(), time, draw, RandomFloat(1.0, 2.5));
 
-	newBullet->getVelocity()->setDx(velocity->getDx() * 0.5 + RandomInt(-6.0, 6.0));
-	newBullet->getVelocity()->setDy(velocity->getDy() * 0.5 + RandomInt(-6.0, 6.0));
+	newBullet->getVelocity()->setDx(velocity->getDx() * 0.5 + RandomFloat(-6.0, 6.0));
+	newBullet->getVelocity()->setDy(velocity->getDy() * 0.5 + RandomFloat(-6.0, 6.0));
 
 	newBullet->getPosition()->setX(position->getX());
 	newBullet->getPosition()->setY(position->getY());
@@ -367,6 +367,8 @@ ElementStorage* Fragment(Position* position, Velocity* velocity) {
 	// age
 	age = random(0.4, 1.0);
 	 */
+
+	return newBullet;
 }
 
 void SkeetLogic::detectCollision() {
@@ -375,14 +377,16 @@ void SkeetLogic::detectCollision() {
 		ElementStorage* bird = (*it);
 		for (Storage::IteratorBullet it2 = SkeetStorage->beginBullet(); it2 != SkeetStorage->endBullet(); ++it2) {
 			ElementStorage* bullet = (*it2);
-			if (!bird->isDead() && !bullet->isDead() &&
+			
+			if (!bird->getDead() && !bullet->getDead() &&
 			 bird->getRadius() + bullet->getRadius() >
 			 minimumDistance(bird->getPosition(), bird->getVelocity(),
 							 bullet->getPosition(),  bullet->getVelocity()))
 			{
-				for (int i = 0; i < 25; i++)
-					
+				// this implies fragments are created on the death of every bird...
+				for (int i = 0; i < 25; i++) {
 					ElementsToSpawn.push_back(Fragment(bullet->getPosition(), bullet->getVelocity()));
+				}
 				bird->kill();
 				bullet->kill();
 				BirdsShotThisFrame++;
