@@ -1,6 +1,5 @@
 ﻿#pragma once
 #include "time.h"
-#include "gun.h"
 #include "ElementStorage.h"
 
 #include <list>
