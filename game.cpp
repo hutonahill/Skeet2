@@ -8,7 +8,6 @@
  ************************************************************************/
 
 #include "uiInteract.h"
-#include "skeet.h"
 #include "position.h"
 
 #define WIDTH  800.0

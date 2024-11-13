@@ -47,5 +47,6 @@ private:
    Time getTime() const { return sl->getTime(); }
    ArrowListener* al;
    SkeetLogic* sl;
+
 };
 

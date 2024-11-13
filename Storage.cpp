@@ -2,32 +2,32 @@
 
 Storage::IteratorElement Storage::beginElement()
 {
-   return IteratorElement(*(Element.begin()));
+   return IteratorElement(*(Element->begin()));
 }
 
 Storage::IteratorElement Storage::endElement()
 {
-   return IteratorElement(*(Element.end()));
+   return IteratorElement(*(Element->end()));
 }
 
 Storage::IteratorBird Storage::beginBird()
 {
-   return IteratorBird(*(Element.begin()));
+   return IteratorBird(*(Element->begin()));
 }
 
 Storage::IteratorBird Storage::endBird()
 {
-   return IteratorBird(*(Element.end()));
+   return IteratorBird(*(Element->end()));
 }
 
 Storage::IteratorBullet Storage::beginBullet()
 {
-   return IteratorBullet(*(Element.begin()));
+   return IteratorBullet(*(Element->begin()));
 }
 
 Storage::IteratorBullet Storage::endBullet()
 {
-   return IteratorBullet(*(Element.end()));
+   return IteratorBullet(*(Element->end()));
 }
 
 void Storage::addElement(ElementStorage* element)
@@ -37,7 +37,7 @@ void Storage::addElement(ElementStorage* element)
       numBirds++;
    }
 
-   Element.push_back(element);
+   Element->push_back(element);
 }
 
 void Storage::remove(ElementStorage* it)
@@ -46,7 +46,7 @@ void Storage::remove(ElementStorage* it)
    {
       numBirds--;
    }
-   Element.remove(it);
+   Element->remove(it);
 }
 
 void Storage::reset()
@@ -92,7 +92,7 @@ ElementStorage* Storage::IteratorBird::operator*()
    return it;
 }
 
-Storage::IteratorBullet::IteratorBullet(ElementStorage* it)
+Storage::IteratorBullet::IteratorBullet(ElementStorage* it) : it(it)
 {
    while (!(it->isBullet) && it != nullptr)
    {

@@ -30,6 +30,7 @@ void Position::add(const Velocity* v)
 {
     *this += v;
 }
+
 Position & Position :: operator += (const Velocity & v)
 {
     addX(v.getDx());
@@ -46,6 +47,8 @@ Velocity::Velocity(double dx, double dy) : dx(0.0), dy(0.0)
    setDx(dx);
    setDy(dy);
 }
+
+
 
 /******************************************
  * POINT insertion
