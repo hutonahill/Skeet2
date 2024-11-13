@@ -65,7 +65,7 @@ inline void glVertexPoint(const Position& point)
  * DRAW RECTANGLE
  * Draw a rectangle on the screen from the beginning to the end.
  *************************************************************************/
-void drawRectangle(const Position& pt,
+void drawRectangle(const Position* pt,
    double angle = 0.0,
    double width = 10.0,
    double height = 100.0,
@@ -93,7 +93,7 @@ void drawRectangle(const Position& pt,
  * DRAW LINE
  * Draw a line on the screen from the beginning to the end.
  *************************************************************************/
-void drawLine(const Position& begin, const Position& end,
+void drawLine(const Position* begin, const Position* end,
    double red, double green, double blue)
 {
    // Get ready...
@@ -113,7 +113,7 @@ void drawLine(const Position& begin, const Position& end,
  * DRAW DOT
  * Draw a single point (square actually on the screen, r pixels by r pixels
  *************************************************************************/
-void drawDot(const Position& point, double radius,
+void drawDot(const Position* point, double radius,
    double red, double green, double blue)
 {
    // Get ready, get set...
@@ -136,7 +136,7 @@ void drawDot(const Position& point, double radius,
  * DRAW Disk
  * Draw a filled circule at [center] with size [radius]
  *************************************************************************/
-void drawDisk(const Position& center, double radius,
+void drawDisk(const Position* center, double radius,
    double red, double green, double blue)
 {
    assert(radius > 1.0);
@@ -204,7 +204,7 @@ void drawText(const Position& topLeft, const string& text)
  *************************************************************************/
 void drawTimer(double percent,
    double redFore, double greenFore, double blueFore,
-   double redBack, double greenBack, double blueBack, Position dimensions)
+   double redBack, double greenBack, double blueBack, Position* dimensions)
 {
    double radians;
 

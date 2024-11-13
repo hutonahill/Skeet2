@@ -19,8 +19,8 @@ void MissleDraw::draw(ElementStorage* elm)
    if (!elm->getDead())
    {
       // missile is a line with a dot at the end so it looks like fins.
-      Position ptNext(elm->getPosition());
-      ptNext.add(elm->getVelocity());
+      Position* ptNext(elm->getPosition());
+      ptNext->add(elm->getVelocity());
       drawLine(elm->getPosition(), ptNext, 1.0, 1.0, 0.0);
       drawDot(elm->getPosition(), 3.0, 1.0, 1.0, 1.0);
    }
@@ -101,10 +101,10 @@ void FragmentDraw::draw(ElementStorage* elm)
    glColor3f((GLfloat)elm->getAge(), (GLfloat)elm->getAge(), (GLfloat)elm->getAge());
 
    // draw the fragment
-   glVertex2f((GLfloat)(elm->getPosition().getX() - elm->getRadius()), (GLfloat)(elm->getPosition().getY() - elm->getRadius()));
-   glVertex2f((GLfloat)(elm->getPosition().getX() + elm->getRadius()), (GLfloat)(elm->getPosition().getY() - elm->getRadius()));
-   glVertex2f((GLfloat)(elm->getPosition().getX() + elm->getRadius()), (GLfloat)(elm->getPosition().getY() + elm->getRadius()));
-   glVertex2f((GLfloat)(elm->getPosition().getX() - elm->getRadius()), (GLfloat)(elm->getPosition().getY() + elm->getRadius()));
+   glVertex2f((GLfloat)(elm->getPosition()->getX() - elm->getRadius()), (GLfloat)(elm->getPosition()->getY() - elm->getRadius()));
+   glVertex2f((GLfloat)(elm->getPosition()->getX() + elm->getRadius()), (GLfloat)(elm->getPosition()->getY() - elm->getRadius()));
+   glVertex2f((GLfloat)(elm->getPosition()->getX() + elm->getRadius()), (GLfloat)(elm->getPosition()->getY() + elm->getRadius()));
+   glVertex2f((GLfloat)(elm->getPosition()->getX() - elm->getRadius()), (GLfloat)(elm->getPosition()->getY() + elm->getRadius()));
    glColor3f((GLfloat)1.0 /* red % */, (GLfloat)1.0 /* green % */, (GLfloat)1.0 /* blue % */);
    glEnd();
 }
@@ -138,8 +138,8 @@ void exhaustDraw::draw(Effect* elm)
    glColor3f((GLfloat)elm->getAge(), (GLfloat)elm->getAge(), (GLfloat)elm->getAge());
 
    // Draw the actual line
-   glVertex2f((GLfloat)elm->getPosition().getX(), (GLfloat)elm->getPosition().getY());
-   glVertex2f((GLfloat)elm->getEnd().getX(), (GLfloat)elm->getEnd().getY());
+   glVertex2f((GLfloat)elm->getPosition()->getX(), (GLfloat)elm->getPosition()->getY());
+   glVertex2f((GLfloat)elm->getEnd()->getX(), (GLfloat)elm->getEnd()->getY());
 
    glColor3f((GLfloat)1.0 /* red % */, (GLfloat)1.0 /* green % */, (GLfloat)1.0 /* blue % */);
    glEnd();
@@ -159,7 +159,7 @@ void ScoreDraw::draw(ElementStorage* elm)
    glColor3f(red, green, blue);
 
    // specify the position
-   glRasterPos2f((GLfloat)elm->getPosition().getX(), (GLfloat)elm->getPosition().getY());
+   glRasterPos2f((GLfloat)elm->getPosition()->getX(), (GLfloat)elm->getPosition()->getY());
 
    // draw the digits
    int number = (elm->value > 0 ? elm->value : -elm->value);
@@ -179,27 +179,27 @@ void StatusDraw::draw(Storage* elm)
 {
    // output the text information
    ostringstream sout;
-   if (elm->getTime().isGameOver())
+   if (elm->getTime()->isGameOver())
    {
       // draw the end of game message
-      drawText(Position(elm->getDimensions().getX() / 2 - 30, elm->getDimensions().getY() / 2 + 10),
+      drawText(Position(elm->getDimensions()->getX() / 2 - 30, elm->getDimensions()->getY() / 2 + 10),
          "Game Over");
 
       // draw end of game status
-      drawText(Position(elm->getDimensions().getX() / 2 - 30, elm->getDimensions().getY() / 2 - 10),
+      drawText(Position(elm->getDimensions()->getX() / 2 - 30, elm->getDimensions()->getY() / 2 - 10),
          to_string(elm->getPoints()));
    }
    else
    {
       // output the status elm->getTime()r
-      drawTimer(1.0 - elm->getTime().percentLeft(),
-         (elm->getTime().level() - 0.0) * .1, 0.0, 0.0,
-         (elm->getTime().level() - 1.0) * .1, 0.0, 0.0, elm->getDimensions());
+      drawTimer(1.0 - elm->getTime()->percentLeft(),
+         (elm->getTime()->level() - 0.0) * .1, 0.0, 0.0,
+         (elm->getTime()->level() - 1.0) * .1, 0.0, 0.0, elm->getDimensions());
 
       // draw the message giving a countdown
-      sout << "Level " << elm->getTime().level()
-         << " begins in " << elm->getTime().secondsLeft() << " seconds";
-      drawText(Position(elm->getDimensions().getX() / 2 - 110, elm->getDimensions().getY() / 2 - 10),
+      sout << "Level " << elm->getTime()->level()
+         << " begins in " << elm->getTime()->secondsLeft() << " seconds";
+      drawText(Position(elm->getDimensions()->getX() / 2 - 110, elm->getDimensions()->getY() / 2 - 10),
          sout.str());
    }
 }
