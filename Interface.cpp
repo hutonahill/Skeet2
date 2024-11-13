@@ -3,5 +3,5 @@
 
 ArrowListener* Interface::getArrowListener()
 {
-   return al;
+   return &al;
 }

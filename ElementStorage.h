@@ -10,20 +10,18 @@
 #pragma once
 #include <string>
 #include "position.h"
-#include "bullet.h"
 #include "score.h"
-#include "ElementLogic.h"
-#include "Effect.h"
-#include "DrawStrategy.h"
 
 
 class SpecialMove;
+class DrawStrategy;
 class Timing;
 class Bird;
 class Bullet;
 class OnDeath;
 class Input;
 class Effect;
+class ElementLogic;
 
 /**********************
  * ENTITY STORAGE

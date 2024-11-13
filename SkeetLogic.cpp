@@ -1,6 +1,7 @@
 ﻿#include "SkeetLogic.h"
 #include "ArrowListener.h"
 #include "DrawStrategy.h"
+#include "ElementLogic.h"
 #include "skeet.h"
 #include "Storage.h"
 #include "Interface.h"
