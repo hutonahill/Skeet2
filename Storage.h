@@ -17,6 +17,8 @@ private:
 	StorageGun gun;
 	std::list<ElementStorage*> Element;
 
+public:
+
 	class IteratorElement
 	{
 	public:
@@ -26,6 +28,7 @@ private:
 
 		IteratorElement operator++();
 		ElementStorage* operator*();
+		bool operator !=(const IteratorElement& rhs) { return it != rhs.it; }
 
 	private:
 		ElementStorage* it;
@@ -40,6 +43,7 @@ private:
 
 		IteratorBird operator++();
 		ElementStorage* operator*();
+		bool operator !=(const IteratorBird& rhs) { return it != rhs.it; }
 
 	private:
 		ElementStorage* it;
@@ -54,13 +58,11 @@ private:
 
 		IteratorBullet operator++();
 		ElementStorage* operator*();
+		bool operator !=(const IteratorBullet& rhs) { return it != rhs.it; }
 
 	private:
 		ElementStorage* it;
 	};
-
-
-public:
 	
 	Storage() : numBirds(0), points(0), numKilled(0), numMissed(0), gun(Position(800.0, 0.0)), dimensions(Position(800.0, 800.0)) {}
 	int getPoints() { return points; }
