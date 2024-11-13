@@ -58,14 +58,14 @@ Storage::IteratorElement Storage::IteratorElement::operator++()
 
 ElementStorage* Storage::IteratorElement::operator*()
 {
-   return it;
+   return *it;
 }
 
 Storage::IteratorBird::IteratorBird(ElementStorage* it)
 {
    it++;
 
-   while (!(it.isBird()) && it != nullptr)
+   while (!(it->isBird) && it != nullptr)
    {
       it++;
    }
@@ -75,7 +75,7 @@ Storage::IteratorBird Storage::IteratorBird::operator++()
 {
    it++;
 
-   while (!(it.isBird()) && it != nullptr)
+   while (!(it->isBird) && it != nullptr)
    {
       it++;
    }
@@ -85,12 +85,12 @@ Storage::IteratorBird Storage::IteratorBird::operator++()
 
 ElementStorage* Storage::IteratorBird::operator*()
 {
-   return it;
+   return *it;
 }
 
 Storage::IteratorBullet::IteratorBullet(ElementStorage* it)
 {
-   while (!(it.isBullet()) && it != nullptr)
+   while (!(it->isBullet) && it != nullptr)
    {
       it++;
    }
@@ -100,7 +100,7 @@ Storage::IteratorBullet Storage::IteratorBullet::operator++()
 {
    it++;
 
-   while (!(it.isBullet()) && it != nullptr)
+   while (!(it->isBullet) && it != nullptr)
    {
       it++;
    }
@@ -110,5 +110,5 @@ Storage::IteratorBullet Storage::IteratorBullet::operator++()
 
 ElementStorage* Storage::IteratorBullet::operator*()
 {
-   return it;
+   return *it;
 }
