@@ -5,14 +5,11 @@
 class ElementStorage;
 using namespace std;
 
-
 class Storage;
 class Interface;
 
 class SkeetLogic {
 public:
-
-	class iterator;
 	
 	SkeetLogic(Interface* skeetInterface);
 	
@@ -25,6 +22,16 @@ public:
 	void makeBomb();
 
 	list<ElementStorage*> ElementsToSpawn;
+	class Iterator {
+
+	private:
+		Storage::IteratorElement it;
+	public:
+		Iterator(Storage* SkeetStorage);
+	};
+		Iterator begin() {
+			return Iterator(SkeetStorage);
+		};
 	
 private:
 	void specialMoves();
@@ -47,7 +54,4 @@ private:
 	
 };
 
-class SkeetLogic :: iterator {
-private:
-	
-};
+

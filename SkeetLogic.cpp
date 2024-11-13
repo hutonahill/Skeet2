@@ -1,5 +1,6 @@
 ﻿#include "SkeetLogic.h"
-
+#include "ArrowListener.h"
+#include "DrawStrategy.h"
 #include "skeet.h"
 #include "Storage.h"
 
@@ -27,6 +28,55 @@ void SkeetLogic::Advance() {
 	spawn();
 
 	
+}
+
+void SkeetLogic::makePellet()
+{
+	float speed = 15;
+	SpecialMove* move = new PelletMove();
+	OnDeath* death = new DisapearDeath();
+	Input* in = new NoInput();
+	Timing* t = new NotTimed();
+
+
+	Bullet* b = new Bullet(move,death,in,t,1);
+	b->setPoints(1);
+	b->getVelocity().setDx(randomFloat(speed - .5, speed + .5));
+	b->getVelocity().setDy(randomFloat(speed - .5, speed + .5));
+	ElementsToSpawn.push_back(b);
+}
+
+void SkeetLogic::makeMissile()
+{
+	float speed = 10;
+	SpecialMove* move = new MissleMove();
+	OnDeath* death = new DisapearDeath();
+	Input* in = new Arrows();
+	in->subscribe(SkeetInterface->getArrowListener());
+	Timing* t = new NotTimed();
+
+
+	Bullet* b = new Bullet(move, death, in, t, 1);
+	b->setPoints(3);
+	b->getVelocity().setDx(randomFloat(speed - .5, speed + .5));
+	b->getVelocity().setDy(randomFloat(speed - .5, speed + .5));
+	ElementsToSpawn.push_back(b);
+}
+
+void SkeetLogic::makeBomb()
+{
+	float speed = 15;
+	SpecialMove* move = new PelletMove();
+	OnDeath* death = new ShrapnelDeath(this);
+	Input* in = new NoInput();
+	Timing* t = new Timed();
+
+
+	Bullet* b = new Bullet(move, death, in, t, 1);
+	b->setPoints(1);
+	b->getVelocity().setDx(randomFloat(speed - .5, speed + .5));
+	b->getVelocity().setDy(randomFloat(speed - .5, speed + .5));
+	ElementsToSpawn.push_back(b);
 }
 
 void SkeetLogic::specialMoves() {
@@ -267,5 +317,7 @@ void SkeetLogic::spawn() {
 	}
 }
 
-
-
+SkeetLogic::Iterator::Iterator(Storage* SkeetStorage)
+{
+	it = SkeetStorage->beginElement();
+}

@@ -1,4 +1,5 @@
 ﻿#pragma once
+#include <list>
 
 class ElementStorage;
 class ArrowListener;
@@ -103,10 +104,10 @@ public:
 class ShrapnelDeath : public OnDeath
 {
 public:
-	ShrapnelDeath(SkeetLogic* sl) : SkeetLogic(sl) {};
+	ShrapnelDeath(list<ElementStorage*>* sl) : SkeetLogic(sl) {};
 	virtual void execute(ElementStorage* el);
 private:
-	SkeetLogic* SkeetLogic;
+	list<ElementStorage*>* SkeetLogic;
 };
 
 // Handles whether an element needs input or not

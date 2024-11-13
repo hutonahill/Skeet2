@@ -106,6 +106,7 @@ void DisapearDeath::execute(ElementStorage* el)
 
 void ShrapnelDeath::execute(ElementStorage* el)
 {
+
 }
 
 void Arrows::execute(ElementStorage* el)
@@ -114,7 +115,7 @@ void Arrows::execute(ElementStorage* el)
 
 void Arrows::subscribe(ArrowListener* al)
 {
-   al = al->subscribe(this);
+   al->subscribe(this);
 }
 
 void Arrows::unsubscribe(ArrowListener* al)
@@ -122,15 +123,15 @@ void Arrows::unsubscribe(ArrowListener* al)
    al->unsubscribe(this);
 }
 
-void None::execute(ElementStorage* el)
+void NoInput::execute(ElementStorage* el)
 {
 }
 
-void None::subscribe(ArrowListener* al)
+void NoInput::subscribe(ArrowListener* al)
 {
 }
 
-void None::unsubscribe(ArrowListener* al)
+void NoInput::unsubscribe(ArrowListener* al)
 {
 }
 
