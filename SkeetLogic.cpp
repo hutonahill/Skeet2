@@ -37,9 +37,8 @@ void SkeetLogic::makePellet()
 	OnDeath* death = new DisapearDeath();
 	Input* in = new NoInput();
 	Timing* t = new NotTimed();
-
-
-	Bullet* b = new Bullet(move,death,in,t,1);
+	DrawStrategy* dr = new PelletDraw();
+	Bullet* b = new Bullet(move,death,in,t,dr,1);
 	b->setPoints(1);
 	b->getVelocity().setDx(randomFloat(speed - .5, speed + .5));
 	b->getVelocity().setDy(randomFloat(speed - .5, speed + .5));
@@ -54,9 +53,9 @@ void SkeetLogic::makeMissile()
 	Input* in = new Arrows();
 	in->subscribe(SkeetInterface->getArrowListener());
 	Timing* t = new NotTimed();
+	DrawStrategy* dr = new MissleDraw();
 
-
-	Bullet* b = new Bullet(move, death, in, t, 1);
+	Bullet* b = new Bullet(move, death, in, t,dr, 1);
 	b->setPoints(3);
 	b->getVelocity().setDx(randomFloat(speed - .5, speed + .5));
 	b->getVelocity().setDy(randomFloat(speed - .5, speed + .5));
@@ -67,12 +66,12 @@ void SkeetLogic::makeBomb()
 {
 	float speed = 15;
 	SpecialMove* move = new PelletMove();
-	OnDeath* death = new ShrapnelDeath(this);
+	OnDeath* death = new ShrapnelDeath(&ElementsToSpawn);
 	Input* in = new NoInput();
 	Timing* t = new Timed();
+	DrawStrategy* dr = new BombDraw();
 
-
-	Bullet* b = new Bullet(move, death, in, t, 1);
+	Bullet* b = new Bullet(move, death, in, t, dr, 1);
 	b->setPoints(1);
 	b->getVelocity().setDx(randomFloat(speed - .5, speed + .5));
 	b->getVelocity().setDy(randomFloat(speed - .5, speed + .5));
@@ -147,7 +146,8 @@ ElementStorage* Standard(double radius, double speed, int points) {
 	OnDeath* death = new DisapearDeath();
 	Timing* time = new NotTimed();
 	Input* input = new NoInput();
-	Bird* b = new Bird(move, death, input, time, radius);
+	DrawStrategy* dr = new StandardBirdDraw();
+	Bird* b = new Bird(move, death, input, time, dr, radius);
 	b->setValue(points);
 	b->getVelocity().setDx(randomFloat(speed - .5, speed + .5));
 	b->getVelocity().setDy(randomFloat(speed - .5, speed + .5));
@@ -186,7 +186,8 @@ ElementStorage* Sinker(double radius, double speed, int points) {
 	OnDeath* death = new DisapearDeath();
 	Timing* time = new NotTimed();
 	Input* input = new NoInput();
-	Bird* b = new Bird(move, death, input, time, radius);
+	DrawStrategy* dr = new SinkerBirdDraw();
+	Bird* b = new Bird(move, death, input, time,dr, radius);
 	b->setValue(points);
 	b->getVelocity().setDx(randomFloat(speed - .5, speed + .5));
 	b->getVelocity().setDy(randomFloat(speed - .5, speed + .5));
@@ -222,7 +223,8 @@ ElementStorage* Floater(double radius, double speed, int points) {
 	OnDeath* death = new DisapearDeath();
 	Timing* time = new NotTimed();
 	Input* input = new NoInput();
-	Bird* b = new Bird(move, death, input, time, radius);
+	DrawStrategy* dr = new FloaterBirdDraw();
+	Bird* b = new Bird(move, death, input, time,dr, radius);
 	b->setValue(points);
 	b->getVelocity().setDx(randomFloat(speed - .5, speed + .5));
 	b->getVelocity().setDy(randomFloat(speed - .5, speed + .5));
@@ -255,7 +257,8 @@ ElementStorage* Crazy(double size, double speed, int points) {
 	OnDeath* death = new DisapearDeath();
 	Timing* time = new NotTimed();
 	Input* input = new NoInput();
-	Bird* b = new Bird(move, death, input, time, size);
+	DrawStrategy* dr = new CrazyBirdDraw();
+	Bird* b = new Bird(move, death, input, time,dr, size);
 	b->setValue(points);
 	b->getVelocity().setDx(randomFloat(speed - .5, speed + .5));
 	b->getVelocity().setDy(randomFloat(speed - .5, speed + .5));
