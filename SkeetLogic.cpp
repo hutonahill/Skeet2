@@ -5,8 +5,8 @@
 
 #include <math.h>
 
-SkeetLogic::SkeetLogic(Interface* skeetInterface) {
-	SkeetInterface = skeetInterface;
+SkeetLogic::SkeetLogic() {
+	SkeetInterface = nullptr;
 	SkeetStorage = new Storage();
 }
 
@@ -27,6 +27,11 @@ void SkeetLogic::Advance() {
 	spawn();
 
 	
+}
+
+Time SkeetLogic::getTime()
+{
+	return SkeetStorage->getTime();
 }
 
 void SkeetLogic::specialMoves() {
