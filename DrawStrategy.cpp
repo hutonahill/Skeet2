@@ -1,6 +1,7 @@
 ﻿#include "DrawStrategy.h"
 #include "openGLIntegration.h"
 #include "ElementStorage.h"
+#include <sstream>
 
 //Draw bullet
 void PelletDraw::draw(ElementStorage* elm)
@@ -172,4 +173,29 @@ void gunDraw::draw(ElementStorage* elm)
 
 void StatusDraw::draw(ElementStorage* elm)
 {
+   // output the text information
+   ostringstream sout;
+   if (elm->time.isGameOver())
+   {
+      // draw the end of game message
+      drawText(Position(elm->dimensions.getX() / 2 - 30, elm->dimensions.getY() / 2 + 10),
+         "Game Over");
+
+      // draw end of game status
+      drawText(Position(elm->dimensions.getX() / 2 - 30, elm->dimensions.getY() / 2 - 10),
+         elm->score.getText());
+   }
+   else
+   {
+      // output the status timer
+      drawTimer(1.0 - elm->time.percentLeft(),
+         (elm->time.level() - 0.0) * .1, 0.0, 0.0,
+         (elm->time.level() - 1.0) * .1, 0.0, 0.0, elm->dimensions);
+
+      // draw the message giving a countdown
+      sout << "Level " << elm->time.level()
+         << " begins in " << elm->time.secondsLeft() << " seconds";
+      drawText(Position(elm->dimensions.getX() / 2 - 110, elm->dimensions.getY() / 2 - 10),
+         sout.str());
+   }
 }

@@ -44,6 +44,7 @@ public:
    //Constructor
    ElementStorage(bool isDead, bool isBird, bool isBullet, SpecialMove* sm, OnDeath* od, Input* arrow, Timing* time, double radius = 0) : isDead(isDead), isBird(isBird), isBullet(isBullet), sm(sm), od(od), arrow(arrow), time(time), radius(radius) {};
    
+
    
    // getters
    SpecialMove* getSpecialMove()
@@ -68,8 +69,6 @@ public:
    
    
    
-   
-   
 
 protected:
    
@@ -87,8 +86,6 @@ protected:
    Timing*  time;       //how much time do we have?
    DrawStrategy* draw;  //how we display the object
    
-   
-   bool dead;           //Are we dead?
    
 };
 
@@ -110,7 +107,6 @@ class Bullet : public ElementStorage
 {
 public:
    Bullet(SpecialMove* sm, OnDeath* od, Input* arrow, Timing* time, double radius) : ElementStorage(false, false, true, sm, od, arrow, time, radius) {};
-
    
 };
 
