@@ -3,7 +3,7 @@
 #include "DrawStrategy.h"
 #include "skeet.h"
 #include "Storage.h"
-
+#include "Interface.h"
 #include <math.h>
 
 SkeetLogic::SkeetLogic(Interface* skeetInterface) {

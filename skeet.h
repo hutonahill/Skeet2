@@ -18,7 +18,6 @@
 #include "time.h"
 #include "score.h"
 #include "points.h"
-
 #include <list>
 
 /*************************************************************************
