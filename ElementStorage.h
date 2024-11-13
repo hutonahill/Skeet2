@@ -55,13 +55,13 @@ public:
    DrawStrategy* getDraw() const         {return draw;         }
    
    //Other valid functions
-   bool getDead()         const         {return isDead;          }
+   bool getDead()         const         {return isDead;        }
    double getRadius()     const         {return radius;        }
    double getAge()        const         {return age;           }
    int getPoints()        const         {return points;        }
    int getValue()         const         {return value;         }
    //Setters
-   void kill()                          {isDead = true;          }
+   void kill()                          {isDead = true;        }
    void setAge(double age)              {age = this->age;      }
    void setPoints(int points)           {points = this->points;}
    void setValue(int value)             {value = this->value;  }

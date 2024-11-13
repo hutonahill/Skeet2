@@ -4,6 +4,9 @@
 
 
 class ElementStorage;
+class Effect;
+class StorageGun;
+class Storage;
 
 
 class DrawStrategy
@@ -88,14 +91,14 @@ public:
 class StreekDraw : public DrawStrategy
 {
 public:
-	virtual void draw(ElementStorage* elm);
+	virtual void draw(Effect* elm);
 
 };
 
 class exhaustDraw : public DrawStrategy
 {
 public:
-	virtual void draw(ElementStorage* elm);
+	virtual void draw(Effect* elm);
 
 };
 
@@ -111,13 +114,13 @@ public:
 class gunDraw : public DrawStrategy
 {
 public:
-	virtual void draw(ElementStorage* elm);
+	virtual void draw(StorageGun* elm);
 
 };
 
 class StatusDraw : public DrawStrategy
 {
 public:
-	virtual void draw(ElementStorage* elm);
+	virtual void draw(Storage* elm);
 
 };
