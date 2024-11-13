@@ -41,7 +41,7 @@ public:
    int points;
    int value;
    //Constructor
-   ElementStorage(bool isDead, bool isBird, bool isBullet, SpecialMove* sm, OnDeath* od, Input* arrow, Timing* time, double radius = 0) : isDead(isDead), isBird(isBird), isBullet(isBullet), sm(sm), od(od), arrow(arrow), time(time), radius(radius) {};
+   ElementStorage(bool isDead, bool isBird, bool isBullet, SpecialMove* sm, OnDeath* od, Input* arrow, Timing* time, DrawStrategy* draw, double radius = 0) : isDead(isDead), isBird(isBird), isBullet(isBullet), sm(sm), od(od), arrow(arrow), time(time), draw(draw), radius(radius) {};
    
 
    
@@ -57,7 +57,7 @@ public:
    //Other valid functions
    bool getDead()         const         {return isDead;        }
    double getRadius()     const         {return radius;        }
-   double getAge()        const         {return age;           }
+   double getAge()                      {return age++;         }
    int getPoints()        const         {return points;        }
    int getValue()         const         {return value;         }
    //Setters
@@ -86,6 +86,7 @@ protected:
    DrawStrategy* draw;  //how we display the object
    
    
+   
 };
 
 //age? Size? radius?
@@ -95,7 +96,7 @@ protected:
 class Bird : public ElementStorage
 {
 public:
-   Bird(SpecialMove* sm, OnDeath* od, Input* arrow, Timing* time, double radius) : ElementStorage(false, true, false, sm, od, arrow, time, radius) {};
+   Bird(SpecialMove* sm, OnDeath* od, Input* arrow, Timing* time, DrawStrategy* draw, double radius) : ElementStorage(false, true, false, sm, od, arrow, time, draw, radius) {};
    
 };
 
@@ -105,7 +106,7 @@ public:
 class Bullet : public ElementStorage
 {
 public:
-   Bullet(SpecialMove* sm, OnDeath* od, Input* arrow, Timing* time, double radius) : ElementStorage(false, false, true, sm, od, arrow, time, radius) {};
+   Bullet(SpecialMove* sm, OnDeath* od, Input* arrow, Timing* time,DrawStrategy* draw, double radius) : ElementStorage(false, false, true, sm, od, arrow, time, draw, radius) {};
    
 };
 
@@ -115,7 +116,7 @@ public:
 class Effect : public ElementStorage
 {
 public:
-   Effect(SpecialMove* sm, OnDeath* od, Input* arrow, Timing* time, double radius, Position& ptEnd) : ElementStorage(false, false, false, sm, od, arrow, time, radius) {};
+   Effect(SpecialMove* sm, OnDeath* od, Input* arrow, Timing* time, DrawStrategy* draw, double radius, Position& ptEnd) : ElementStorage(false, false, false, sm, od, arrow, time, draw, radius) {};
    Position& getEnd() {return ptEnd;}
    void setEnd(Position& ptEnd) {ptEnd= this->ptEnd;}
    
