@@ -10,7 +10,6 @@
 #include "position.h"
 #include <cmath>
 #include <cassert>
-#include <limits>
 
 /******************************************
  * POINT : CONSTRUCTOR WITH X,Y
@@ -26,11 +25,10 @@ Position::Position(double x, double y) : x(0.0), y(0.0)
  * POINT : ADD
  * Move a point according to a velocity
  *****************************************/
-void Position::add(const Velocity* v)
+void Position::add(const Velocity & v)
 {
     *this += v;
 }
-
 Position & Position :: operator += (const Velocity & v)
 {
     addX(v.getDx());
@@ -47,8 +45,6 @@ Velocity::Velocity(double dx, double dy) : dx(0.0), dy(0.0)
    setDx(dx);
    setDy(dy);
 }
-
-
 
 /******************************************
  * POINT insertion
@@ -76,11 +72,11 @@ std::istream & operator >> (std::istream & in, Position & pt)
    return in;
 }
    
-double minimumDistance(const Position * pt1, const Velocity * v1,
-                       const Position * pt2, const Velocity * v2) 
+double minimumDistance(const Position & pt1, const Velocity & v1,
+                       const Position & pt2, const Velocity & v2) 
 {
-   double d1 = max(abs(v1->getDx()), abs(v1->getDy()));
-   double d2 = max(abs(v2->getDx()), abs(v2->getDy()));
+   double d1 = max(abs(v1.getDx()), abs(v1.getDy()));
+   double d2 = max(abs(v2.getDx()), abs(v2.getDy()));
    double dMax = max(d1, d2);
    assert(dMax > 0.0);
 
@@ -94,10 +90,10 @@ double minimumDistance(const Position * pt1, const Velocity * v1,
    for (double percent = 0.0; percent <= 1.0; percent += slice)
    {
       // find the points of the LHS and the RHS
-      Position pointLhs(pt1->getX() + (v1->getDx() * percent),
-                     pt1->getY() + (v1->getDy() * percent));
-      Position pointRhs(pt2->getX() + (v2->getDx() * percent),
-                     pt2->getY() + (v2->getDy() * percent));
+      Position pointLhs(pt1.getX() + (v1.getDx() * percent),
+                     pt1.getY() + (v1.getDy() * percent));
+      Position pointRhs(pt2.getX() + (v2.getDx() * percent),
+                     pt2.getY() + (v2.getDy() * percent));
 
       // how far apart are they now?
       double distSquared =
