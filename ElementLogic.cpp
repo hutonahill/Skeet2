@@ -66,7 +66,7 @@ void SinkerBirdMove::execute(ElementStorage* el)
 
 void CrazyBirdMove::execute(ElementStorage* el)
 {
-      // erratic turns eery half a second or so
+      // erratic turns every half a second or so
    if (randomInt(0, 15) == 0)
    {
       el->getVelocity()->addDy(RandomFloat(-1.5, 1.5));
@@ -84,7 +84,7 @@ void PelletMove::execute(ElementStorage* el)
    el->getPosition()->add(el->getVelocity());
 }
 
-void MissleMove::execute(ElementStorage* el)
+void MissileMove::execute(ElementStorage* el)
 {
    if (el->getInput()->up)
       el->getVelocity()->turn(0.04);
@@ -98,12 +98,15 @@ void NoneMove::execute(ElementStorage* el)
 {
 }
 
-void EffectDeath::execute(ElementStorage* el)
-{
-   // This would add bird fragments if it were implimented
+void OnDeath::execute(ElementStorage* el) {
 }
 
-void DisapearDeath::execute(ElementStorage* el)
+void EffectDeath::execute(ElementStorage* el)
+{
+   // This would add bird fragments if it were implemented
+}
+
+void DisappearDeath::execute(ElementStorage* el)
 {
    el->isDead = true;
 }

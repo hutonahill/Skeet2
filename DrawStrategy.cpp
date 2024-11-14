@@ -9,7 +9,7 @@
 void PelletDraw::draw(ElementStorage* elm)
 {
    if (!elm->getDead())
-      drawDot(elm->getPosition(), 3.0, 1.0, 1.0, 0.0);
+      drawDot1(elm->getPosition(), 3.0, 1.0, 1.0, 0.0);
 }
 
 void MissleDraw::draw(ElementStorage* elm)
@@ -19,8 +19,8 @@ void MissleDraw::draw(ElementStorage* elm)
       // missile is a line with a dot at the end so it looks like fins.
       Position* ptNext(elm->getPosition());
       ptNext->add(elm->getVelocity());
-      drawLine(elm->getPosition(), ptNext, 1.0, 1.0, 0.0);
-      drawDot(elm->getPosition(), 3.0, 1.0, 1.0, 1.0);
+      drawLine1(elm->getPosition(), ptNext, 1.0, 1.0, 0.0);
+      drawDot1(elm->getPosition(), 3.0, 1.0, 1.0, 1.0);
    }
 }
 
@@ -29,17 +29,17 @@ void BombDraw::draw(ElementStorage* elm)
    if (!elm->getDead())
    {
       // Bomb actually has a gradient to cut out the harsh edges
-      drawDot(elm->getPosition(), elm->radius + 2.0, 0.50, 0.50, 0.00);
-      drawDot(elm->getPosition(), elm->radius + 1.0, 0.75, 0.75, 0.00);
-      drawDot(elm->getPosition(), elm->radius + 0.0, 0.87, 0.87, 0.00);
-      drawDot(elm->getPosition(), elm->radius - 1.0, 1.00, 1.00, 0.00);
+      drawDot1(elm->getPosition(), elm->radius + 2.0, 0.50, 0.50, 0.00);
+      drawDot1(elm->getPosition(), elm->radius + 1.0, 0.75, 0.75, 0.00);
+      drawDot1(elm->getPosition(), elm->radius + 0.0, 0.87, 0.87, 0.00);
+      drawDot1(elm->getPosition(), elm->radius - 1.0, 1.00, 1.00, 0.00);
    }
 }
 
 void ShrapnelDraw::draw(ElementStorage* elm)
 {
    if (!elm->getDead())
-      drawDot(elm->getPosition(), elm->radius, 1.0, 1.0, 0.0);
+      drawDot1(elm->getPosition(), elm->radius, 1.0, 1.0, 0.0);
 }
 
 
@@ -49,8 +49,8 @@ void StandardBirdDraw::draw(ElementStorage* elm)
 {
    if (!elm->getDead())
    {
-      drawDisk(elm->getPosition(), elm->radius - 0.0, 1.0, 1.0, 1.0); // white outline
-      drawDisk(elm->getPosition(), elm->radius - 3.0, 0.0, 0.0, 1.0); // blue center
+      drawDisk1(elm->getPosition(), elm->radius - 0.0, 1.0, 1.0, 1.0); // white outline
+      drawDisk1(elm->getPosition(), elm->radius - 3.0, 0.0, 0.0, 1.0); // blue center
    }
 }
 
@@ -58,8 +58,8 @@ void SinkerBirdDraw::draw(ElementStorage* elm)
 {
    if (!elm->getDead())
    {
-      drawDisk(elm->getPosition(), elm->radius - 0.0, 0.0, 0.0, 0.8);
-      drawDisk(elm->getPosition(), elm->radius - 4.0, 0.0, 0.0, 0.0);
+      drawDisk1(elm->getPosition(), elm->radius - 0.0, 0.0, 0.0, 0.8);
+      drawDisk1(elm->getPosition(), elm->radius - 4.0, 0.0, 0.0, 0.0);
    }
 }
 
@@ -67,8 +67,8 @@ void FloaterBirdDraw::draw(ElementStorage* elm)
 {
    if (!elm->getDead())
    {
-      drawDisk(elm->getPosition(), elm->radius - 0.0, 0.0, 0.0, 1.0); // blue outline
-      drawDisk(elm->getPosition(), elm->radius - 4.0, 1.0, 1.0, 1.0); // white center
+      drawDisk1(elm->getPosition(), elm->radius - 0.0, 0.0, 0.0, 1.0); // blue outline
+      drawDisk1(elm->getPosition(), elm->radius - 4.0, 1.0, 1.0, 1.0); // white center
    }
 }
 
@@ -76,11 +76,11 @@ void CrazyBirdDraw::draw(ElementStorage* elm)
 {
    if (!elm->getDead())
    {
-      drawDisk(elm->getPosition(), elm->radius * 1.0, 0.0, 0.0, 1.0); // bright blue outside
-      drawDisk(elm->getPosition(), elm->radius * 0.8, 0.2, 0.2, 1.0);
-      drawDisk(elm->getPosition(), elm->radius * 0.6, 0.4, 0.4, 1.0);
-      drawDisk(elm->getPosition(), elm->radius * 0.4, 0.6, 0.6, 1.0);
-      drawDisk(elm->getPosition(), elm->radius * 0.2, 0.8, 0.8, 1.0); // almost white inside
+      drawDisk1(elm->getPosition(), elm->radius * 1.0, 0.0, 0.0, 1.0); // bright blue outside
+      drawDisk1(elm->getPosition(), elm->radius * 0.8, 0.2, 0.2, 1.0);
+      drawDisk1(elm->getPosition(), elm->radius * 0.6, 0.4, 0.4, 1.0);
+      drawDisk1(elm->getPosition(), elm->radius * 0.4, 0.6, 0.6, 1.0);
+      drawDisk1(elm->getPosition(), elm->radius * 0.2, 0.8, 0.8, 1.0); // almost white inside
    }
 }
 

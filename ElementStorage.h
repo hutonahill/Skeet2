@@ -8,16 +8,12 @@
  ************************************************************************/
 
 #pragma once
-#include <string>
 #include "position.h"
-#include "bullet.h"
-#include "score.h"
-#include "ElementLogic.h"
-#include "Effect.h"
 #include "DrawStrategy.h"
 
 
 class SpecialMove;
+class ElementLogic;
 class Timing;
 class Bird;
 class Bullet;
@@ -52,13 +48,12 @@ public:
 
    
    // getters
-   SpecialMove* getSpecialMove()
-                                    {return sm;           }
+   SpecialMove* getSpecialMove() const {return sm;           }
    Position* getPosition() const           {return objectPT;     }
-   Velocity* getVelocity()           {return objectV;      }
-   Input* getInput()                {return arrow;        }
-   Timing* getTime()                {return time;         }
-   DrawStrategy* getDraw()          {return draw;         }
+   Velocity* getVelocity() const {return objectV;      }
+   Input* getInput() const {return arrow;        }
+   Timing* getTime() const {return time;         }
+   DrawStrategy* getDraw() const {return draw;         }
    
    //Other valid functions
    bool getDead()         const         {return isDead;        }
@@ -68,11 +63,9 @@ public:
    int getValue()         const         {return value;         }
    //Setters
    void kill()                          {isDead = true;        }
-   void setAge(double age)  {age = this->age;      }
-   void setPoints(int points)  {points = this->points;}
-   void setValue(int value)  {value = this->value;  }
-   
-   
+   void setAge(double age) const {age = this->age;      }
+   void setPoints(int points) const {points = this->points;}
+   void setValue(int value) const {value = this->value;  }
    
 
 protected:
@@ -80,8 +73,6 @@ protected:
    Position* objectPT;   //what is our position?
    Position* ptEnd;      //what is the end of an effect's position?
    Velocity* objectV;    //what is our velocity?
-   Score* score;         //what is our value? How much will our score be affected?
-   HitRatio* hr;         //what is our hit ratio?
    Effect* effect;      //what visual effects exist?
    
    
@@ -128,7 +119,7 @@ class Effect : public ElementStorage
 public:
    Effect(SpecialMove* sm, OnDeath* od, Input* arrow, Timing* time, DrawStrategy* draw, double radius, Position& ptEnd) :
 	ElementStorage(false, false, false, sm, od, arrow, time, draw, radius) {}
-   Position* getEnd() {return ptEnd;}
-   void setEnd(Position* ptEnd) {ptEnd= this->ptEnd;}
+   Position* getEnd() const {return ptEnd;}
+   void setEnd(const Position* ptEnd) const {ptEnd= this->ptEnd;}
    
 };

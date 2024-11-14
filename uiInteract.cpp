@@ -29,14 +29,14 @@
 #endif // __linux__
 
 #ifdef _WIN32
-#include <stdio.h>
+
 #include <stdlib.h>
 #include <Gl/glut.h>           // OpenGL library we copied
 #include <ctime>            // for ::Sleep();
 #include <Windows.h>
 
 #define _USE_MATH_DEFINES
-#include <math.h>
+
 #endif // _WIN32
 
 #include "uiInteract.h"

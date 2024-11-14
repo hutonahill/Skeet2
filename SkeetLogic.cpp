@@ -7,6 +7,8 @@
 #include <math.h>
 #include <GL/freeglut_std.h>
 
+#include "ElementLogic.h"
+
 SkeetLogic::SkeetLogic() {
 	SkeetInterface = nullptr;
 	SkeetStorage = new Storage();
@@ -31,7 +33,7 @@ void SkeetLogic::Advance() {
 	
 }
 
-double RandomFloat(const double min, const double max)
+double RandomFloat2(const double min, const double max)
 {
 	assert(min < max);
 	double num = min +(static_cast<double>(rand()) / static_cast<double>(RAND_MAX) * (max - min));
@@ -44,22 +46,22 @@ void SkeetLogic::makePellet()
 {
 	float speed = 15;
 	SpecialMove* move = new PelletMove();
-	OnDeath* death = new DisapearDeath();
+	OnDeath* death = new DisappearDeath();
 	Input* in = new NoInput();
 	Timing* t = new NotTimed();
 	DrawStrategy* dr = new PelletDraw();
 	Bullet* b = new Bullet(move,death,in,t,dr,1);
 	b->setPoints(1);
-	b->getVelocity()->setDx(RandomFloat(speed - .5, speed + .5));
-	b->getVelocity()->setDy(RandomFloat(speed - .5, speed + .5));
+	b->getVelocity()->setDx(RandomFloat2(speed - .5, speed + .5));
+	b->getVelocity()->setDy(RandomFloat2(speed - .5, speed + .5));
 	ElementsToSpawn.push_back(b);
 }
 
 void SkeetLogic::makeMissile()
 {
 	float speed = 10;
-	SpecialMove* move = new MissleMove();
-	OnDeath* death = new DisapearDeath();
+	SpecialMove* move = new MissileMove();
+	OnDeath* death = new DisappearDeath();
 	Input* in = new Arrows();
 	in->subscribe(SkeetInterface->getArrowListener());
 	Timing* t = new NotTimed();
@@ -67,8 +69,8 @@ void SkeetLogic::makeMissile()
 
 	Bullet* b = new Bullet(move, death, in, t,dr, 1);
 	b->setPoints(3);
-	b->getVelocity()->setDx(RandomFloat(speed - .5, speed + .5));
-	b->getVelocity()->setDy(RandomFloat(speed - .5, speed + .5));
+	b->getVelocity()->setDx(RandomFloat2(speed - .5, speed + .5));
+	b->getVelocity()->setDy(RandomFloat2(speed - .5, speed + .5));
 	ElementsToSpawn.push_back(b);
 }
 
@@ -82,8 +84,8 @@ void SkeetLogic::makeBomb() {
 
 	Bullet* b = new Bullet(move, death, in, t, dr, 1);
 	b->setPoints(1);
-	b->getVelocity()->setDx(RandomFloat(speed - .5, speed + .5));
-	b->getVelocity()->setDy(RandomFloat(speed - .5, speed + .5));
+	b->getVelocity()->setDx(RandomFloat2(speed - .5, speed + .5));
+	b->getVelocity()->setDy(RandomFloat2(speed - .5, speed + .5));
 	ElementsToSpawn.push_back(b);
 }
 Time* SkeetLogic::getTime() const {
@@ -167,14 +169,14 @@ double getSize(int level) {
 
 ElementStorage* Standard(const double radius, const double speed, const int points) {
 	SpecialMove* move = new StandardBirdMove();
-	OnDeath* death = new DisapearDeath();
+	OnDeath* death = new DisappearDeath();
 	Timing* time = new NotTimed();
 	Input* input = new NoInput();
 	DrawStrategy* dr = new StandardBirdDraw();
 	Bird* b = new Bird(move, death, input, time, dr, radius);
 	b->setValue(points);
-	b->getVelocity()->setDx(RandomFloat(speed - .5, speed + .5));
-	b->getVelocity()->setDy(RandomFloat(speed - .5, speed + .5));
+	b->getVelocity()->setDx(RandomFloat2(speed - .5, speed + .5));
+	b->getVelocity()->setDy(RandomFloat2(speed - .5, speed + .5));
 
 
 	return b;
@@ -207,14 +209,14 @@ void SkeetLogic::StandardFactory(const double size, const int level) {
 
 ElementStorage* Sinker(double radius, double speed, int points) {
 	SpecialMove* move = new SinkerBirdMove();
-	OnDeath* death = new DisapearDeath();
+	OnDeath* death = new DisappearDeath();
 	Timing* time = new NotTimed();
 	Input* input = new NoInput();
 	DrawStrategy* dr = new SinkerBirdDraw();
 	Bird* b = new Bird(move, death, input, time,dr, radius);
 	b->setValue(points);
-	b->getVelocity()->setDx(RandomFloat(speed - .5, speed + .5));
-	b->getVelocity()->setDy(RandomFloat(speed - .5, speed + .5));
+	b->getVelocity()->setDx(RandomFloat2(speed - .5, speed + .5));
+	b->getVelocity()->setDy(RandomFloat2(speed - .5, speed + .5));
 
 
 	return b;
@@ -244,14 +246,14 @@ void SkeetLogic::SinkerFactory(double size, int level) {
 
 ElementStorage* Floater(double radius, double speed, int points) {
 	SpecialMove* move = new FloaterBirdMove();
-	OnDeath* death = new DisapearDeath();
+	OnDeath* death = new DisappearDeath();
 	Timing* time = new NotTimed();
 	Input* input = new NoInput();
 	DrawStrategy* dr = new FloaterBirdDraw();
 	Bird* b = new Bird(move, death, input, time,dr, radius);
 	b->setValue(points);
-	b->getVelocity()->setDx(RandomFloat(speed - .5, speed + .5));
-	b->getVelocity()->setDy(RandomFloat(speed - .5, speed + .5));
+	b->getVelocity()->setDx(RandomFloat2(speed - .5, speed + .5));
+	b->getVelocity()->setDy(RandomFloat2(speed - .5, speed + .5));
 
 
 	return b;
@@ -278,14 +280,14 @@ void SkeetLogic::FloaterFactory(double size, int level) {
 
 ElementStorage* Crazy(double size, double speed, int points) {
 	SpecialMove* move = new FloaterBirdMove();
-	OnDeath* death = new DisapearDeath();
+	OnDeath* death = new DisappearDeath();
 	Timing* time = new NotTimed();
 	Input* input = new NoInput();
 	DrawStrategy* dr = new CrazyBirdDraw();
 	Bird* b = new Bird(move, death, input, time,dr, size);
 	b->setValue(points);
-	b->getVelocity()->setDx(RandomFloat(speed - .5, speed + .5));
-	b->getVelocity()->setDy(RandomFloat(speed - .5, speed + .5));
+	b->getVelocity()->setDx(RandomFloat2(speed - .5, speed + .5));
+	b->getVelocity()->setDy(RandomFloat2(speed - .5, speed + .5));
 
 
 	return b;
@@ -338,26 +340,36 @@ void SkeetLogic::birdSpawn() {
 	
 }
 
+/**
+ * Spawns all the elements that were qued up
+ */
 void SkeetLogic::spawn() const {
 	for (ElementStorage* element : ElementsToSpawn) {
 		SkeetStorage->addElement(element);
 	}
 }
 
+
+/**
+ * Builder for a fragment
+ * @param position The initial position of the fragment
+ * @param velocity The velocity that the fragment orginates from
+ * @return 
+ */
 ElementStorage* SkeetLogic::Fragment(const Position* position, const Velocity* velocity) {
 	SpecialMove* move = new PelletMove();
-	OnDeath* death = new DisapearDeath();
+	OnDeath* death = new DisappearDeath();
 	Timing* time = new Timed();
-	int timeToLive = static_cast<int>(30.0 * RandomFloat(0.4, 1.0));
+	int timeToLive = static_cast<int>(30.0 * RandomFloat2(0.4, 1.0));
 	time->setInitialTimer(timeToLive);
 	DrawStrategy* draw = new FragmentDraw();
 
 
 	
-	ElementStorage* newBullet = new Bullet(move, death, new NoInput(), time, draw, RandomFloat(1.0, 2.5));
+	ElementStorage* newBullet = new Bullet(move, death, new NoInput(), time, draw, RandomFloat2(1.0, 2.5));
 
-	newBullet->getVelocity()->setDx(velocity->getDx() * 0.5 + RandomFloat(-6.0, 6.0));
-	newBullet->getVelocity()->setDy(velocity->getDy() * 0.5 + RandomFloat(-6.0, 6.0));
+	newBullet->getVelocity()->setDx(velocity->getDx() * 0.5 + RandomFloat2(-6.0, 6.0));
+	newBullet->getVelocity()->setDy(velocity->getDy() * 0.5 + RandomFloat2(-6.0, 6.0));
 
 	newBullet->getPosition()->setX(position->getX());
 	newBullet->getPosition()->setY(position->getY());
@@ -407,6 +419,10 @@ void SkeetLogic::detectCollision() {
 SkeetLogic::Iterator::Iterator(Storage* SkeetStorage)
 {
 	it = SkeetStorage->beginElement();
+}
+
+void SkeetLogic::Iterator::moveToEnd(Storage* SkeetStorage) {
+	it = SkeetStorage->endElement();
 }
 
 SkeetLogic::Iterator SkeetLogic::Iterator::operator++()

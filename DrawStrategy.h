@@ -23,28 +23,28 @@ public:
 class PelletDraw : public DrawStrategy
 {
 public:
-	virtual void draw(ElementStorage* elm);
+	void draw(ElementStorage* elm) override;
 
 };
 
 class MissleDraw : public DrawStrategy
 {
 public:
-	virtual void draw(ElementStorage* elm);
+	void draw(ElementStorage* elm) override;
 
 };
 
 class BombDraw : public DrawStrategy
 {
 public:
-	virtual void draw(ElementStorage* elm);
+	void draw(ElementStorage* elm) override;
 
 };
 
 class ShrapnelDraw : public DrawStrategy
 {
 public:
-	virtual void draw(ElementStorage* elm);
+	void draw(ElementStorage* elm) override;
 
 };
 
@@ -53,28 +53,28 @@ public:
 class StandardBirdDraw : public DrawStrategy
 {
 public:
-	virtual void draw(ElementStorage* elm);
+	void draw(ElementStorage* elm) override;
 
 };
 
 class SinkerBirdDraw : public DrawStrategy
 {
 public:
-	virtual void draw(ElementStorage* elm);
+	void draw(ElementStorage* elm) override;
 
 };
 
 class FloaterBirdDraw : public DrawStrategy
 {
 public:
-	virtual void draw(ElementStorage* elm);
+	void draw(ElementStorage* elm) override;
 
 };
 
 class CrazyBirdDraw : public DrawStrategy
 {
 public:
-	virtual void draw(ElementStorage* elm);
+	void draw(ElementStorage* elm) override;
 
 };
 
@@ -83,7 +83,7 @@ public:
 class FragmentDraw : public DrawStrategy
 {
 public:
-	virtual void draw(ElementStorage* elm);
+	void draw(ElementStorage* elm) override;
 
 };
 
@@ -104,7 +104,7 @@ public:
 class ScoreDraw : public DrawStrategy
 {
 public:
-	virtual void draw(ElementStorage* elm);
+	void draw(ElementStorage* elm) override;
 
 };
 

@@ -21,9 +21,9 @@ public:
 	class IteratorElement
 	{
 	public:
-		IteratorElement() : it(nullptr) {};
-		IteratorElement(ElementStorage* it) : it(it) {};
-		IteratorElement(IteratorElement* that) : it(that->it) {};
+		IteratorElement() : it(nullptr) {}
+		IteratorElement(ElementStorage* it) : it(it) {}
+		IteratorElement(IteratorElement* that) : it(that->it) {}
 
 		IteratorElement operator++();
 		ElementStorage* operator*();
@@ -36,7 +36,7 @@ public:
 	class IteratorBird
 	{
 	public:
-		IteratorBird() : it(nullptr) {};
+		IteratorBird() : it(nullptr) {}
 		IteratorBird(ElementStorage* it);
 		IteratorBird(IteratorBird* that) : it(that->it) {};
 

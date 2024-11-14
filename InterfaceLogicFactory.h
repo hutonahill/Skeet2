@@ -10,6 +10,8 @@ public:
    {
       i->setSkeetLogic(sl);
       sl->setInterface(i);
+
+      return i;
    }
 
 };

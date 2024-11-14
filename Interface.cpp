@@ -6,19 +6,21 @@
 void Interface::drawLevel() const
 {
    // output the background
-   drawBackground(getTime().level() * .1, 0.0, 0.0);
+   drawBackground2(getTime()->level() * .1, 0.0, 0.0);
 
    // output the gun
    drawGun();
 
-   for (SkeetLogic::Iterator it = SkeetLogic->beginElement(); it != SkeetLogic->endElement(); ++it) {
-      (*it)->draw();
+   for (SkeetLogic::Iterator it = sl->begin(); it != sl->end(); ++it) {
+      ElementStorage* targetElement = (*it);
+      
+      targetElement->getDraw()->draw(targetElement);
    }
 
    // status
-   drawText(Position(10, sl->getDimensions()->getY() - 30), to_string(sl->getPoints()));
-   drawText(Position(sl->getDimensions()->getX() / 2 - 30, sl->getDimensions()->getY() - 30), getTime().getText());
-   drawText(Position(sl->getDimensions()->getX() - 110, sl->getDimensions()->getY() - 30), to_string(sl->getHitRatio()));
+   drawText1(Position(10, sl->getDimensions()->getY() - 30), to_string(sl->getPoints()));
+   drawText1(Position(sl->getDimensions()->getX() / 2 - 30, sl->getDimensions()->getY() - 30), getTime()->getText());
+   drawText1(Position(sl->getDimensions()->getX() - 110, sl->getDimensions()->getY() - 30), to_string(sl->getHitRatio()));
 }
 
 void Interface::interact(const UserInput& ui)
@@ -39,41 +41,41 @@ void Interface::interact(const UserInput& ui)
 
 void Interface::drawGun() const
 {
-   drawRectangle(sl->getGun()->getPosition(), M_PI_2 - sl->getGun()->getAngle(), 10.0, 100.0, 1.0, 1.0, 1.0);
+   drawRectangle1(sl->getGun()->getPosition(), M_PI_2 - sl->getGun()->getAngle(), 10.0, 100.0, 1.0, 1.0, 1.0);
 }
 
 void Interface::drawStatus() const
 {
    // output the text information
    ostringstream sout;
-   if (getTime().isGameOver())
+   if (getTime()->isGameOver())
    {
       // draw the end of game message
-      drawText(Position(sl->getDimensions()->getX() / 2 - 30, sl->getDimensions()->getY() / 2 + 10),
+      drawText1(Position(sl->getDimensions()->getX() / 2 - 30, sl->getDimensions()->getY() / 2 + 10),
          "Game Over");
 
       // draw end of game status
-      drawText(Position(sl->getDimensions()->getX() / 2 - 30, sl->getDimensions()->getY() / 2 - 10),
+      drawText1(Position(sl->getDimensions()->getX() / 2 - 30, sl->getDimensions()->getY() / 2 - 10),
          to_string(sl->getPoints()));
    }
    else
    {
       // output the status getTime()r
-      drawTimer(1.0 - getTime().percentLeft(),
-         (getTime().level() - 0.0) * .1, 0.0, 0.0,
-         (getTime().level() - 1.0) * .1, 0.0, 0.0);
+      drawTimer(1.0 - getTime()->percentLeft(),
+         (getTime()->level() - 0.0) * .1, 0.0, 0.0,
+         (getTime()->level() - 1.0) * .1, 0.0, 0.0);
 
       // draw the message giving a countdown
-      sout << "Level " << getTime().level()
-         << " begins in " << getTime().secondsLeft() << " seconds";
-      drawText(Position(sl->getDimensions()->getX() / 2 - 110, sl->getDimensions()->getY() / 2 - 10),
+      sout << "Level " << getTime()->level()
+         << " begins in " << getTime()->secondsLeft() << " seconds";
+      drawText1(Position(sl->getDimensions()->getX() / 2 - 110, sl->getDimensions()->getY() / 2 - 10),
          sout.str());
    }
 }
 
 bool Interface::isPlaying() const
 {
-   return getTime().isPlaying();
+   return getTime()->isPlaying();
 }
 
 /************************************************************************
@@ -81,16 +83,16 @@ bool Interface::isPlaying() const
  * Fill in the background
  *  INPUT color   Background color
  *************************************************************************/
-void Interface::drawBackground(double redBack, double greenBack, double blueBack) const
+void Interface::drawBackground2(double redBack, double greenBack, double blueBack) const
 {
    glBegin(GL_TRIANGLE_FAN);
 
    // two rectangles is the fastest way to fill the screen.
-   glColor3f((GLfloat)redBack /* red % */, (GLfloat)greenBack /* green % */, (GLfloat)blueBack /* blue % */);
+   glColor3f(static_cast<GLfloat>(redBack /* red % */) /* red % */, static_cast<GLfloat>(greenBack /* green % */) /* green % */, (GLfloat)blueBack /* blue % */);
    glVertex2f((GLfloat)0.0, (GLfloat)0.0);
-   glVertex2f((GLfloat)sl->getDimensions()->getX(), (GLfloat)0.0);
-   glVertex2f((GLfloat)sl->getDimensions()->getX(), (GLfloat)sl->getDimensions()->getY());
-   glVertex2f((GLfloat)0.0, (GLfloat)sl->getDimensions()->getY());
+   glVertex2f(static_cast<GLfloat>(sl->getDimensions()->getX()), (GLfloat)0.0);
+   glVertex2f(static_cast<GLfloat>(sl->getDimensions()->getX()), static_cast<GLfloat>(sl->getDimensions()->getY()));
+   glVertex2f((GLfloat)0.0, static_cast<GLfloat>(sl->getDimensions()->getY()));
 
    glEnd();
 }
@@ -112,7 +114,7 @@ void Interface::drawTimer(double percent,
    GLfloat half = length / (GLfloat)2.0;
 
    // do the background stuff
-   drawBackground(redBack, greenBack, blueBack);
+   drawBackground2(redBack, greenBack, blueBack);
 
    // foreground stuff
    radians = percent * M_PI * 2.0;

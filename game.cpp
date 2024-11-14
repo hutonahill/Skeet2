@@ -9,6 +9,7 @@
 
 #include "uiInteract.h"
 #include "position.h"
+#include "skeet.h"
 
 #define WIDTH  800.0
 #define HEIGHT 800.0
@@ -27,7 +28,7 @@ void callBack(const UserInput* pUI, void* p)
 {
    // the first step is to cast the void pointer into a game object. This
    // is the first step of every single callback function in OpenGL. 
-   Skeet* pSkeet = (Skeet*)p;
+   Skeet* pSkeet = static_cast<Skeet*>(p);
 
    // handle user input
    pSkeet->interact(*pUI);
@@ -44,7 +45,7 @@ void callBack(const UserInput* pUI, void* p)
 
 /*********************************
  * Main is pretty sparse.  Just initialize
- * my Skkeep type and call the display engine.
+ * my Skeet type and call the display engine.
  * That is all!
  *********************************/
 #ifdef _WIN32_X
@@ -60,7 +61,7 @@ int main(int argc, char** argv)
 {
    // initialize OpenGL
    Position dimensions(WIDTH, HEIGHT);
-   UserInput ui(0, NULL,
+   UserInput ui(0, nullptr,
       "Skeet2",
       dimensions);
 

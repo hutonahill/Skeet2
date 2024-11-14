@@ -18,7 +18,7 @@ public:
 // Abstract
 class SpecialMove : public ElementLogic {
 public:
-	void execute(ElementStorage* el)  = 0;
+	void execute(ElementStorage* el) override = 0;
 };
 
 // Special move for standard bird
@@ -26,7 +26,7 @@ public:
 class StandardBirdMove : public SpecialMove
 {
 public:
-	void execute(ElementStorage* el) ;
+	void execute(ElementStorage* el) override;
 };
 
 // Special move for floater bird
@@ -34,7 +34,7 @@ public:
 class FloaterBirdMove : public SpecialMove
 {
 public:
-	void execute(ElementStorage* el) ;
+	void execute(ElementStorage* el) override;
 };
 
 // Special move for sinker bird
@@ -42,7 +42,7 @@ public:
 class SinkerBirdMove : public SpecialMove
 {
 public:
-	void execute(ElementStorage* el) ;
+	void execute(ElementStorage* el) override;
 };
 
 // Special move for crazy bird
@@ -50,7 +50,7 @@ public:
 class CrazyBirdMove : public SpecialMove
 {
 public:
-	void execute(ElementStorage* el) ;
+	void execute(ElementStorage* el) override;
 };
 
 // Special move for pellet and bomb
@@ -58,15 +58,15 @@ public:
 class PelletMove : public SpecialMove
 {
 public:
-	void execute(ElementStorage* el) ;
+	void execute(ElementStorage* el) override;
 };
 
-// Special move for the missle
+// Special move for the missile
 // Concrete
-class MissleMove : public SpecialMove
+class MissileMove : public SpecialMove
 {
 public:
-	void execute(ElementStorage* el) ;
+	void execute(ElementStorage* el) override;
 };
 
 // Special move for things that don't move
@@ -82,7 +82,7 @@ public:
 class OnDeath : public ElementLogic
 {
 public:
-	void execute(ElementStorage* el)  = 0;
+	void execute(ElementStorage* el) override;
 };
 
 // When an effect dies
@@ -91,17 +91,17 @@ class EffectDeath : public OnDeath
 {
 public:
 	EffectDeath(std::list<ElementStorage*>* sl) : ElementsToSpawn(sl) {};
-	void execute(ElementStorage* el) ;
+	void execute(ElementStorage* el) override;
 private:
 	std::list<ElementStorage*>* ElementsToSpawn;
 };
 
-// Fragments, offscreen birds, shrappnel, missle, bullets
+// Fragments, offscreen birds, shrapnel, missile, bullets
 // Concrete
-class DisapearDeath : public OnDeath
+class DisappearDeath : public OnDeath
 {
 public:
-	void execute(ElementStorage* el) ;
+	void execute(ElementStorage* el) override;
 };
 
 // Bombs
@@ -110,7 +110,7 @@ class ShrapnelDeath : public OnDeath
 {
 public:
 	ShrapnelDeath(std::list<ElementStorage*>* sl) : ElementsToSpawn(sl) {};
-	void execute(ElementStorage* el);
+	void execute(ElementStorage* el) override;
 private:
 	std::list<ElementStorage*>* ElementsToSpawn;
 };
@@ -129,7 +129,7 @@ public:
 	int right;
 };
 
-// Missles need arrow input
+// Missiles need arrow input
 // Concrete
 class Arrows : public Input
 {
