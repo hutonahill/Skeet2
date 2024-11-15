@@ -95,7 +95,7 @@ Time* SkeetLogic::getTime() const {
 
 void SkeetLogic::specialMoves() const {
 
-	for (Storage::IteratorElement it = SkeetStorage->beginElement(); it != SkeetStorage->endElement(); ++it ) {
+	for (Storage::IteratorElement it = SkeetStorage->beginElement(); it != SkeetStorage->endElement(); ++it ) { // strange error
 		(*it)->getSpecialMove()->execute(*it);
 	}
 
@@ -128,10 +128,17 @@ void SkeetLogic::detectOutOfBounds(){
 
 
 void SkeetLogic::clearZombies() const {
-	for (Storage::IteratorElement it = SkeetStorage->beginElement(); it != SkeetStorage->endElement(); ++it) {
+
+	Storage::IteratorElement start = SkeetStorage->beginElement();
+	Storage::IteratorElement end =       SkeetStorage->endElement();
+	
+	for (Storage::IteratorElement it = start; it != end;) {
 		bool dead = (*it)->getDead();
 		if ( (*it)->getDead()) {
-			SkeetStorage->remove(*it);
+			it = SkeetStorage->erase(it.getIt());
+		}
+		else {
+			++it;
 		}
 	}
 }
@@ -175,8 +182,10 @@ ElementStorage* Standard(const double radius, const double speed, const int poin
 	DrawStrategy* dr = new StandardBirdDraw();
 	Bird* b = new Bird(move, death, input, time, dr, radius);
 	b->setValue(points);
-	b->getVelocity()->setDx(RandomFloat2(speed - .5, speed + .5));
-	b->getVelocity()->setDy(RandomFloat2(speed - .5, speed + .5));
+	double xSpeed = RandomFloat2(speed - .5, speed + .5);
+	double ySpeed = RandomFloat2(speed - .5, speed + .5);
+	b->getVelocity()->setDx(xSpeed);
+	b->getVelocity()->setDy(ySpeed);
 
 
 	return b;
@@ -393,11 +402,11 @@ void SkeetLogic::detectCollision() {
 		ElementStorage* bird = (*it);
 		for (Storage::IteratorBullet it2 = SkeetStorage->beginBullet(); it2 != SkeetStorage->endBullet(); ++it2) {
 			ElementStorage* bullet = (*it2);
+
+			double minDistance =  minimumDistance(bird->getPosition(), bird->getVelocity(),
+							 bullet->getPosition(),  bullet->getVelocity());
 			
-			if (!bird->getDead() && !bullet->getDead() &&
-			 bird->getRadius() + bullet->getRadius() >
-			 minimumDistance(bird->getPosition(), bird->getVelocity(),
-							 bullet->getPosition(),  bullet->getVelocity()))
+			if (!bird->getDead() && !bullet->getDead() && bird->getRadius() + bullet->getRadius() > minDistance)
 			{
 				// this implies fragments are created on the death of every bird...
 				for (int i = 0; i < 25; i++) {
@@ -416,13 +425,12 @@ void SkeetLogic::detectCollision() {
 
 
 
-SkeetLogic::Iterator::Iterator(Storage* SkeetStorage)
-{
-	it = SkeetStorage->beginElement();
+SkeetLogic::Iterator::Iterator(Storage* skeetStorage) : storage_(skeetStorage){
+	it = storage_->beginElement();
 }
 
-void SkeetLogic::Iterator::moveToEnd(Storage* SkeetStorage) {
-	it = SkeetStorage->endElement();
+void SkeetLogic::Iterator::moveToEnd(const Storage* skeetStorage) {
+	it = skeetStorage->endElement();
 }
 
 SkeetLogic::Iterator SkeetLogic::Iterator::operator++()
@@ -431,7 +439,6 @@ SkeetLogic::Iterator SkeetLogic::Iterator::operator++()
 	return *this;
 }
 
-ElementStorage* SkeetLogic::Iterator::operator*()
-{
+ElementStorage* SkeetLogic::Iterator::operator*() const {
 	return *it;
 }

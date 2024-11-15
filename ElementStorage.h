@@ -39,18 +39,21 @@ public:
    //Constructor
    ElementStorage(const bool isDead, const bool isBird, const bool isBullet, SpecialMove* sm, OnDeath* od, Input* arrow,
    	Timing* time, DrawStrategy* draw, double radius = 0) :
-	   isBird(isBird), isBullet(isBullet), isDead(isDead), radius(radius), sm(sm), od(od), arrow(arrow), time(time),
-	   draw(draw)
-	{
-	   
-    }
-   
+	   isBird(isBird), isBullet(isBullet), isDead(isDead), radius(radius), age(0), points(0), value(0),
+	   objectPT(nullptr),
+	   ptEnd(nullptr),
+	   objectV(nullptr),
+	   effect(nullptr), sm(sm),
+	   od(od),
+	   arrow(arrow), time(time),
+	   draw(draw) {
+   }
 
-   
+
    // getters
    SpecialMove* getSpecialMove() const {return sm;           }
-   Position* getPosition() const           {return objectPT;     }
-   Velocity* getVelocity() const {return objectV;      }
+   Position* getPosition() ;
+   Velocity* getVelocity();
    Input* getInput() const {return arrow;        }
    Timing* getTime() const {return time;         }
    DrawStrategy* getDraw() const {return draw;         }
@@ -119,7 +122,7 @@ class Effect : public ElementStorage
 public:
    Effect(SpecialMove* sm, OnDeath* od, Input* arrow, Timing* time, DrawStrategy* draw, double radius, Position& ptEnd) :
 	ElementStorage(false, false, false, sm, od, arrow, time, draw, radius) {}
-   Position* getEnd() const {return ptEnd;}
+   Position* getEnd();
    void setEnd(const Position* ptEnd) const {ptEnd= this->ptEnd;}
    
 };

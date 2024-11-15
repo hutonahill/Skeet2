@@ -26,7 +26,7 @@
 class Skeet
 {
 public:
-    Skeet(Position & dimensions) : dimensions(dimensions) 
+    Skeet(const Position& dimensions) : dimensions(dimensions) 
     {
        Interface* inter = new Interface();
        SkeetLogic* skeetLogic = new SkeetLogic();

@@ -36,19 +36,20 @@ public:
 
 
 	list<ElementStorage*> ElementsToSpawn;
+	
 	class Iterator {
 
 	private:
 		Storage::IteratorElement it;
+		Storage* storage_;
 	public:
-		Iterator(Storage* SkeetStorage);
-		Iterator(ElementStorage* it) : it(it) {}
-		Iterator(Iterator* that) : it(that->it) {}
+		Iterator(Storage* skeetStorage);
+		Iterator(Iterator* that) : storage_(that->storage_), it(that->it) {}
 
-		void moveToEnd(Storage* SkeetStorage);
+		void moveToEnd(const Storage* SkeetStorage);
 		
 		Iterator operator++();
-		ElementStorage* operator*();
+		ElementStorage* operator*() const;
 		bool operator !=(const Iterator& rhs) { return it != rhs.it; }
 	};
 	
