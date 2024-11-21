@@ -12,16 +12,17 @@
 #include "effect.h"
 #include <list>
 #include <cassert>
+#include "Element.h"
 
 /*********************************************
  * BULLET
  * Something to shoot something else
  *********************************************/
-class Bullet
+class Bullet : public Element
 {
 protected:
    static Position dimensions;   // size of the screen
-   Position pt;                  // position of the bullet
+   Position& pt;                  // position of the bullet
    Velocity v;                // velocity of the bullet
    double radius;             // the size (radius) of the bullet
    bool dead;                 // is this bullet dead?
@@ -36,10 +37,11 @@ public:
    
    // getters
    bool isDead()           const { return dead;   }
-   Position getPosition()  const { return pt;     }
+   Position& getPosition() const override { return pt;     }
    Velocity getVelocity()  const { return v;      }
    double getRadius()      const { return radius; }
-   int getValue()          const { return value;  }
+   int getPointValue()     const { return value;  }
+   double getValue() const override; // get angle based on velocity.
 
    // special functions
    virtual void death(std::list<Bullet *> & bullets) {}

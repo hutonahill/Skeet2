@@ -100,7 +100,7 @@ void Skeet::animate()
       if ((*it)->isDead())
       {
          (*it)->death(bullets);
-         int value = -(*it)->getValue();
+         int value = -(*it)->getPointValue();
          points.push_back(Points((*it)->getPosition(), value));
          score.adjust(value);
          it = bullets.erase(it);

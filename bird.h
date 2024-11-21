@@ -9,33 +9,35 @@
 
 #pragma once
 #include "position.h"
+#include "Element.h"
 
 /**********************
  * BIRD
  * Everything that can be shot
  **********************/
-class Bird
+class Bird : public Element
 {
 protected:
    static Position dimensions; // size of the screen
-   Position pt;                  // position of the flyer
+   Position&pt;                  // position of the flyer
    Velocity v;                // velocity of the flyer
    double radius;             // the size (radius) of the flyer
    bool dead;                 // is this flyer dead?
    int points;                // how many points is this worth?
    
 public:
-   Bird() : dead(false), points(0), radius(1.0) { }
-   
+   Bird() : pt(), radius(1.0), dead(false), points(0) {
+   }
+
    // setters
-   void operator=(const Position    & rhs) { pt = rhs;    }
+   void operator=(const Position    & rhs) const { pt = rhs;    }
    void operator=(const Velocity & rhs) { v = rhs;     }
    void kill()                          { dead = true; }
    void setPoints(int pts)              { points = pts;}
 
    // getters
    bool isDead()           const { return dead;   }
-   Position getPosition()     const { return pt;     }
+   Position& getPosition() const override { return pt;     }
    Velocity getVelocity()  const { return v;      }
    double getRadius()      const { return radius; }
    int getPoints() const { return points; }
@@ -44,6 +46,8 @@ public:
       return (pt.getX() < -radius || pt.getX() >= dimensions.getX() + radius ||
               pt.getY() < -radius || pt.getY() >= dimensions.getY() + radius);
    }
+
+ double getValue() const override {return radius;}
 
    // special functions
    virtual void draw() = 0;

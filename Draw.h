@@ -1,12 +1,22 @@
 ﻿#pragma once
 #include "position.h"
 
+#include <functional>
+#include <list>]
+
+using namespace std;
+
+class Draw;
+
+using drawMethod = void (Draw::*)(Position&, double);
+
 class Position;
 
 class Draw {
 public:
 	
 private:
+	list<tuple<drawMethod, Position&, double>> elementsToDraw = list<tuple<drawMethod, Position&, double>>();
 	
 	void drawBomb(const Position& point, double angle) const;
 	void drawPellet(const Position& point, double angle) const;
