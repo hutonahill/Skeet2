@@ -30,7 +30,7 @@ void SkeetLogic::Advance() {
 	
 	spawn();
 
-	
+	(*SkeetStorage->getTime())++;
 }
 
 double RandomFloat2(const double min, const double max)

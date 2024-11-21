@@ -14,7 +14,7 @@ public:
    {
       al = new ArrowListener();
       sl = nullptr;
-   };
+   }
 
    void setSkeetLogic(SkeetLogic* sl) { this->sl = sl; }
    ArrowListener* getArrowListener() const { return al; }
