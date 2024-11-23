@@ -19,7 +19,7 @@ public:
    abstractDraw(Bird* bird, Bullet* bullet) : bird(bird), bullet(bullet) {}
    abstractDraw(Bird* bird) : bird(bird) {}
    abstractDraw(Bullet* bullet) : bullet(bullet) {}
-   virtual void draw() = 0;
+   virtual void draw() = 0; //execute
    bool isDead;
    double radius;
    //getters
@@ -65,24 +65,28 @@ BIRD DRAW
 class standardDraw : public birdDraw
 {
 public:
+   standardDraw(Bird* bird) : birdDraw(bird) {}
    virtual void draw() = 0;
 };
 
 class sinkerDraw : public birdDraw
 {
 public:
+   sinkerDraw(Bird* bird) : birdDraw(bird) {}
    virtual void draw() = 0;
 };
 
 class floaterDraw : public birdDraw
 {
 public:
+   floaterDraw(Bird* bird) : birdDraw(bird) {}
    virtual void draw() = 0;
 }; 
 
 class crazyDraw : public birdDraw
 {
 public:
+   crazyDraw(Bird* bird) : birdDraw(bird) {}
    virtual void draw() = 0;
 }; 
 
@@ -92,23 +96,27 @@ BULLET DRAW
 class pelletDraw : public bulletDraw
 {
 public:
+   pelletDraw(Bullet* bullet) : bulletDraw(bullet) {}
    virtual void draw() = 0;
 };
 
 class missileDraw : public bulletDraw
 {
 public:
+   missileDraw(Bullet* bullet) : bulletDraw(bullet) {}
    virtual void draw() = 0;
 }; 
 
 class bombDraw : public bulletDraw
 {
 public:
+   bombDraw(Bullet* bullet) : bulletDraw(bullet) {}
    virtual void draw() = 0;
 }; 
 
 class shrapnelDraw : public bulletDraw
 {
 public:
+   shrapnelDraw(Bullet* bullet) : bulletDraw(bullet) {}
    virtual void draw() = 0;
 };
