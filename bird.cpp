@@ -248,7 +248,7 @@ void Sinker::advance()
  * DRAW Disk
  * Draw a filled circule at [center] with size [radius]
  *************************************************************************/
-void drawDisk(const Position& center, double radius,
+/*void drawDisk(const Position& center, double radius,
               double red, double green, double blue)
 {
    assert(radius > 1.0);
@@ -256,7 +256,7 @@ void drawDisk(const Position& center, double radius,
 
    // begin drawing
    glBegin(GL_TRIANGLES);
-   glColor3f((GLfloat)red /* red % */, (GLfloat)green /* green % */, (GLfloat)blue /* blue % */);
+   glColor3f((GLfloat)red /* red % #1#, (GLfloat)green /* green % #1#, (GLfloat)blue /* blue % #1#);
 
    // three points: center, pt1, pt2
    Position pt1;
@@ -281,39 +281,39 @@ void drawDisk(const Position& center, double radius,
 
    // complete drawing
    glEnd();
-}
+}*/
 
 /*********************************************
  * STANDARD DRAW
  * Draw a standard bird: blue center and white outline
  *********************************************/
-void Standard::draw()
+/*void Standard::draw()
 {
    if (!isDead())
    {
       drawDisk(pt, radius - 0.0, 1.0, 1.0, 1.0); // white outline
       drawDisk(pt, radius - 3.0, 0.0, 0.0, 1.0); // blue center
    }
-}
+}*/
 
 /*********************************************
  * FLOATER DRAW
  * Draw a floating bird: white center and blue outline
  *********************************************/
-void Floater::draw()
+/*void Floater::draw()
 {
    if (!isDead())
    {
       drawDisk(pt, radius - 0.0, 0.0, 0.0, 1.0); // blue outline
       drawDisk(pt, radius - 4.0, 1.0, 1.0, 1.0); // white center
    }
-}
+}*/
 
 /*********************************************
  * CRAZY DRAW
  * Draw a crazy bird: concentric circles in a course gradient
  *********************************************/
-void Crazy::draw()
+/*void Crazy::draw()
 {
    if (!isDead())
    {
@@ -323,17 +323,17 @@ void Crazy::draw()
       drawDisk(pt, radius * 0.4, 0.6, 0.6, 1.0);
       drawDisk(pt, radius * 0.2, 0.8, 0.8, 1.0); // almost white inside
    }
-}
+}*/
 
 /*********************************************
  * SINKER DRAW
  * Draw a sinker bird: black center and dark blue outline
  *********************************************/
-void Sinker::draw()
+/*void Sinker::draw()
 {
    if (!isDead())
    {
       drawDisk(pt, radius - 0.0, 0.0, 0.0, 0.8);
       drawDisk(pt, radius - 4.0, 0.0, 0.0, 0.0);
    }
-}
+}*/

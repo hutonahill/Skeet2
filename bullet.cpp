@@ -35,18 +35,18 @@
  * BULLET constructor
  *********************************************/
 Bullet::Bullet(double angle, double speed, double radius, int value) :
-   dead(false), radius(radius), value(value)
-{
-   // set the initial position
-   pt.setX(dimensions.getX() - 1.0);
-   pt.setY(1.0);
-   assert(pt.getX() > 100.0);
+  pt(), v(),
+  radius(radius), dead(false), value(value) {
+	// set the initial position
+	pt.setX(dimensions.getX() - 1.0);
+	pt.setY(1.0);
+	assert(pt.getX() > 100.0);
 
-   // set the initial velocity
-   v.setDx(-speed * cos(angle));
-   v.setDy(speed * sin(angle));
-   assert(v.getDx() <= 0.0);
-   assert(v.getDy() >= 0.0);
+	// set the initial velocity
+	v.setDx(-speed * cos(angle));
+	v.setDy(speed * sin(angle));
+	assert(v.getDx() <= 0.0);
+	assert(v.getDy() >= 0.0);
 }
 
 /*********************************************
@@ -64,6 +64,7 @@ void Bomb::death(std::list<Bullet*>& bullets)
  /*                             MOVE                            */
  /***************************************************************/
  /***************************************************************/
+
 
 /*********************************************
  * BULLET MOVE
@@ -144,7 +145,7 @@ inline void glVertexPoint(const Position& point)
  * DRAW LINE
  * Draw a line on the screen from the beginning to the end.
  *************************************************************************/
-void Bullet::drawLine(const Position& begin, const Position& end,
+/*void Bullet::drawLine(const Position& begin, const Position& end,
                       double red, double green, double blue) const
 {
    // Get ready...
@@ -156,15 +157,15 @@ void Bullet::drawLine(const Position& begin, const Position& end,
    glVertexPoint(end);
 
    // Complete drawing
-   glColor3f((GLfloat)1.0 /* red % */, (GLfloat)1.0 /* green % */, (GLfloat)1.0 /* blue % */);
+   glColor3f((GLfloat)1.0 /* red % #1#, (GLfloat)1.0 /* green % #1#, (GLfloat)1.0 /* blue % #1#);
    glEnd();
-}
+}*/
 
 /************************************************************************
  * DRAW DOT
  * Draw a single point (square actually on the screen, r pixels by r pixels
  *************************************************************************/
-void Bullet::drawDot(const Position& point, double radius,
+/*void Bullet::drawDot(const Position& point, double radius,
                      double red, double green, double blue) const
 {
    // Get ready, get set...
@@ -179,25 +180,25 @@ void Bullet::drawDot(const Position& point, double radius,
    glVertex2f((GLfloat)(point.getX() - r), (GLfloat)(point.getY() + r));
 
    // Done!  OK, that was a bit too dramatic
-   glColor3f((GLfloat)1.0 /* red % */, (GLfloat)1.0 /* green % */, (GLfloat)1.0 /* blue % */);
+   glColor3f((GLfloat)1.0 /* red % #1#, (GLfloat)1.0 /* green % #1#, (GLfloat)1.0 /* blue % #1#);
    glEnd();
-}
+}*/
 
 /*********************************************
  * PELLET OUTPUT
  * Draw a pellet - just a 3-pixel dot
  *********************************************/
-void Pellet::output()
+/*void Pellet::output()
 {
    if (!isDead())
       drawDot(pt, 3.0, 1.0, 1.0, 0.0);
-}
+}*/
 
 /*********************************************
  * BOMB OUTPUT
  * Draw a bomb - many dots to make it have a soft edge
  *********************************************/
-void Bomb::output()
+/*void Bomb::output()
 {
    if (!isDead())
    {
@@ -207,23 +208,23 @@ void Bomb::output()
        drawDot(pt, radius + 0.0, 0.87, 0.87, 0.00);
        drawDot(pt, radius - 1.0, 1.00, 1.00, 0.00);
    }
-}
+}*/
 
 /*********************************************
  * SHRAPNEL OUTPUT
  * Draw a fragment - a bright yellow dot
  *********************************************/
-void Shrapnel::output()
+/*void Shrapnel::output()
 {
     if (!isDead())
        drawDot(pt, radius, 1.0, 1.0, 0.0);
-}
+}*/
 
 /*********************************************
  * MISSILE OUTPUT
  * Draw a missile - a line and a dot for the fins
  *********************************************/
-void Missile::output()
+/*void Missile::output()
 {
     if (!isDead())
     {
@@ -233,7 +234,7 @@ void Missile::output()
         drawLine(pt, ptNext, 1.0, 1.0, 0.0);
         drawDot(pt, 3.0, 1.0, 1.0, 1.0);
     }
-}
+}*/
 
 /***************************************************************/
 /***************************************************************/

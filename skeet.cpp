@@ -31,6 +31,8 @@ using namespace std;
 #define GLUT_TEXT GLUT_BITMAP_HELVETICA_12
 #endif // _WIN32
 
+#include "DrawMethods.h"
+
 /************************
  * SKEET ANIMATE
  * move the gameplay by one unit of time
@@ -290,7 +292,7 @@ void Skeet::drawBullseye(double angle) const
  * SKEET DRAW LEVEL
  * output everything that will be on the screen
  ************************/
-void Skeet::drawLevel() const
+void Skeet::drawLevel() 
 {
    // output the background
    drawBackground(time.level() * .1, 0.0, 0.0);
@@ -307,10 +309,45 @@ void Skeet::drawLevel() const
       pts.show();
    for (auto effect : effects)
       effect->render();
-   for (auto bullet : bullets)
-      bullet->output();
-   for (auto element : birds)
-      element->draw();
+   
+   for (auto bullet : bullets) {
+      switch (bullet->getType()) {
+         case PELLET:
+            draw.add(drawPellet, bullet);
+            break;
+         case BOMB:
+            draw.add(drawBomb, bullet);
+            break;
+         case SHRAPNEL:
+            draw.add(drawShrapnel, bullet);
+            break;
+         case MISSILE:
+            draw.add(drawMissile, bullet);
+            break;
+         default:
+            break;
+      }
+   }
+   for (auto element : birds) {
+      switch (element->getType()) {
+         case STANDARD:
+            draw.add(drawStandard, element);
+            break;
+         case SINKER:
+            draw.add(drawSinker, element);
+            break;
+         case FLOATER:
+            draw.add(drawFloater, element);
+            break;
+         case CRAZY:
+            draw.add(drawCrazy, element);
+            break;
+         default:
+            break;
+      }
+   }
+
+   draw.drawAll();
    
    // status
    drawText(Position(10,                         dimensions.getY() - 30), score.getText()  );

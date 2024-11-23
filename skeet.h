@@ -21,6 +21,8 @@
 
 #include <list>
 
+#include "Draw.h"
+
 /*************************************************************************
  * Skeet2
  * The game class
@@ -38,7 +40,7 @@ public:
     void animate();
 
     // output everything on the screen
-    void drawLevel()  const;    // output the game
+    void drawLevel() ;    // output the game
     void drawStatus() const;    // output the status information
 
     // is the game currently playing right now?
@@ -62,4 +64,6 @@ private:
     HitRatio hitRatio;             // the hit ratio for the birds
     Position dimensions;           // size of the screen
     bool bullseye;
+
+	Draw draw = Draw();
 };
