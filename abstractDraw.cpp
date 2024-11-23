@@ -81,8 +81,8 @@ void standardDraw::draw()
 {
    if (!getDead())
    {
-      drawDisk(pt, radius - 0.0, 1.0, 1.0, 1.0); // white outline
-      drawDisk(pt, radius - 3.0, 0.0, 0.0, 1.0); // blue center
+      drawDisk(getPt(), getRadius() - 0.0, 1.0, 1.0, 1.0); // white outline
+      drawDisk(getPt(), getRadius() - 3.0, 0.0, 0.0, 1.0); // blue center
    }
 }
 
@@ -94,8 +94,8 @@ void floaterDraw::draw()
 {
    if (!getDead())
    {
-      drawDisk(pt, radius - 0.0, 0.0, 0.0, 1.0); // blue outline
-      drawDisk(pt, radius - 4.0, 1.0, 1.0, 1.0); // white center
+      drawDisk(getPt(), getRadius() - 0.0, 0.0, 0.0, 1.0); // blue outline
+      drawDisk(getPt(), getRadius() - 4.0, 1.0, 1.0, 1.0); // white center
    }
 }
 
@@ -107,11 +107,11 @@ void crazyDraw::draw()
 {
    if (!getDead())
    {
-      drawDisk(pt, radius * 1.0, 0.0, 0.0, 1.0); // bright blue outside
-      drawDisk(pt, radius * 0.8, 0.2, 0.2, 1.0);
-      drawDisk(pt, radius * 0.6, 0.4, 0.4, 1.0);
-      drawDisk(pt, radius * 0.4, 0.6, 0.6, 1.0);
-      drawDisk(pt, radius * 0.2, 0.8, 0.8, 1.0); // almost white inside
+      drawDisk(getPt(), getRadius() * 1.0, 0.0, 0.0, 1.0); // bright blue outside
+      drawDisk(getPt(), getRadius() * 0.8, 0.2, 0.2, 1.0);
+      drawDisk(getPt(), getRadius() * 0.6, 0.4, 0.4, 1.0);
+      drawDisk(getPt(), getRadius() * 0.4, 0.6, 0.6, 1.0);
+      drawDisk(getPt(), getRadius() * 0.2, 0.8, 0.8, 1.0); // almost white inside
    }
 }
 
@@ -123,8 +123,8 @@ void sinkerDraw::draw()
 {
    if (!getDead())
    {
-      drawDisk(pt, radius - 0.0, 0.0, 0.0, 0.8);
-      drawDisk(pt, radius - 4.0, 0.0, 0.0, 0.0);
+      drawDisk(getPt(), getRadius() - 0.0, 0.0, 0.0, 0.8);
+      drawDisk(getPt(), getRadius() - 4.0, 0.0, 0.0, 0.0);
    }
 }
 
@@ -193,7 +193,7 @@ void drawDot(const Position& point, double radius,
 void pelletDraw::draw()
 {
    if (!getDead())
-      drawDot(pt, 3.0, 1.0, 1.0, 0.0);
+      drawDot(getPt(), 3.0, 1.0, 1.0, 0.0);
 }
 
 /*********************************************
@@ -205,10 +205,10 @@ void bombDraw::draw()
    if (!getDead())
    {
          // Bomb actually has a gradient to cut out the harsh edges
-      drawDot(pt, radius + 2.0, 0.50, 0.50, 0.00);
-      drawDot(pt, radius + 1.0, 0.75, 0.75, 0.00);
-      drawDot(pt, radius + 0.0, 0.87, 0.87, 0.00);
-      drawDot(pt, radius - 1.0, 1.00, 1.00, 0.00);
+      drawDot(getPt(), getRadius() + 2.0, 0.50, 0.50, 0.00);
+      drawDot(getPt(), getRadius() + 1.0, 0.75, 0.75, 0.00);
+      drawDot(getPt(), getRadius() + 0.0, 0.87, 0.87, 0.00);
+      drawDot(getPt(), getRadius() - 1.0, 1.00, 1.00, 0.00);
    }
 }
 
@@ -219,7 +219,7 @@ void bombDraw::draw()
 void shrapnelDraw::draw()
 {
    if (!getDead())
-      drawDot(pt, radius, 1.0, 1.0, 0.0);
+      drawDot(getPt(), getRadius(), 1.0, 1.0, 0.0);
 }
 
 /*********************************************
@@ -231,9 +231,9 @@ void missileDraw::draw()
    if (!getDead())
    {
          // missile is a line with a dot at the end so it looks like fins.
-      Position ptNext(pt);
-      ptNext.add(v);
-      drawLine(pt, ptNext, 1.0, 1.0, 0.0);
-      drawDot(pt, 3.0, 1.0, 1.0, 1.0);
+      Position ptNext(getPt());
+      ptNext.add(getV());
+      drawLine(getPt(), ptNext, 1.0, 1.0, 0.0);
+      drawDot(getPt(), 3.0, 1.0, 1.0, 1.0);
    }
 }

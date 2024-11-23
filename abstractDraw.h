@@ -20,20 +20,16 @@ public:
    abstractDraw(Bird* bird) : bird(bird) {}
    abstractDraw(Bullet* bullet) : bullet(bullet) {}
    virtual void draw() = 0; //execute
-   bool isDead;
-   double radius;
+
    //getters
-   
-   bool getDead() const {return isDead;}
-   double getRadius() const {return radius;}
-   Position getPosition() const {return pt;}
-   Velocity getVelocity() const {return v;}
+
+//   Position getPosition() const {return pt;}
+//   Velocity getVelocity() const {return v;}
    
 protected:
    Bird* bird;
    Bullet* bullet;
-   Position pt;
-   Velocity v;
+
 };
 
 class birdDraw : public abstractDraw
@@ -41,9 +37,14 @@ class birdDraw : public abstractDraw
 public:
    birdDraw(Bird* bird) : abstractDraw(bird) {}
    virtual void draw() = 0;
-
+   bool getDead() const {return bird->isDead();}
+   double getRadius() const {return bird->getRadius();}
+   Position getPt() const {return bird->getPosition();}
+   Velocity getV() const {return bird->getVelocity();}
+   
 private:
    Bird* bird;
+
 };
 
 class bulletDraw : public abstractDraw
@@ -52,6 +53,10 @@ class bulletDraw : public abstractDraw
 public:
    bulletDraw(Bullet* bullet) : abstractDraw(bullet) {}
    virtual void draw() = 0;
+   bool getDead() const {return bullet->isDead();}
+   double getRadius() const {return bullet->getRadius();}
+   Position getPt() const {return bullet->getPosition();}
+   Velocity getV() const {return bullet->getVelocity();}
 
    
 private:
