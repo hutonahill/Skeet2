@@ -77,7 +77,7 @@ void drawDisk(const Position& center, double radius,
  * STANDARD DRAW
  * Draw a standard bird: blue center and white outline
  *********************************************/
-void standardDraw::draw()
+void StandardDraw::draw() const 
 {
    if (!getDead())
    {
@@ -90,7 +90,7 @@ void standardDraw::draw()
  * FLOATER DRAW
  * Draw a floating bird: white center and blue outline
  *********************************************/
-void floaterDraw::draw()
+void FloaterDraw::draw() const
 {
    if (!getDead())
    {
@@ -103,7 +103,7 @@ void floaterDraw::draw()
  * CRAZY DRAW
  * Draw a crazy bird: concentric circles in a course gradient
  *********************************************/
-void crazyDraw::draw()
+void CrazyDraw::draw() const
 {
    if (!getDead())
    {
@@ -119,7 +119,7 @@ void crazyDraw::draw()
  * SINKER DRAW
  * Draw a sinker bird: black center and dark blue outline
  *********************************************/
-void sinkerDraw::draw()
+void SinkerDraw::draw() const
 {
    if (!getDead())
    {
@@ -190,7 +190,7 @@ void drawDot(const Position& point, double radius,
  * PELLET OUTPUT
  * Draw a pellet - just a 3-pixel dot
  *********************************************/
-void pelletDraw::draw()
+void PelletDraw::draw() const
 {
    if (!getDead())
       drawDot(getPt(), 3.0, 1.0, 1.0, 0.0);
@@ -200,7 +200,7 @@ void pelletDraw::draw()
  * BOMB OUTPUT
  * Draw a bomb - many dots to make it have a soft edge
  *********************************************/
-void bombDraw::draw()
+void BombDraw::draw() const
 {
    if (!getDead())
    {
@@ -216,7 +216,7 @@ void bombDraw::draw()
  * SHRAPNEL OUTPUT
  * Draw a fragment - a bright yellow dot
  *********************************************/
-void shrapnelDraw::draw()
+void ShrapnelDraw::draw() const
 {
    if (!getDead())
       drawDot(getPt(), getRadius(), 1.0, 1.0, 0.0);
@@ -226,7 +226,7 @@ void shrapnelDraw::draw()
  * MISSILE OUTPUT
  * Draw a missile - a line and a dot for the fins
  *********************************************/
-void missileDraw::draw()
+void MissileDraw::draw() const
 {
    if (!getDead())
    {

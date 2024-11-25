@@ -46,7 +46,6 @@ public:
    }
 
    // special functions
-   virtual void draw() = 0;
    virtual void advance() = 0;
 };
 

@@ -18,6 +18,7 @@
 #include "time.h"
 #include "score.h"
 #include "points.h"
+#include "abstractDraw.h"
 
 #include <list>
 
@@ -51,6 +52,8 @@ private:
                    double redFore, double greenFore, double blueFore,
                    double redBack, double greenBack, double blueBack) const;
     void drawBullseye(double angle) const;
+
+    void execute(const AbstractDraw* obj) const;
 
     Gun gun;                       // the gun
     std::list<Bird*> birds;        // all the shootable birds

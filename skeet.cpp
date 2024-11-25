@@ -5,6 +5,7 @@
 
 #include <string>
 #include <sstream>
+#include <typeinfo> 
 #include "skeet.h"
 using namespace std;
 
@@ -286,6 +287,10 @@ void Skeet::drawBullseye(double angle) const
    glEnd();
 }
 
+void Skeet::execute(const AbstractDraw* obj) const{
+   obj->draw(); // Call the draw method of the passed AbstractDraw object
+}
+
 /************************
  * SKEET DRAW LEVEL
  * output everything that will be on the screen
@@ -307,10 +312,49 @@ void Skeet::drawLevel() const
       pts.show();
    for (auto effect : effects)
       effect->render();
+
    for (auto bullet : bullets)
-      bullet->output();
+   {
+      if (typeid(*bullet) == typeid(Pellet))
+      {
+         PelletDraw pelletDraw(bullet);
+         execute(&pelletDraw);
+      }
+      else if (typeid(*bullet) == typeid(Bomb))
+      {
+         BombDraw bombDraw(bullet);
+         execute(&bombDraw);
+      }
+      else if (typeid(*bullet) == typeid(Missile))
+      {
+         MissileDraw missileDraw(bullet);
+         execute(&missileDraw);
+      }
+   }
+
    for (auto element : birds)
-      element->draw();
+   {
+      if (typeid(*element) == typeid(Standard))
+      {
+         StandardDraw standardDraw(element);
+         execute(&standardDraw);
+      }
+      else if (typeid(*element) == typeid(Crazy))
+      {
+         CrazyDraw crazyDraw(element);
+         execute(&crazyDraw);
+      }
+      else if (typeid(*element) == typeid(Floater))
+      {
+         FloaterDraw floaterDraw(element);
+         execute(&floaterDraw);
+      }
+      else if (typeid(*element) == typeid(Sinker))
+      {
+         SinkerDraw sinkerDraw(element);
+         execute(&sinkerDraw);
+      }
+   }
    
    // status
    drawText(Position(10,                         dimensions.getY() - 30), score.getText()  );

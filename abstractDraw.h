@@ -13,13 +13,14 @@
 #include "bird.h"
 
 
-class abstractDraw
+class AbstractDraw
 {
 public:
-   abstractDraw(Bird* bird, Bullet* bullet) : bird(bird), bullet(bullet) {}
-   abstractDraw(Bird* bird) : bird(bird) {}
-   abstractDraw(Bullet* bullet) : bullet(bullet) {}
-   virtual void draw() = 0; //execute
+   AbstractDraw()                           : bird(nullptr), bullet(nullptr) {}
+   AbstractDraw(Bird* bird, Bullet* bullet) : bird(bird),    bullet(bullet)  {}
+   AbstractDraw(Bird* bird)                 : bird(bird),    bullet(nullptr) {}
+   AbstractDraw(Bullet* bullet)             : bird(nullptr), bullet(bullet)  {}
+   virtual void draw() const = 0; //execute
 
    //getters
 
@@ -32,11 +33,11 @@ protected:
 
 };
 
-class birdDraw : public abstractDraw
+class BirdDraw : public AbstractDraw
 {
 public:
-   birdDraw(Bird* bird) : abstractDraw(bird) {}
-   virtual void draw() = 0;
+   BirdDraw(Bird* bird) : AbstractDraw(bird), bird(bird) {}
+   virtual void draw() const = 0;
    bool getDead() const {return bird->isDead();}
    double getRadius() const {return bird->getRadius();}
    Position getPt() const {return bird->getPosition();}
@@ -47,12 +48,12 @@ private:
 
 };
 
-class bulletDraw : public abstractDraw
+class BulletDraw : public AbstractDraw
 {
    
 public:
-   bulletDraw(Bullet* bullet) : abstractDraw(bullet) {}
-   virtual void draw() = 0;
+   BulletDraw(Bullet* bullet) : AbstractDraw(bullet), bullet(bullet) {}
+   virtual void draw() const = 0;
    bool getDead() const {return bullet->isDead();}
    double getRadius() const {return bullet->getRadius();}
    Position getPt() const {return bullet->getPosition();}
@@ -67,61 +68,61 @@ private:
 /***********
 BIRD DRAW
 ***********/
-class standardDraw : public birdDraw
+class StandardDraw : public BirdDraw
 {
 public:
-   standardDraw(Bird* bird) : birdDraw(bird) {}
-   virtual void draw() = 0;
+   StandardDraw(Bird* bird) : BirdDraw(bird) {}
+   virtual void draw() const;
 };
 
-class sinkerDraw : public birdDraw
+class SinkerDraw : public BirdDraw
 {
 public:
-   sinkerDraw(Bird* bird) : birdDraw(bird) {}
-   virtual void draw() = 0;
+   SinkerDraw(Bird* bird) : BirdDraw(bird) {}
+   virtual void draw() const;
 };
 
-class floaterDraw : public birdDraw
+class FloaterDraw : public BirdDraw
 {
 public:
-   floaterDraw(Bird* bird) : birdDraw(bird) {}
-   virtual void draw() = 0;
+   FloaterDraw(Bird* bird) : BirdDraw(bird) {}
+   virtual void draw() const;
 }; 
 
-class crazyDraw : public birdDraw
+class CrazyDraw : public BirdDraw
 {
 public:
-   crazyDraw(Bird* bird) : birdDraw(bird) {}
-   virtual void draw() = 0;
+   CrazyDraw(Bird* bird) : BirdDraw(bird) {}
+   virtual void draw() const;
 }; 
 
 /***********
 BULLET DRAW
 ***********/
-class pelletDraw : public bulletDraw
+class PelletDraw : public BulletDraw
 {
 public:
-   pelletDraw(Bullet* bullet) : bulletDraw(bullet) {}
-   virtual void draw() = 0;
+   PelletDraw(Bullet* bullet) : BulletDraw(bullet) {}
+   virtual void draw() const;
 };
 
-class missileDraw : public bulletDraw
+class MissileDraw : public BulletDraw
 {
 public:
-   missileDraw(Bullet* bullet) : bulletDraw(bullet) {}
-   virtual void draw() = 0;
+   MissileDraw(Bullet* bullet) : BulletDraw(bullet) {}
+   virtual void draw() const;
 }; 
 
-class bombDraw : public bulletDraw
+class BombDraw : public BulletDraw
 {
 public:
-   bombDraw(Bullet* bullet) : bulletDraw(bullet) {}
-   virtual void draw() = 0;
+   BombDraw(Bullet* bullet) : BulletDraw(bullet) {}
+   virtual void draw() const;
 }; 
 
-class shrapnelDraw : public bulletDraw
+class ShrapnelDraw : public BulletDraw
 {
 public:
-   shrapnelDraw(Bullet* bullet) : bulletDraw(bullet) {}
-   virtual void draw() = 0;
+   ShrapnelDraw(Bullet* bullet) : BulletDraw(bullet) {}
+   virtual void draw() const;
 };
