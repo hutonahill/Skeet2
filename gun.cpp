@@ -94,11 +94,15 @@ void drawRectangle(const Position& pt,
    glEnd();
 }
 
+void drawGun(Position pt, double angle) {
+	drawRectangle(pt, M_PI_2 - angle, 10.0, 100.0, 1.0, 1.0, 1.0);
+}
+
  /*********************************************
   * GUN : DISPLAY
   * Display the gun on the screen
   *********************************************/
-void Gun::display() const
+void ActualGun::display()
 {
    drawRectangle(pt, M_PI_2 - angle, 10.0, 100.0, 1.0, 1.0, 1.0);
 }
@@ -107,7 +111,7 @@ void Gun::display() const
  * GUN : INTERACT
  * Move the gun
  *********************************************/
-void Gun::interact(int clockwise, int counterclockwise)
+void ActualGun::interact(int clockwise, int counterclockwise)
 {
    // move it
    if (clockwise > 0)
@@ -123,3 +127,29 @@ void Gun::interact(int clockwise, int counterclockwise)
          angle = 0.0;
    }
 }
+
+double TotallyRealGun::getAngle() const {
+	if (RealGun != nullptr) {
+		return RealGun->getAngle();
+	}
+	return angle;
+}
+
+void TotallyRealGun::interact(int clockwise, int counterclockwise) {
+	if (RealGun == nullptr) {
+		RealGun = new ActualGun(pt);
+	}
+
+	RealGun->interact(clockwise, counterclockwise);
+}
+
+void TotallyRealGun::display() {
+	if (RealGun != nullptr) {
+		RealGun->display();
+	}
+	else {
+		drawGun(pt, angle);
+	}
+}
+
+

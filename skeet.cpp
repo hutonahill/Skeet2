@@ -297,10 +297,10 @@ void Skeet::drawLevel() const
    
    // draw the bullseye
    if (bullseye)
-      drawBullseye(gun.getAngle());
+      drawBullseye(gun->getAngle());
 
    // output the gun
-   gun.display();
+   gun->display();
          
    // output the birds, bullets, and fragments
    for (auto& pts : points)
@@ -367,18 +367,18 @@ void Skeet::interact(const UserInput & ui)
    }
 
    // gather input from the interface
-   gun.interact(ui.isUp() + ui.isRight(), ui.isDown() + ui.isLeft());
+   gun->interact(ui.isUp() + ui.isRight(), ui.isDown() + ui.isLeft());
    Bullet *p = nullptr;
 
    // a pellet can be shot at any time
    if (ui.isSpace())
-      p = new Pellet(gun.getAngle());
+      p = new Pellet(gun->getAngle());
    // missiles can be shot at level 2 and higher
    else if (ui.isM() && time.level() > 1)
-      p = new Missile(gun.getAngle());
+      p = new Missile(gun->getAngle());
    // bombs can be shot at level 3 and higher
    else if (ui.isB() && time.level() > 2)
-      p = new Bomb(gun.getAngle());
+      p = new Bomb(gun->getAngle());
    
    bullseye = ui.isShift();
 
