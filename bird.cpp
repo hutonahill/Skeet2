@@ -9,6 +9,7 @@
 
 #include <cassert>
 #include "bird.h"
+#include "drawUI.h"
 
 #ifdef __APPLE__
 #define GL_SILENCE_DEPRECATION
@@ -289,10 +290,10 @@ void drawDisk(const Position& center, double radius,
  *********************************************/
 void Standard::draw()
 {
+   DrawUI drawUI;
    if (!isDead())
    {
-      drawDisk(pt, radius - 0.0, 1.0, 1.0, 1.0); // white outline
-      drawDisk(pt, radius - 3.0, 0.0, 0.0, 1.0); // blue center
+      drawUI.drawStandard(radius, pt);
    }
 }
 

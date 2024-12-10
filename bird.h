@@ -9,7 +9,6 @@
 
 #pragma once
 #include "position.h"
-
 /**********************
  * BIRD
  * Everything that can be shot
